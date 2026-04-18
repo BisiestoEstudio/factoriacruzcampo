@@ -7,18 +7,46 @@ class FCC_CoverManager {
 
 	/**
 	 * Disponibilidad en rango de fechas. Ideal para vista de calendario mensual.
+	 * Sin fechas devuelve toda la disponibilidad.
 	 *
-	 * @param string $date_start  Fecha inicio: 'YYYY-MM-DD'.
-	 * @param string $date_end    Fecha fin: 'YYYY-MM-DD'.
-	 * @param int    $people      Número de personas.
+	 * @param int         $people      Número de personas.
+	 * @param string|null $date_start  Fecha inicio: 'YYYY-MM-DD'. Opcional.
+	 * @param string|null $date_end    Fecha fin: 'YYYY-MM-DD'. Opcional.
 	 * @return array|WP_Error
 	 */
-	public static function get_availability_calendar( $date_start, $date_end, $people ) {
-		return self::post( '/api/reserv/availability_calendar', array(
+	public static function get_availability_calendar( $people, $date_start = null, $date_end = null ) {
+		$params = array(
 			'restaurant' => FCC_COVERMANAGER_RESTAURANT,
 			'people'     => (int) $people,
-			'dateStart'  => $date_start,
-			'dateEnd'    => $date_end,
+		);
+
+		if ( $date_start !== null ) {
+			$params['dateStart'] = $date_start;
+		}
+		if ( $date_end !== null ) {
+			$params['dateEnd'] = $date_end;
+		}
+
+		return self::post( '/api/reserv/availability_calendar', $params );
+	}
+
+	/**
+	 * Disponibilidad completa de un día: horas, productos, precios y tipo de reserva.
+	 * Endpoint principal para la vista de día de la agenda.
+	 *
+	 * @param string $date    Fecha: 'YYYY-MM-DD'.
+	 * @param int    $people  Número de personas.
+	 * @return array|WP_Error
+	 */
+	public static function get_availability_extended( $date, $people ) {
+		return self::post( '/apiV2/availability_extended', array(
+			'restaurant'    => FCC_COVERMANAGER_RESTAURANT,
+			'date'          => $date,
+			'number_people' => (int) $people,
+			'discount'      => '0',
+			'product_type'  => '0',
+			'show_zones'    => '1',
+			'headerFormat'  => '0',
 		) );
 	}
 
