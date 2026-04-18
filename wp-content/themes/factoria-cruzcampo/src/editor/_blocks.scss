@@ -1,0 +1,22 @@
+.wp-block-separator{
+width: 258px;
+height: 6px;
+background-color: var(--wp--preset--color--main-yellow);
+border: none;
+}
+
+:where(.editor-styles-wrapper) .wp-block-list {
+    list-style-type: disc;
+    padding-left: 16px;
+    margin-block-end: 18px;
+
+}
+
+
+
+/*
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+  max-width: 1300px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}*/

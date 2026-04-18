@@ -1,0 +1,77 @@
+.wp-block-accordion{
+    width: 100%;
+    text-align: left;
+}
+
+.wp-block-accordion-heading__toggle {
+    max-width: unset;
+    padding: 16px;
+
+    &:hover,
+    &:active {
+        background-color: transparent !important;
+    }
+}
+
+.wp-block-accordion-heading{
+    margin: 0 !important;
+    padding: 0;
+    position: relative;
+    &::after {
+        content: url('../images/accordion-arrow.svg');
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        transition: transform 0.3s ease-in-out;
+        pointer-events: none;
+    }
+}
+
+.is-open .wp-block-accordion-heading{
+    &::after {
+        transform: rotate(180deg);
+    }
+}
+
+.wp-block-accordion-heading__toggle-title {
+    font-family: var(--heading-font);
+    line-height: var(--h5-height);
+    font-size: var(--wp--preset--font-size--h-5);
+    font-weight: var(--font-weight-bold);
+    color: var(--negro);
+    padding-right: 32px;
+
+}
+
+.wp-block-accordion-heading__toggle-icon{
+    display: none;
+}
+
+.wp-block-accordion-heading__toggle:hover .wp-block-accordion-heading__toggle-title {
+    text-decoration: none;
+
+}
+
+.wp-block-accordion-item{
+    border-top: 1px solid var(--gris);
+    margin-top: 0 !important;
+
+
+    &:last-child {
+        border-bottom: 1px solid var(--gris);
+    }
+}
+
+.wp-block-accordion-panel{
+    padding: 16px 40px 16px 16px;
+    margin-top: 0 !important;
+    min-height: 0;
+
+}
+
+.b-section .wp-block-accordion{
+    max-width: var(--contentsize);
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,250 @@
+/* Tipography */
+
+/* staatliches-regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Staatliches';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/staatliches-v15-latin-regular.woff2') format('woff2'),
+       url('../fonts/staatliches-v15-latin-regular.ttf') format('truetype');
+}
+
+/* playfair-display-500 */
+@font-face {
+  font-display: swap;
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/playfair-display-v40-latin-500.woff2') format('woff2'),
+       url('../fonts/playfair-display-v40-latin-500.ttf') format('truetype');
+}
+
+/* playfair-display-600 */
+@font-face {
+  font-display: swap;
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/playfair-display-v40-latin-600.woff2') format('woff2'),
+       url('../fonts/playfair-display-v40-latin-600.ttf') format('truetype');
+}
+
+/* playfair-display-600italic */
+@font-face {
+  font-display: swap;
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 600;
+  src: url('../fonts/playfair-display-v40-latin-600italic.woff2') format('woff2'),
+       url('../fonts/playfair-display-v40-latin-600italic.ttf') format('truetype');
+}
+
+
+
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+p{
+  text-wrap: pretty;
+}
+
+strong, b, .u_bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* 
+h1, h2 {
+  text-wrap: balance;
+} */
+
+p a, h1 a, h2 a, h3 a, h4 a, form a{
+  &,
+  &:hover,
+  &:visited,
+  &:active,
+  &:link{
+    text-decoration: underline;
+  }
+} 
+
+figcaption{
+  font-size: var(--wp--preset--font-size--caption);
+  font-weight: var(--font-weight-regular);
+  text-align: center;
+}
+
+main p:not(main .b-bisiesto p),
+main .has-base-font-size:not(main .b-bisiesto .has-base-font-size),
+main ul:not(main .b-bisiesto ul),
+main ol:not(main .b-bisiesto ol)
+{
+  margin-block-start: 0;
+  margin-block-end: 0.75rem; /* 12px */
+}
+
+main  h1:not(main .b-bisiesto h1),
+main .has-h-1-font-size:not(main .b-bisiesto .has-h-1-font-size)
+{
+  margin-block-end: 1.5rem; /* 24px */
+}
+
+main  h2:not(main .b-bisiesto h2),
+main .has-h-2-font-size:not(main .b-bisiesto .has-h-2-font-size)
+{
+  margin-block-start: 2rem; /* 64px */
+  margin-block-end: 1.5rem;
+}
+
+main h3:not(main .b-bisiesto h3),
+main .has-h-3-font-size:not(main .b-bisiesto .has-h-3-font-size){
+  margin-block-start: 2rem; /* 64px */
+  margin-block-end: 0.75rem; /* 12px */
+}
+
+main h4:not(main .b-bisiesto h4),
+main .has-h-4-font-size:not(main .b-bisiesto .has-h-4-font-size)
+{
+  margin-block-start: 2rem; /* 40px */
+  margin-block-end: 0.75rem; /* 12px */
+}
+
+main h5:not(main .b-bisiesto h5),
+main .has-h-5-font-size:not(main .b-bisiesto .has-h-5-font-size){
+  margin-block-start: 2rem; /* 40px */
+  margin-block-end: 0.75rem; /* 12px */
+}
+
+main .is-style-display_xl:not(main .b-bisiesto .is-style-display_xl){
+  margin-block-start: 0; /* 0px */
+  margin-block-end: 1.5rem; /* 24px */
+}
+
+main .is-style-display_l:not(main .b-bisiesto .is-style-display_l){
+  margin-block-start: 4rem; /* 64px */
+}
+
+main .is-style-display_m:not(main .b-bisiesto .is-style-display_m){
+  margin-block-start: 2.5rem; /* 40px */
+}
+
+main .is-style-display_s:not(main .b-bisiesto .is-style-display_s){
+  margin-block-start: 2.5rem; /* 40px */
+}
+
+
+.b-bisiesto,
+.b-bisiesto *,
+.is-no-prose{
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.b-bisiesto .is-prose > *{
+  margin-block-start: 0px;
+  margin-block-end: var(--innerblocks-gap);
+}
+
+.b-bisiesto .is-prose > *:last-child{
+  margin-block-end: 0px;
+}
+
+
+.has-base-font-size{
+  font-family: var(--base-font);
+  line-height: var(--base-height);
+  font-weight: var(--font-weight-regular);
+  strong, b, &.u_bold{
+    font-weight: bold;
+  }
+}
+
+h1, .has-h-1-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h1-height);
+  font-weight: 400;
+  
+  strong, b, &.u_bold{
+    font-weight: 400;
+  }
+}
+
+
+h2, .has-h-2-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h2-height);
+  font-weight: 400;
+  strong, b, &.u_bold{
+    font-weight: 400;
+  }
+}
+
+
+h3, .has-h-3-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h3-height);
+  font-weight: 400;
+  strong, b, &.u_bold{
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+
+h4, .has-h-4-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h4-height);
+  font-weight: 400;
+  strong, b, &.u_bold{
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+h5, .has-h-5-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h5-height);
+  font-weight: 400;
+  strong, b, &.u_bold{
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+h6, .has-h-6-font-size{
+  font-family: var(--heading-font);
+  line-height: var(--h6-height);
+  font-weight: 400;
+  strong, b, &.u_bold{
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.caption, .has-caption-font-size, small{
+  font-family: var(--base-font);
+  line-height: var(--caption-height);
+  font-weight: 300;
+  strong, b, &.u_bold{
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.has-h2-uppercase {
+
+  h2,
+  .has-h-2-font-size {
+    text-transform: uppercase;
+  }
+
+  .has-h-1-font-size,
+  .has-h-3-font-size {
+    text-transform: none;
+  }
+
+}
+
+
+
+
+
+
+

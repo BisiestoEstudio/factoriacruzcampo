@@ -1,0 +1,136 @@
+/***********************
+2. Layout
+***********************/
+html{
+	background: var(--blanco);
+} 
+
+body{
+  display: grid;
+  min-height: 100dvh;
+  scroll-behavior: smooth;
+	text-rendering: optimizeSpeed;
+  grid-template-columns: var(--layout-margin) minmax(0, 1fr) var(--layout-margin);
+  grid-template-rows: auto 1fr auto;
+  > *{
+    grid-column: 2;
+  }
+}
+
+.alignright {
+	float:right;
+}
+.alignleft {
+	float: left;
+}
+
+.content{
+  flex-grow: 999;
+}
+
+main{
+  grid-auto-rows: auto;
+  > *{
+    max-width: var(--contentsize);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.is-layout-constrained{
+  display: grid;
+  grid-template-columns: var(--layout-margin) minmax(0, 1fr) var(--layout-margin);
+}
+
+.is-layout-constrained > *{
+  grid-column: 2;
+  width: 100%;
+  max-width: var(--contentsize);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.alignexpand{
+  max-width: unset;
+}
+
+.alignextrawide{
+  max-width: var(--extrawidesize) !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.alignwide{
+  max-width: var(--widesize);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.single-post .alignwide{
+  max-width: 1300px;
+}
+
+.alignmedium{
+  max-width: var(--mediumsize) !important;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.alignfull{
+  margin-left: calc( -1 * var(--layout-margin));
+  margin-right: calc( -1 * var(--layout-margin));
+  max-width: unset;
+  width: unset;
+}
+
+:root :where(.is-layout-constrained) > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+
+/***********************
+Sidebar layout
+ **********************/
+.c-template-sidebar{
+  padding: var(--spacing-fluid-m) 0;
+  display: grid;
+  gap: 40px;
+}
+
+@media screen and (min-width: $md) {
+  .is-style-col-4 .c-grid,
+  .is-style-col-2 .c-grid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .is-style-col-3 .c-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: $lg){
+  .c-template-sidebar{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 70px;
+    margin: auto;
+
+    &__sidebar{
+      width: max(300px, 25%);
+    }
+
+    &__content{
+      max-width: var(--contentsize);
+      flex-grow: 999;
+      flex-basis: 0;
+    }
+  }
+
+
+
+  .is-style-col-4 .c-grid{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

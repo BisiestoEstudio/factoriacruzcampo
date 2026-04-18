@@ -1,0 +1,89 @@
+.wp-block-table{
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-inline: 0 !important;
+    max-width: 100% !important;
+    min-width: 0;
+    padding: 1px;
+  margin-inline-start: 0 !important;
+  
+    &::-webkit-scrollbar {
+      height: 6px;
+      margin-top: 10px !important;
+  
+      &-track{
+        /*box-shadow: inset 0 0 3px $color-main-beige;*/
+        border-radius: 10px;
+        background-color: $color-accent;
+      }
+  
+      &-thumb {
+        border-radius: 10px;
+        height: 3px;
+        background-color: $color-primary;
+      }
+    }
+  
+  }
+  
+  
+  .wp-block-table table{
+    width: 100%;
+    margin: auto;
+    border-spacing: 0px;
+    overflow: hidden;
+    font-size: var(--base-size);
+    text-align: left;
+    border-collapse: collapse;
+    border-style: hidden;
+    border-radius: 20px;
+    margin: 12px auto;
+    border-spacing: 0px;
+    box-shadow: 0 0 0 1px #666;
+    overflow: hidden;
+    min-width: auto;
+  }
+  .wp-block-table table .has-text-align-center{
+    text-align: center;
+  }
+  .wp-block-table table .has-text-align-right{
+    text-align: right;
+  }
+  
+  .wp-block-table{
+    th{
+      padding: 8px 6px;
+      background-color: $color-accent;
+      color: $color-primary;
+      font-weight: 600;
+      font-size: var(--base-size);
+      vertical-align: middle;
+    }
+  
+    td{
+      padding: 8px 12px;
+      border-bottom: solid 2px $color-primary;
+      font-size: var(--base-size);  
+    }
+  }
+  
+  .wp-block-table.aligncenter table{
+    width: auto;
+  }
+  .wp-block-table.alignleft{
+    float: none !important;
+    margin: 0;
+  }
+  .wp-block-table.alignleft table{
+    width: auto;
+    margin-left: 0;
+  }
+  @media screen and (min-width: $lg) {
+    table.has-fixed-layout{
+      table-layout: fixed;
+    }
+    table.has-fixed-layout th, table.has-fixed-layout td{
+      word-wrap: break-word;
+    }
+  
+  }

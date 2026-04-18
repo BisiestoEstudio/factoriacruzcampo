@@ -1,0 +1,95 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  background-color: var(--body-color);
+  color: $color-primary;
+  overflow-x: hidden;
+  font-weight: var(--font-weight-regular);
+}
+
+*::-webkit-media-controls,
+*::-webkit-media-controls-enclosure,
+*::-webkit-media-controls-overlay-play-button,
+*::-webkit-media-controls-play-button,
+*::-webkit-media-controls-panel,
+*::-webkit-media-controls-start-playback-button 
+{ 
+  display: none !important; 
+  -webkit-appearance: none;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute; top: -9999px;
+
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-padding-top: max(56px, 10vh);
+  font-family: var(--base-font);
+}
+
+html:focus-within {
+  scroll-behavior: auto;
+}
+
+img, picture, svg, video, canvas{
+  max-width: 100%;
+  height: auto;
+}
+
+img[src$=".svg"] {
+  image-rendering: auto;
+  shape-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
+
+mark{
+  background-color: transparent;
+}
+
+/** Reset useragent styles */
+/**
+body, h1, h2, h3, h4, h5, p, ul, ol, figure, blockquote, dl, dd, dt, table, fieldset, legend, pre, textarea, input, button, select, progress, menu, ul{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+}
+  **/
+
+body *{
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+}
+
+a,
+a:link,
+a:hover,
+a:visited,
+a:active{
+  text-decoration: none;
+}
+
+/*Reset menu user agent rules*/
+ul{
+  list-style-type: none;
+}
+
+img{
+  height: auto;
+}
+
+/* a:has( > img){
+  line-height: 0;
+} */

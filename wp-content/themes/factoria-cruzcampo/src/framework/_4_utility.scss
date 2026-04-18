@@ -1,0 +1,126 @@
+/***********************
+3. Utilities classes
+***********************/
+.is-style-dark{
+  background-color: var(--wp--preset--color--black);
+  color: var(--wp--preset--color--white);
+}
+
+.u_bold{
+  font-weight: var(--font-weight-bold);
+}
+
+
+.u_hidden,
+.js-hidden{
+  display: none !important;
+}
+
+.u_overflow-hidden{
+  overflow: hidden;
+}
+
+.u_relative{
+  position:relative;
+}
+
+.u_absolute{
+  position: absolute;
+}
+.u_overflow-hidden{
+  overflow: hidden;
+}
+
+.u_hide-mobile,
+.u_hide-mobile-menu{
+  display: none !important;
+}
+
+
+.u_text-negative,
+.u_text-negative *{
+  color: white;
+}
+
+.u_text-positive,
+.u_text-positive *{
+  color: var(--wp--preset--color--black);
+}
+
+.has-white-color,
+.has-white-color a{
+  color: var(--wp--preset--color--white) !important;
+}
+
+/**
+.u_bg-dark,
+.has-main-blue-background-color{
+  background-color: $color-primary;
+  color: $color-white;
+}
+  */
+
+.u_bg-accent{
+  background-color: var(--wp--preset--color--accent);
+}
+
+.u_text-center{
+  text-align: center;
+}
+
+.u_type-md{
+  font-family: var(--heading-font);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 30px;
+}
+
+.u_type-body-xs{
+  color: #302727;
+  font-family: var(--base-font);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 24px;
+}
+
+.gradient-highlight{
+  background: var(--wp--preset--gradient--gradient-corp);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+
+@media screen and (min-width: $md) {
+  .u_only-mobile{
+    display: none !important;
+  }
+  .u_hide-mobile{
+    display: block !important;
+  }
+}
+
+@media screen and (min-width: $lg) {
+  .u_hide-desktop{
+    display: none;
+  }
+}
+
+@media screen and (max-width: $lg) {
+  .u_only-desktop{
+    display: none !important;
+  }
+}
+
+/*Breakpoint del menú*/
+@media screen and (min-width: $breakpoint-menu){
+  .u_hide-mobile-menu{
+    display: block !important;
+  }
+  .u_hide-desktop-menu{
+    display: none !important;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "postcss",
+  "version": "1.0.2",
+  "description": "File to use postcss with wp theme",
+  "main": "index.js",
+  "devDependencies": {
+    "@lehoczky/postcss-fluid": "^1.0.3",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-import": "^16.1.1",
+    "postcss-minify": "^1.2.0",
+    "postcss-nested": "^7.0.2",
+    "postcss-simple-vars": "^7.0.1"
+  },
+  "scripts": {
+    "watch-blocks": "postcss src/blocks.postcss.scss --output assets/css/blocks.css --watch",
+    "watch-framework": "postcss src/framework.postcss.scss --output assets/css/framework.min.css --watch",
+    "watch-main": "postcss src/main.postcss.scss --output assets/css/main.min.css --watch",
+    "watch-editor": "postcss src/editor.postcss.scss --output assets/css/editor.min.css --watch",
+    "watch": "npm run watch-framework | npm run watch-main | npm run watch-editor | npm run watch-blocks"
+  },
+  "author": "Elena Titos",
+  "license": "ISC"
+}

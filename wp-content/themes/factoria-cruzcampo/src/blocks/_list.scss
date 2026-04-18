@@ -1,0 +1,17 @@
+.wp-block-list {
+    list-style-type: disc;
+    padding-left: 24px;
+    margin-block-end: 18px;
+
+    &.is-style-expanded li:not(:last-child) {
+        margin-block-end: 16px !important;
+    }
+
+
+    li::marker {
+        font-size: 0.75em;
+    }
+}
+
+
+

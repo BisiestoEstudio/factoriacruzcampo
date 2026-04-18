@@ -1,0 +1,88 @@
+/* Colores */
+
+::backdrop,
+:root {
+
+  /** Variables de color — Figma: colección "Color" **/
+  --red:        #d71920;
+  --red-dark:   #a70a0f;
+  --red-10:     #d719201a;
+  --red-20:     #d7192033;
+
+  --beige-bg:   #faf5ef;
+  --beige-dark: #f5eadb;
+
+  --white:      #fcfcfc;
+  --black:      #020202;
+
+  --gray-light: #f0f0f0;
+  --gray:       #bfbfbf;
+  --gray-dark:  #5d5d5d;
+
+  --black-10:   #0202021a;
+  --black-20:   #02020233;
+  --black-40:   #02020266;
+  --black-60:   #02020299;
+
+  --glass:      #d4d4d41a;
+
+  --success:    #00d07e;
+  --error:      #ff7900;
+  /** Fin variables de color **/
+
+ 
+
+  --button-padding: 12px fluid(28px, 16px);
+
+  --base-font:  'Inter', sans-serif;
+  --heading-font: 'Suisse Intl', serif;
+  --display-font: 'Staatliches', serif;
+  --font-weight-regular: 300;
+  --font-weight-bold: 500;
+
+
+  --base-height: 1.5;
+  --display-height: 1.12;
+  --h1-height: 1.12;
+  --h2-height: 1.12;
+  --h3-height: 1.12;
+  --h4-height: 1.12;
+  --h5-height: 1.12;
+  --h6-height: 1.12;
+  --caption-height: 1.5;
+
+  --table-height: var(--base-height);
+
+  --body-color: var(--clarito);
+
+  --layout-margin: clamp(16px, 4vw, 20px);
+  --extrawidesize: 1440px;
+  --widesize: var(--wp--style--global--wide-size);
+  --mediumsize: 800px;
+  --contentsize: var(--wp--style--global--content-size);
+
+  --breakpoint-menu: $breakpoint-menu;
+
+  --border-radius-s: fluid(16px, 8px);
+  --border-radius-l: fluid(40px, 20px);
+
+  --filter-to-white: brightness(0) invert(1);
+  --filter-to-black: brightness(0) invert(0);
+
+  --spacing-fluid-menu: fluid(150px, 100px);
+  --spacing-fluid-l: fluid(120px, 40px);
+  --spacing-fluid-m: fluid(80px, 40px);
+  --spacing-fluid-s: fluid(40px, 24px);
+
+  --block-padding: var(--spacing-fluid-m) 0;
+  --innerblocks-gap: 24px;
+
+
+  --modified-vh: calc(100svh - 56px);
+
+}
+
+.has-black-background-color,
+.has-white-color {
+  --wp--preset--color--glass: var(--glass-dark);
+}

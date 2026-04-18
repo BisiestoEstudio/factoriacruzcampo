@@ -1,0 +1,91 @@
+/* Datos para modificar el icio de hamburguesa */
+$hamburger-lines-background-color: var(--black);
+$hamburger-line-height: 2px;
+$hamburger-icon-width: 28px;
+$hamburger-short-line: 28px;
+$hamburger-line-border-radius: 10px;
+$hamburger-line-gap: 8px;
+
+.hamburger-btn{
+  --gap: $hamburger-line-gap;
+  --line-height: $hamburger-line-height;
+  --icon-width: $hamburger-icon-width;
+  --short-line: $hamburger-short-line;
+  --lines-color: var(--black);
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  height: calc( var(--line-height) + var(--gap) * 2);
+  padding-right: calc(var(--icon-width) - var(--short-line));
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+.hamburger-icon{
+  width: var(--short-line);
+  height: var(--line-height);
+  background-color: var(--lines-color);
+  border-radius: $hamburger-line-border-radius;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+
+  .is-dark &{
+    background-color: var(--white);
+    &::before,
+    &::after{
+      background-color: var(--white);
+    }
+  }
+
+  &::before,
+  &::after{
+    content: '';
+    position: absolute;
+    width: var(--icon-width);
+    left: 0;
+    height: var(--line-height);
+    background-color: var(--lines-color);
+    border-radius: $hamburger-line-border-radius;
+    transform-origin: 50% 50%;
+    transition:  transform 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    top 0.2s 0.2s ease-in-out;
+  }
+
+  &::before{
+    top: calc(var(--gap) * -1);
+  }
+
+  &::after{
+    top: var(--gap);
+  }
+
+
+
+
+}
+
+/* Animación */
+.hamburger-btn[aria-expanded="true"] .hamburger-icon{
+  --lines-color: var(--white);
+  background-color: transparent;
+    &::before,
+    &::after{
+        top: 0;
+        transition:  transform 0.2s 0.2s ease-in-out,
+        top 0.2s ease-in-out;
+    }
+    &::before{
+        transform: rotate3d(0, 0, 1, -45deg) scaleX(0.8);
+    }
+    &::after{
+        transform: rotate3d(0, 0, 1, 45deg) scaleX(0.8);
+    }
+}
+
+@media screen and (min-width: $breakpoint-menu){
+    .hamburger-btn{
+        display: none;
+    }
+}
+
+

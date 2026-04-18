@@ -1,0 +1,26 @@
+.c-room-related{
+
+    padding: 40px 0;
+    row-gap: 32px;
+
+    &__list{
+		display: grid;
+		gap: 40px;
+    }
+
+
+}
+
+@media (min-width: 768px) {
+    .c-room-related{
+        &__list{
+            display: flex;
+			flex-wrap: nowrap;
+			justify-content: center;
+        }
+
+        .b-room-card {
+			width: calc(50% - 20px);
+		}
+    }
+}

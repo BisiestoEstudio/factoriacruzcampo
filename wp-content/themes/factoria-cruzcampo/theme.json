@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "red",
+          "color": "#d71920",
+          "name": "Red"
+        },
+        {
+          "slug": "white",
+          "color": "#fcfcfc",
+          "name": "White"
+        },
+        {
+          "slug": "black",
+          "color": "#020202",
+          "name": "Black"
+        }
+      ]
+    }
+  }
+}

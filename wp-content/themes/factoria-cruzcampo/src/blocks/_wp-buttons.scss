@@ -1,0 +1,8 @@
+.wp-block-buttons.is-style-movil_centered,
+.is-style-movil_centered .wp-block-buttons {
+    @media (max-width: 768px) {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+}

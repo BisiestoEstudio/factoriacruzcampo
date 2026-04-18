@@ -1,0 +1,26 @@
+.wpcf7 {
+    padding: fluid(55px, 20px);
+    background-color: $color-accent;
+    border-radius: fluid(40px, 22px);
+    border: 1px solid $color-primary;
+    p{
+        margin-bottom: 0 !important;
+    }
+
+    .wpcf7-submit{
+        background-color: $color-primary;
+        color: $color-white;
+
+        &:hover{
+            color: $color-lima;
+          }
+          &:active{
+            color: $color-lima-oscuro;
+          }
+    }
+}
+
+
+
+
+

@@ -1,0 +1,28 @@
+.c-booking-button{
+    position: fixed;
+    z-index: 1000;
+    bottom: 30px;
+    right: 30px;
+
+}
+
+.finca-serena-mallorca{
+    .url-room-body .urh-counter-row:nth-child(2) {
+		display: none;
+	}
+}
+
+@media screen and (max-width: $sm) {
+    .c-booking-button{
+        width: 100%;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        .btn-primary{
+            width: 100%;
+            max-width: unset;
+
+        }
+    
+    }
+}
