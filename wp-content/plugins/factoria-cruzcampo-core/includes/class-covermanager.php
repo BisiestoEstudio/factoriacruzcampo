@@ -34,20 +34,23 @@ class FCC_CoverManager {
 	 * Disponibilidad completa de un día: horas, productos, precios y tipo de reserva.
 	 * Endpoint principal para la vista de día de la agenda.
 	 *
-	 * @param string $date    Fecha: 'YYYY-MM-DD'.
-	 * @param int    $people  Número de personas.
+	 * @param string   $date    Fecha: 'YYYY-MM-DD'.
+	 * @param int|null $people  Número de personas. Opcional.
 	 * @return array|WP_Error
 	 */
-	public static function get_availability_extended( $date, $people ) {
-		return self::post( '/apiV2/availability_extended', array(
-			'restaurant'    => FCC_COVERMANAGER_RESTAURANT,
-			'date'          => $date,
-			'number_people' => (int) $people,
-			'discount'      => '0',
-			'product_type'  => '0',
-			'show_zones'    => '1',
-			'headerFormat'  => '0',
-		) );
+	public static function get_availability_extended( $date, $people = null ) {
+		$params = array(
+			'restaurant'   => FCC_COVERMANAGER_RESTAURANT,
+			'date'         => $date,
+			'discount'     => 'all',
+			'product_type' => '1'
+		);
+
+		if ( $people !== null ) {
+			$params['number_people'] = (int) $people;
+		}
+
+		return self::post( '/apiV2/availability_extended', $params );
 	}
 
 	/**
@@ -88,7 +91,7 @@ class FCC_CoverManager {
 			return new WP_Error( 'fcc_cm_empty_response', __( 'Respuesta vacía de CoverManager.', 'factoria-cruzcampo-core' ) );
 		}
 
-		if ( 1 !== (int) $data['resp'] ) {
+		if ( isset( $data['resp'] ) && 1 !== (int) $data['resp'] ) {
 			return new WP_Error( 'fcc_cm_api_error', $data['status'] ?? __( 'Error desconocido en CoverManager.', 'factoria-cruzcampo-core' ) );
 		}
 
