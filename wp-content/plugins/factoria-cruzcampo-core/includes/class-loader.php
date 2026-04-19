@@ -8,10 +8,12 @@ class FCC_Loader {
 		require_once FCC_PLUGIN_DIR . 'includes/class-meta-boxes.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-covermanager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-debug.php';
+		require_once FCC_PLUGIN_DIR . 'includes/class-api.php';
 
 		add_action( 'init', array( 'FCC_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'FCC_Meta_Boxes', 'register' ) );
 		FCC_Debug::init();
+		FCC_API::register();
 	}
 
 	public static function activate() {

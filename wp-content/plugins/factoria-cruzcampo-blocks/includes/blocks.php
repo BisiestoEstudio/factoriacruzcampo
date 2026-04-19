@@ -22,22 +22,20 @@ class Blocks {
 	}
 
 	function register_blocks() {
-		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
-			wp_register_block_types_from_metadata_collection(
-				plugin_dir_path( __FILE__ ) . '../build/blocks',
-				plugin_dir_path( __FILE__ ) . '../build/blocks-manifest.php'
-			);
+		$build_blocks  = plugin_dir_path( __FILE__ ) . '../build/blocks';
+		$manifest_path = plugin_dir_path( __FILE__ ) . '../build/blocks-manifest.php';
+
+		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) && file_exists( $manifest_path ) ) {
+			wp_register_block_types_from_metadata_collection( $build_blocks, $manifest_path );
 			return;
 		}
 
-		// Fallback para WP < 6.7
-		$manifest_path = plugin_dir_path( __FILE__ ) . '../build/blocks-manifest.php';
-		if ( ! file_exists( $manifest_path ) ) {
+		// Fallback: scan build/blocks/*/block.json
+		if ( ! is_dir( $build_blocks ) ) {
 			return;
 		}
-		$manifest = require $manifest_path;
-		foreach ( array_keys( $manifest ) as $block_type ) {
-			register_block_type( plugin_dir_path( __FILE__ ) . "../build/blocks/{$block_type}" );
+		foreach ( glob( $build_blocks . '/*/block.json' ) as $block_json ) {
+			register_block_type( dirname( $block_json ) );
 		}
 	}
 }
