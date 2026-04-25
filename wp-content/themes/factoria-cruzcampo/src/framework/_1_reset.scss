@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
   background-color: var(--body-color);
-  color: $color-primary;
+  color: var(--black);
   overflow-x: hidden;
   font-weight: var(--font-weight-regular);
 }

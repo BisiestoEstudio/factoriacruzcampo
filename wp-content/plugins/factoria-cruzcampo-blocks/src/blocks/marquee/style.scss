@@ -1,0 +1,22 @@
+.b-marquee {
+    display: flex;
+    overflow: hidden;
+    gap: 24px;
+}
+
+.b-marquee__item {
+    flex-shrink: 0;
+    width: fit-content;
+    white-space: nowrap;
+    animation: scrolling 10s linear infinite;
+
+	.is-style-invert &{
+		animation-direction: reverse;
+	}
+}
+
+@keyframes scrolling {
+	0% { transform: translateX(0); }
+	100% { transform: translateX( calc(-100% - 24px)); }
+}
+

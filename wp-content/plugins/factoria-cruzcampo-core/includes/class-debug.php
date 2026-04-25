@@ -11,7 +11,7 @@ class FCC_Debug {
 			return;
 		}
 
-		//add_action( 'wp_footer', array( __CLASS__, 'render' ) );
+		add_action( 'wp_footer', array( __CLASS__, 'render' ) );
 	}
 
 	public static function render() {
@@ -52,9 +52,8 @@ class FCC_Debug {
 		}
 
 		$extended_results = array();
-		foreach ( $available_dates as $date ) {
-			$extended_results[ $date ] = self::format_response( FCC_CoverManager::get_availability_extended( $date, 1 ) );
-		}
+
+		$extended_results[ '2026-05-14' ] = self::format_response( FCC_CoverManager::get_availability_extended( '2026-05-14' ) );
 		?>
 		<style>
 			#fcc-debug { position:fixed; bottom:0; left:0; right:0; max-height:40vh; overflow-y:auto; background:#1e1e1e; color:#d4d4d4; font:12px/1.5 monospace; padding:16px; z-index:99999; border-top:3px solid #f0a500; }

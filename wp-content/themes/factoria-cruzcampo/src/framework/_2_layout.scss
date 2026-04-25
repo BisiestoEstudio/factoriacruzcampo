@@ -6,15 +6,10 @@ html{
 } 
 
 body{
-  display: grid;
   min-height: 100dvh;
   scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
-  grid-template-columns: var(--layout-margin) minmax(0, 1fr) var(--layout-margin);
-  grid-template-rows: auto 1fr auto;
-  > *{
-    grid-column: 2;
-  }
+
 }
 
 .alignright {
@@ -28,15 +23,8 @@ body{
   flex-grow: 999;
 }
 
-main{
-  grid-auto-rows: auto;
-  > *{
-    max-width: var(--contentsize);
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
 
+/*
 .is-layout-constrained{
   display: grid;
   grid-template-columns: var(--layout-margin) minmax(0, 1fr) var(--layout-margin);
@@ -49,6 +37,9 @@ main{
   margin-right: auto;
   margin-left: auto;
 }
+
+*/
+
 
 .alignexpand{
   max-width: unset;
@@ -77,12 +68,6 @@ main{
 }
 
 
-.alignfull{
-  margin-left: calc( -1 * var(--layout-margin));
-  margin-right: calc( -1 * var(--layout-margin));
-  max-width: unset;
-  width: unset;
-}
 
 :root :where(.is-layout-constrained) > * {
   margin-block-start: 0 !important;

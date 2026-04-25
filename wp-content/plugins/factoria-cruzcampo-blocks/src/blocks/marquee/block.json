@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/marquee",
+	"version": "0.1.0",
+	"title": "Marquee",
+	"category": "bisiesto",
+	"icon": {
+		"src": "insert",
+		"foreground": "#7900D8"
+	},
+	"description": "Marquee",
+	"example": {},
+	"parent": ["bisiesto/marquee-group"],
+	"attributes": {
+		"invertDirection": {
+			"type": "boolean",
+			"default": false
+		},
+		"speed": {
+			"type": "number",
+			"default": 0
+		},
+		"marqueeText": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "invert",
+			"label": "Invertido",
+			"isDefault": false
+		}
+	],
+	"supports": {
+		"html": false,
+		"innerBlocks": true
+	},
+	"textdomain": "orbitant-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

@@ -1,12 +1,22 @@
+$buttons-font: var(--display-font);
+$buttons-font-size: var(--wp--preset--font-size--base);
+$buttons-font-weight: var(--font-weight-regular);
+$buttons-padding: 12px 24px;
+$buttons-border-radius: 0;
+$buttons-text-decoration: none;
+$buttons-text-align: center;
+$buttons-transition: background-color 0.3s ease-in-out;
+$buttons-background-color: var(--negro);
+
 button{
-  font-family: var(--base-font);
+  font-family: $buttons-font;
 }
 
 .btn,
 .wp-block-button .wp-element-button,
 input[type="submit"]
 {
-  font-family: var(--base-font);
+  font-family: $buttons-font;
   font-size: var(--wp--preset--font-size--base);
   font-weight: var(--font-weight-regular);
   padding: 12px 24px;
