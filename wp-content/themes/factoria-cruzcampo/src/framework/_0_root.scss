@@ -4,16 +4,16 @@
 :root {
 
   /** Variables de color — Figma: colección "Color" **/
-  --red:        #d71920;
+  --red:        var(--wp--preset--color--red);
   --red-dark:   #a70a0f;
   --red-10:     #d719201a;
   --red-20:     #d7192033;
 
-  --beige-bg:   #faf5ef;
+  --beige-bg:   var(--wp--preset--color--beige-bg);
   --beige-dark: #f5eadb;
 
-  --white:      #fcfcfc;
-  --black:      #020202;
+  --white:      var(--wp--preset--color--white);
+  --black:      var(--wp--preset--color--black);
 
   --gray-light: #f0f0f0;
   --gray:       #bfbfbf;
@@ -30,6 +30,9 @@
   --error:      #ff7900;
   /** Fin variables de color **/
 
+  /** Semantic colors **/
+  --body-color: var(--beige-bg);
+  /* Fin semantic colors **/
  
 
   --button-padding: 12px fluid(28px, 16px);
@@ -53,7 +56,7 @@
 
   --table-height: var(--base-height);
 
-  --body-color: var(--clarito);
+
 
   --layout-margin: clamp(16px, 4vw, 32px);
   --extrawidesize: 1440px;

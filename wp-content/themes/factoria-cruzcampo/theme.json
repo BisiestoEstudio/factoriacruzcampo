@@ -19,6 +19,11 @@
           "name": "Red"
         },
         {
+          "slug": "beige-bg",
+          "color": "#faf5ef",
+          "name": "Beige BG"
+        },
+        {
           "slug": "white",
           "color": "#fcfcfc",
           "name": "White"
