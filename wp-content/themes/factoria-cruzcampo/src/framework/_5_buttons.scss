@@ -1,12 +1,11 @@
 $buttons-font: var(--display-font);
-$buttons-font-size: var(--wp--preset--font-size--base);
+$buttons-font-size: fluid(48px, 32px);
 $buttons-font-weight: var(--font-weight-regular);
-$buttons-padding: 12px 24px;
 $buttons-border-radius: 0;
 $buttons-text-decoration: none;
 $buttons-text-align: center;
 $buttons-transition: background-color 0.3s ease-in-out;
-$buttons-background-color: var(--negro);
+$buttons-background-color: var(--red);
 
 button{
   font-family: $buttons-font;
@@ -17,32 +16,69 @@ button{
 input[type="submit"]
 {
   font-family: $buttons-font;
-  font-size: var(--wp--preset--font-size--base);
+  font-size: 24px;
   font-weight: var(--font-weight-regular);
-  padding: 12px 24px;
+  padding: fluid(32px, 16px);
   border-radius: 0;
   text-decoration: none;
   text-align: center;
-  transition: background-color 0.3s ease-in-out;
-  background-color: var(--negro);
-  color: var(--clarito);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  background-color: $buttons-background-color;
+  color: var(--beige-bg);
   border: none;
   width: fit-content;
-  min-width: min(240px, 80vw);
-  display: inline-block;
+  min-width: min(368px, 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   cursor: pointer;
+
+  .has-red-background-color &{
+    background-color: transparent;
+    border: 3px solid var(--beige-bg);
+  }
+&::after{
+    content: '';
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    background: url('../images/button-arrow.svg') no-repeat center / contain;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
   &:hover{
-    background-color: var(--neutral-100);
-    background-color: #625f5f;
+    background-color: var(--red-dark);
+  }
+  &:not(:disabled):hover::after{
+    transform: translateX(8px);
   }
   &:enabled:active{
-    background-color: var(--neutral-100);
-    background-color: #625f5f;
+    background-color: var(--red-dark);
+  }
+  &:enabled:active::after{
+    transform: translateX(8px);
   }
 
   &:disabled{
-    background-color: var(--negro);
-    color: var(--gris);
+    background-color: var(--red-20);
+    cursor: not-allowed;
+  }
+}
+
+input[type="submit"]{
+  padding-right: 64px;
+  background-image: url('../images/button-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: right 24px center;
+  background-size: 32px 32px;
+  transition: background-color 0.3s ease-in-out, background-position 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  &:not(:disabled):hover{
+    background-position: right 16px center;
+  }
+  &:enabled:active{
+    background-position: right 16px center;
   }
 }
 
@@ -63,85 +99,46 @@ input[type="submit"]
   }
 }
 
-/*Esto es para cuando en móvil va a ancho completo*/
-
-/* 
-
-@media screen and (min-width: $sm){
-  .btn,
-  .wp-block-buttons,
-  .wp-block-button,
-  .wp-element-button,
-  button._submit,
-  input[type="submit"],
-  p:has(.wpcf7-submit){
-    width: fit-content;
-  }
-} */
 
 
-.btn-secondary,
-.wp-block-button.is-style-outline .wp-element-button
+
+.btn-large,
+.wp-block-button.is-style-large .wp-element-button
 {
-  color: var(--negro);
-  background-color: transparent;
-  border: 1px solid var(--oscuro);
-  position: relative;
-  &:after{
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    background-color: var(--gris);
-    opacity: 0.25;
-    z-index: 0;
-    transition: height 0.3s ease-in-out;
-  }
+  font-size: fluid(32px, 48px);
+  padding: fluid(32px, 24px) fluid(40px, 32px);
+  min-width: min(550px, 100%);
 
-  &:hover{
-    background-color: transparent;
-  }
-
-  &:hover:after{
-    height: 100%;
-  }
-  &:enabled:active{
-    background-color: transparent;
-  }
-
-  &:disabled{
-    color: var(--gris);
-    border-color: var(--gris);
-    background-color: transparent;
-    &:after{
-      height: 0%;
-    }
-  }
 
 }
 
-.btn-link,
-.wp-block-button.is-style-link .wp-element-button,
-button.c-filter-tabs__button
+.btn-small,
+.wp-block-button.is-style-small .wp-element-button
 {
+  font-size: fluid(30px, 26px);
+  padding: 12px fluid(16px, 12px);
   min-width: unset;
-  max-width: unset;
-  color: var(--negro);
-  text-decoration: none;
   background-color: transparent;
-  border: none;
-  border-bottom: 1px solid var(--negro);
-  padding: 0 0 4px 0;
-  font-weight: var(--font-weight-bold);
-  &:hover{
-    color: var(--gris);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gris);
-    background-color: transparent;
+  border: 2px solid var(--red);
+  color: var(--red);
+  &::after{
+    content: none;
   }
+
+  &:hover,
+  &:enabled:active{
+    border-color: var(--red-dark);
+    color: var(--red-dark);
+  }
+
+  .has-red-background-color &{
+    border-color: var(--beige-bg);
+    color: var(--beige-bg);
+  }
+
 }
+
+
 
 
 

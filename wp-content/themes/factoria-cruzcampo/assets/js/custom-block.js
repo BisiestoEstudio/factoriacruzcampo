@@ -1,7 +1,8 @@
 wp.domReady(() => {
 
     const buttonStyles = {
-        link: 'Link',
+        small: 'Small',
+        large: 'Large',
     }
 
     const listStyles = {
@@ -9,6 +10,7 @@ wp.domReady(() => {
     }
 
     
+    wp.blocks.unregisterBlockStyle('core/button', ['fill', 'outline']);
     bisRegisterBlockVariation('core/button', buttonStyles);
 
     bisRegisterBlockVariation('core/spacer', {

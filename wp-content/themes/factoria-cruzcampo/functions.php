@@ -14,6 +14,12 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_script( 'factoria-cruzcampo-main', $js_uri . 'main.js', array( 'lenis' ), $version, true );
 } );
 
+add_action( 'after_setup_theme', function () {
+	add_editor_style( 'assets/css/framework.min.css' );
+	add_editor_style( 'assets/css/blocks.css' );
+	add_editor_style( 'assets/css/editor.min.css' );
+} );
+
 add_action( 'enqueue_block_editor_assets', function () {
 	$uri     = get_template_directory_uri() . '/assets/css/';
 	$version = wp_get_theme()->get( 'Version' );
