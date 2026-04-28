@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/imagen-texto",
+	"version": "0.1.0",
+	"title": "Imagen Texto",
+	"category": "bisiesto",
+	"icon": {
+		"src": "align-pull-left",
+		"foreground": "#7900D8"
+	},
+	"description": "Bloque con imagen y contenido de bloques",
+	"example": {},
+	"attributes": {
+		"image": {
+			"type": "number",
+			"default": 0
+		},
+		"verticalAlignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "left"
+		}
+	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "garabato",
+			"label": "Garabato",
+			"isDefault": false
+		},
+		{
+			"name": "wide",
+			"label": "Wide",
+			"isDefault": false
+		}],
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

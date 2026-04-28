@@ -4,6 +4,10 @@
   "title": "Calendario Reserva",
   "category": "bisiesto",
   "description": "Calendario de disponibilidad CoverManager con navegación mensual.",
+  "icon": {
+    "src": "calendar-alt",
+    "foreground": "#7900D8"
+  },
   "attributes": {
     "anchor": { "type": "string", "default": "" }
   },
