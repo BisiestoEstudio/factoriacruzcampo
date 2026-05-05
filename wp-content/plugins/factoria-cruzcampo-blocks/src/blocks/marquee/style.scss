@@ -2,18 +2,37 @@
     display: flex;
     overflow: hidden;
     gap: 24px;
+
+    &__text {
+        font-family: var(--display-font);
+        color: var(--red);
+        text-transform: uppercase;
+        font-size: max(4.5vw, 36px);
+        flex-shrink: 0;
+    }
+
+    &__item {
+        flex-shrink: 0;
+        width: fit-content;
+        white-space: nowrap;
+        animation: scrolling 10s linear infinite;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    
+        .is-style-invert &{
+            animation-direction: reverse;
+        }
+    }
+
+    &__separator {
+        display: block;
+        flex-shrink: 0;
+        width: fluid(64px, 24px);
+    }
 }
 
-.b-marquee__item {
-    flex-shrink: 0;
-    width: fit-content;
-    white-space: nowrap;
-    animation: scrolling 10s linear infinite;
 
-	.is-style-invert &{
-		animation-direction: reverse;
-	}
-}
 
 @keyframes scrolling {
 	0% { transform: translateX(0); }
