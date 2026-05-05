@@ -109,6 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							'core/separator',
 							'core/accordion',
 							'bisiesto/maps',
+							'bisiesto/banner',
 						]}
 						templateLock={false}
 					/>

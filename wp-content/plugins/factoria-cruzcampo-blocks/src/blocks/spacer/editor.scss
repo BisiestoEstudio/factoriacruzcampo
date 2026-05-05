@@ -1,0 +1,18 @@
+.b-spacer {
+	border: 2px dashed #ccc;
+	border-radius: 4px;
+	position: relative;
+    background-color: rgba(0, 0, 0, 0.05);
+	
+	/* Ensure minimum height for visibility in editor */
+	min-height: 20px;
+	
+	
+
+}
+
+/* Selected state styling */
+.bisiesto-spacer.is-selected {
+	border-color: #007cba;
+	background-color: rgba(0, 124, 186, 0.1);
+}

@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/banner",
+	"version": "0.1.0",
+	"title": "Banner",
+	"category": "bisiesto",
+	"icon": {
+		"src": "align-wide",
+		"foreground": "#7900D8"
+	},
+	"description": "Banner con contenido e imagen en dos columnas",
+	"example": {},
+	"parent": [ "bisiesto/section" ],
+	"attributes": {
+		"image": {
+			"type": "number",
+			"default": 0
+		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

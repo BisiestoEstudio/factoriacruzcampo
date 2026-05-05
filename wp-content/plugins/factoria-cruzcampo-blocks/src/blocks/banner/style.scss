@@ -1,0 +1,51 @@
+.b-banner {
+
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 24px;
+	}
+
+	&__image {
+		display: none;
+	}
+
+	&__placeholder {
+		aspect-ratio: 16 / 9;
+		background: rgba(255, 255, 255, 0.1);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		font-size: 14px;
+		padding: 16px;
+		color: rgba(255, 255, 255, 0.6);
+		border: 2px dashed rgba(255, 255, 255, 0.3);
+	}
+}
+
+@media (min-width: 768px) {
+	.b-banner {
+		border: solid fluid(40px, 24px, 1100px, 700px) var(--red);
+		display: grid;
+		gap: fluid(40px, 24px, 1100px, 700px);
+		grid-template-columns: min(480px, 100%) 1fr;
+		align-items: stretch;
+
+	
+		&__image {
+			display: grid;
+			place-items: center;
+			img {
+				width: min(130px, 60%);
+				height: auto;
+				aspect-ratio: 1 / 1;
+				object-fit: contain;
+				display: block;
+			}
+		}
+
+	}
+}
