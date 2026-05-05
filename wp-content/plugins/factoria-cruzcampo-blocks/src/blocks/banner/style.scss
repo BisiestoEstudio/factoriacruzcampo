@@ -12,18 +12,7 @@
 		display: none;
 	}
 
-	&__placeholder {
-		aspect-ratio: 16 / 9;
-		background: rgba(255, 255, 255, 0.1);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		font-size: 14px;
-		padding: 16px;
-		color: rgba(255, 255, 255, 0.6);
-		border: 2px dashed rgba(255, 255, 255, 0.3);
-	}
+
 }
 
 @media (min-width: 768px) {

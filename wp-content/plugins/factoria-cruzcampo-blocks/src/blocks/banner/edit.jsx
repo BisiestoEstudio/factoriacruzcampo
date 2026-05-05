@@ -41,7 +41,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<div className="b-banner__content">
+				<div className="b-banner__content has-background-color has-red-background-color has-white-color is-prose">
 					<InnerBlocks
 						allowedBlocks={ ALLOWED_BLOCKS }
 						templateLock={ false }
