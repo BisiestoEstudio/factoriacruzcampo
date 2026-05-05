@@ -5,16 +5,12 @@ import './style.scss';
 import Edit from './edit';
 import metadata from './block.json';
 
-function Save({ attributes }) {
-	const { verticalAlignment, imagePosition } = attributes;
-	const blockProps = useBisiestoBlockPropsSave( {
-		className: `is-vertically-aligned-${ verticalAlignment } is-image-position-${ imagePosition }`,
-	} );
+function Save() {
 
 	return (
-		<div { ...blockProps }>
+
 			<InnerBlocks.Content />
-		</div>
+
 	);
 }
 

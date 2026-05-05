@@ -11,6 +11,8 @@
     "packages-update": "wp-scripts packages-update"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^30.0.0"
+    "@lehoczky/postcss-fluid": "^1.0.3",
+    "@wordpress/scripts": "^30.0.0",
+    "cssnano": "^7.1.9"
   }
 }

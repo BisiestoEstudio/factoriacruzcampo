@@ -40,6 +40,7 @@
 		&__wrapper {
 			display: flex;
 			flex-direction: row-reverse;
+			gap: fluid(146px, 40px);
 
 			.is-vertically-aligned-top & {
 				align-items: start;
@@ -55,6 +56,17 @@
 
 			.is-image-position-right & {
 				flex-direction: row;
+			}
+		}
+
+		&__image {
+			width: 50%;
+		}
+
+		&__content {
+			flex: 1;
+			>* {
+				max-width: 462px;
 			}
 		}
 	}

@@ -32,6 +32,7 @@
 
   /** Semantic colors **/
   --body-color: var(--beige-bg);
+  --text-color: var(--black);
   /* Fin semantic colors **/
 
   /** Layout variables **/
@@ -47,6 +48,8 @@
 
   --button-padding: 12px fluid(28px, 16px);
 
+
+  /** Tipography variables **/
   --base-font:  'Suisse Intl', sans-serif;
   --heading-font: 'Playfair Display', serif;
   --display-font: 'Gobold', serif;
@@ -63,6 +66,8 @@
   --h5-height: 1.12;
   --h6-height: 1.12;
   --caption-height: 1.5;
+
+  /** Fin tipography variables **/
 
   --table-height: var(--base-height);
 

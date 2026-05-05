@@ -173,8 +173,8 @@
       "lineHeight": "var(--base-height)"
     },
     "color": {
-      "background": "var(--wp--preset--color--white)",
-      "text": "var(--wp--preset--color--black)"
+      "background": "var(--body-color)",
+      "text": "var(--text-color)"
     },
     "elements": {
       "h1": {
@@ -224,7 +224,12 @@
           "fontWeight": "500",
           "lineHeight": "var(--h6-height)"
         }
-      }
+      },
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--black)"
+				}
+			}
     },
     "blocks": {
       "core/button": {
