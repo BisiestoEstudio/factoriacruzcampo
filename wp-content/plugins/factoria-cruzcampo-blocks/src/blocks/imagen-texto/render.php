@@ -1,6 +1,9 @@
 <?php
 defined('ABSPATH') || exit;
 
+/** @var array $attributes */
+/** @var WP_Block|null $block */
+
 $image_id           = $attributes['image'] ?? 0;
 $vertical_alignment = $attributes['verticalAlignment'] ?? 'center';
 $image_position     = $attributes['imagePosition'] ?? 'left';
@@ -20,8 +23,10 @@ if($variation === 'wide') {
 <div <?php echo bis_get_block_prop($block, true, ['class' => $extra_classes]); ?>>
 	<div class="b-imagen-texto__wrapper <?= $variation_align_classes; ?>">
 
+	<div class="b-imagen-texto__content-wrapper">
 		<div class="b-imagen-texto__content is-prose">
 			<?php echo $content; ?>
+		</div>
 		</div>
 		<div class="b-imagen-texto__image">
 			<?php if ($image_id) : ?>

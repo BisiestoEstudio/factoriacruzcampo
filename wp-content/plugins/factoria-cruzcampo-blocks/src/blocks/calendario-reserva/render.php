@@ -1,6 +1,9 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+/** @var array $attributes */
+/** @var WP_Block|null $block */
+
 $now        = new DateTimeImmutable( 'now', new DateTimeZone( 'Europe/Madrid' ) );
 $year       = (int) $now->format( 'Y' );
 $month      = (int) $now->format( 'n' );

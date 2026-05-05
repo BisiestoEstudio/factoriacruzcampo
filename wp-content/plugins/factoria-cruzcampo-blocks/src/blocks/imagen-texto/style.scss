@@ -24,7 +24,7 @@
 		}
 	}
 
-	&__content {
+	&__content-wrapper {
 		display: flex;
 		flex-direction: column;
 	}
@@ -72,12 +72,9 @@
 		&__wrapper {
 			display: flex;
 			flex-direction: row-reverse;
-			gap: fluid(146px, 24px, 1500px, 700px);
-
-			.is-vertically-aligned-top & {
-				align-items: start;
-			}
-
+			gap: fluid(40px, 24px, 1500px, 700px);
+			align-items: start;
+	
 			.is-vertically-aligned-center & {
 				align-items: center;
 			}
@@ -95,8 +92,11 @@
 			width: 50%;
 		}
 
-		&__content {
+		&__content-wrapper {
 			flex: 1;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
 			>* {
 				max-width: 462px;
 			}

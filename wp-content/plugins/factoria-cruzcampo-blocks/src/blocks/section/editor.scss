@@ -1,0 +1,9 @@
+.b-section{
+    &__content > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+        margin-block-end: var(--section-gap);
+    }
+
+    &__content > .block-editor-inner-blocks > .block-editor-block-list__layout > *:last-child {
+        margin-block-end: 0;
+    }
+}

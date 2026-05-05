@@ -1,0 +1,51 @@
+.b-section {
+	padding: var(--block-padding);
+	position: relative;
+	--section-gap: var(--innerblocks-gap);
+	overflow-x: hidden;
+
+
+	&__content {
+		p, 
+		span,
+		h1, 
+		h2, 
+		h3, 
+		h4, 
+		h5, 
+		h6{
+			max-width: var(--contentsize);
+		}
+
+		.is-style-center & {
+			display: grid;
+			place-items: center;
+			text-align: center;
+
+			> *:not(.alignextrawide):not(.alignfull):not(.alignwide):not(.alignmedium):not(.aligncontent) 
+			{
+				max-width: var(--contentsize);
+				margin-right: auto;
+				margin-left: auto;
+			}
+
+		}
+
+
+	
+
+		> *:last-child {
+			margin-block-end: 0;
+		}
+	}
+
+	& &__content> * {
+		margin-block-start: 0;
+		margin-block-end: var(--section-gap);
+	}
+
+	& &__content> *:last-child {
+		margin-block-end: 0;
+	}
+}
+

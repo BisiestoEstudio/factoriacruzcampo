@@ -9,6 +9,9 @@
  * @package wpdev
  */
 
+/** @var array $attributes */
+/** @var WP_Block $block */
+
 $marquee_text = $attributes['marqueeText'] ?? '';
 $speed_index = $attributes['speed'] ?? 0;
 $letter_count = strlen($marquee_text);

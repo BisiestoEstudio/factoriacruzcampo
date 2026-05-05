@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/section",
+	"version": "0.1.0",
+	"title": "Sección",
+	"category": "bisiesto",
+	"icon": {
+		"src": "archive",
+		"foreground": "#7900D8"
+	},
+	"description": "Sección para diversos contenidos",
+	"example": {},
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"contentSize": {
+			"type": "string",
+			"enum": [ "expand", "wide", "medium", "content" ],
+			"default": "wide"
+		},
+		"gap": {
+			"type": "string",
+			"default": false
+		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"align": false,
+		"anchor": true,
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"spacing": {
+			"padding": true,
+			"blockGap": true
+		}
+	},
+	"providesContext": {
+		"bisiesto/sectionContentSize": "contentSize"
+	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "center",
+			"label": "Centrado",
+			"isDefault": false
+		}
+	],
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
