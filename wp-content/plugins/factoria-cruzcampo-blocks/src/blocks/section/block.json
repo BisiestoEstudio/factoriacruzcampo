@@ -28,6 +28,10 @@
 		"anchor": {
 			"type": "string",
 			"default": ""
+		},
+		"backgroundVideo": {
+			"type": "object",
+			"default": { "url": "", "posterId": 0 }
 		}
 	},
 	"supports": {

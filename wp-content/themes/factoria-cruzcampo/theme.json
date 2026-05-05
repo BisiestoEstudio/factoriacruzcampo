@@ -3,6 +3,10 @@
   "version": 3,
   "settings": {
     "appearanceTools": true,
+    "background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+    },
     "layout": {
       "contentSize": "var(--contentsize)",
       "wideSize": "var(--widesize)"

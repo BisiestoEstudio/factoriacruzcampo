@@ -10,7 +10,7 @@ class Bisiestheme_Assets {
     public static function init() {
         add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
         add_action( 'after_setup_theme', array( __CLASS__, 'enqueue_editor_styles' ) );
-        add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor_assets' ) );
+        //add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor_assets' ) );
     }
 
 	public static function enqueue_scripts() {
