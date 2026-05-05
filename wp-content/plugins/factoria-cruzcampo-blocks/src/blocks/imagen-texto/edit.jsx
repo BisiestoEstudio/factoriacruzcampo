@@ -4,7 +4,7 @@ import { store as coreStore } from '@wordpress/core-data';
 import { InnerBlocks, InspectorControls, MediaUpload, MediaUploadCheck, BlockControls, BlockVerticalAlignmentControl } from '@wordpress/block-editor';
 import { PanelBody, Button, ButtonGroup } from '@wordpress/components';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
-import './editor.scss';
+import MediaPicker from '../../components/MediaPicker';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { image, verticalAlignment, imagePosition } = attributes;
@@ -12,8 +12,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const imageUrl = useSelect(
 		( select ) => {
 			if ( ! image ) return null;
-			const media = select( coreStore ).getMedia( image );
-			return media?.source_url ?? null;
+			return select( coreStore ).getMedia( image )?.source_url ?? null;
 		},
 		[ image ]
 	);
@@ -50,40 +49,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						) ) }
 					</ButtonGroup>
 
-					<MediaUploadCheck>
-						<MediaUpload
-							onSelect={ ( media ) => setAttributes( { image: media.id } ) }
-							allowedTypes={ [ 'image' ] }
-							value={ image }
-							render={ ( { open } ) => (
-								<div className="imagen-texto-inspector">
-									{ imageUrl && (
-										<div className="imagen-texto-inspector__preview" onClick={ open }>
-											<img src={ imageUrl } alt="" />
-										</div>
-									) }
-									<Button onClick={ open } variant="secondary" style={ { width: '100%' } }>
-										{ image
-											? __( 'Cambiar imagen', 'factoria-cruzcampo-blocks' )
-											: __( 'Seleccionar imagen', 'factoria-cruzcampo-blocks' ) }
-									</Button>
-									{ image > 0 && (
-										<Button
-											onClick={ ( e ) => {
-												e.stopPropagation();
-												setAttributes( { image: 0 } );
-											} }
-											variant="tertiary"
-											isDestructive
-											style={ { width: '100%', marginTop: '4px' } }
-										>
-											{ __( 'Eliminar imagen', 'factoria-cruzcampo-blocks' ) }
-										</Button>
-									) }
-								</div>
-							) }
-						/>
-					</MediaUploadCheck>
+					<MediaPicker
+						mode="image-only"
+						imageId={ image }
+						onImageChange={ ( id ) => setAttributes( { image: id } ) }
+					/>
 				</PanelBody>
 			</InspectorControls>
 

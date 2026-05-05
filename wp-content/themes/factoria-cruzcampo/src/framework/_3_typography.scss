@@ -1,14 +1,36 @@
 /* Tipography */
 
-/* staatliches-regular */
+/* SuisseIntl-Regular */
 @font-face {
   font-display: swap;
-  font-family: 'Staatliches';
+  font-family: 'Suisse Intl';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/staatliches-v15-latin-regular.woff2') format('woff2'),
-       url('../fonts/staatliches-v15-latin-regular.ttf') format('truetype');
+  src: url('../fonts/SuisseIntl-Regular.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Regular.woff') format('woff');
 }
+
+/* SuisseIntl-Bold */
+@font-face {
+  font-display: swap;
+  font-family: 'Suisse Intl';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/SuisseIntl-Bold.woff2') format('woff2'),
+       url('../fonts/SuisseIntl-Bold.woff') format('woff');
+}
+
+/* Gobold-Regular */
+@font-face {
+  font-display: swap;
+  font-family: 'Gobold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Gobold-Regular.woff2') format('woff2'),
+       url('../fonts/Gobold-Regular.woff') format('woff');
+}
+
+
 
 /* playfair-display-500 */
 @font-face {

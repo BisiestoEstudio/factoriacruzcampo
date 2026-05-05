@@ -43,7 +43,11 @@
 		}],
 	"supports": {
 		"html": false,
-		"anchor": true
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true
+		}
 	},
 	"textdomain": "factoria-cruzcampo-blocks",
 	"editorScript": "file:./index.js",

@@ -27,7 +27,10 @@ function bis_get_block_prop( $block, $is_layout_constrained = false, $extra_attr
 	if ( $is_layout_constrained ) {
 		$new_classes[] = 'alignfull';
 		$new_classes[] = 'is-layout-constrained';
+		$new_classes[] = 'has-global-padding';
 	}
+
+
 
 	if ( ! empty( $extra_attributes['class'] ) ) {
 		$new_classes[] = $extra_attributes['class'];
