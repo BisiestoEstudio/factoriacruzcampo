@@ -1,4 +1,8 @@
 .b-imagen-texto {
+	padding: var(--block-padding) 0;
+	.b-section &{
+		padding: 0;
+	}
 	
 	&__wrapper {
 		display: grid;

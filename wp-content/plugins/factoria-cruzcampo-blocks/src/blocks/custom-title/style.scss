@@ -1,0 +1,46 @@
+.b-custom-title {
+	
+
+	&__title {
+		font-family: var(--display-font);
+		color: var(--red);
+		text-transform: uppercase;
+	}
+
+	&__antetitulo {
+		font-style: italic;
+	}
+
+	&__inner {
+
+		&--embellecedor {
+			border-top: 1px solid var(--red);
+			padding-top: 12px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 16px;
+		}
+
+		&--antetitulo {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			gap: 24px;
+			align-items: start;
+		}
+	}
+
+	&__star {
+		flex-shrink: 0;
+		width: 16px;
+		height: 16px;
+		display: block;
+
+		img,
+		svg {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+}

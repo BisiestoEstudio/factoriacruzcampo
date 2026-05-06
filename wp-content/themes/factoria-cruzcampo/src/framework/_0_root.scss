@@ -84,7 +84,7 @@
   --spacing-fluid-m: fluid(80px, 40px);
   --spacing-fluid-s: fluid(40px, 24px);
 
-  --block-padding: var(--spacing-fluid-m) 0;
+  --block-padding: fluid(80px, 4) 0;
   --innerblocks-gap: 24px;
 
 

@@ -110,6 +110,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							'core/accordion',
 							'bisiesto/maps',
 							'bisiesto/banner',
+							'bisiesto/custom-title',
+							'bisiesto/imagen-texto'
 						]}
 						templateLock={false}
 					/>
