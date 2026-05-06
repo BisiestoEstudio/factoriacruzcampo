@@ -1,9 +1,11 @@
 .b-imagen-texto {
 	padding: var(--block-padding) 0;
 	.b-section &{
-		padding: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
-	
+
+
 	&__wrapper {
 		display: grid;
 		gap: 40px;
@@ -67,6 +69,17 @@
 			z-index: -1;
 		}
 
+	}
+
+	&.is-style-wide &{
+		&__content{
+			max-width: unset;
+			padding: 24px var(--layout-margin);
+		}
+
+		&__image {
+			align-self: stretch;
+		}
 	}
 }
 

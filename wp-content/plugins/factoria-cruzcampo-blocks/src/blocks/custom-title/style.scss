@@ -5,6 +5,10 @@
 		font-family: var(--display-font);
 		color: var(--red);
 		text-transform: uppercase;
+
+		&--antetitulo {
+			font-size: clamp(36px, 5.3vw, 120px);
+		}
 	}
 
 	&__antetitulo {
@@ -24,9 +28,7 @@
 
 		&--antetitulo {
 			display: grid;
-			grid-template-columns: auto 1fr;
-			gap: 24px;
-			align-items: start;
+			gap: 16px;
 		}
 	}
 
@@ -41,6 +43,17 @@
 			width: 100%;
 			height: auto;
 			display: block;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.b-custom-title {
+		&__inner--antetitulo {
+			display: grid;
+			grid-template-columns: min(250px, 30%) 1fr;
+			gap: 24px;
+			align-items: start;
 		}
 	}
 }

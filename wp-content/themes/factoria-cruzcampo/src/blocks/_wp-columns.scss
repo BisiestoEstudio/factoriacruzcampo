@@ -1,0 +1,7 @@
+.b-imagen-texto .wp-block-columns{
+	flex-wrap: wrap !important;
+
+    .wp-block-column{
+        min-width: min(300px, 100%);
+    }
+}

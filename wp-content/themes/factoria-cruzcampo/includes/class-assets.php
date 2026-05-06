@@ -10,7 +10,7 @@ class Bisiestheme_Assets {
     public static function init() {
         add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
         add_action( 'after_setup_theme', array( __CLASS__, 'enqueue_editor_styles' ) );
-        //add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor_assets' ) );
+        add_action( 'enqueue_block_editor_assets', array( __CLASS__, 'enqueue_editor_assets' ) );
     }
 
 	public static function enqueue_scripts() {
@@ -31,9 +31,7 @@ class Bisiestheme_Assets {
 	}
 
 	public static function enqueue_editor_assets() {
-		wp_enqueue_style( 'bisiestheme-framework', BISIESTHEME_URI . '/assets/css/framework.min.css', array(), BISIESTHEME_VERSION );
-		wp_enqueue_style( 'bisiestheme-blocks', BISIESTHEME_URI . '/assets/css/blocks.css', array( 'bisiestheme-framework' ), BISIESTHEME_VERSION );
-		wp_enqueue_style( 'bisiestheme-editor', BISIESTHEME_URI . '/assets/css/editor.min.css', array( 'bisiestheme-blocks' ), BISIESTHEME_VERSION );
+
 
 		wp_enqueue_script(
 			'bisiestheme-custom-block',

@@ -101,6 +101,9 @@ input[type="submit"]{
 
 
 
+
+
+
 .btn-large,
 .wp-block-button.is-style-large .wp-element-button
 {
@@ -108,7 +111,14 @@ input[type="submit"]{
   padding: fluid(32px, 24px) fluid(40px, 32px);
   min-width: min(550px, 100%);
 
+}
 
+@media screen and (max-width: $md){ 
+  .btn-large,
+  .wp-block-button.is-style-large
+  {
+    width: 100%;
+  }
 }
 
 .btn-small,

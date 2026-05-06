@@ -28,7 +28,7 @@ $star_url   = FCB_PLUGIN_URL . 'assets/images/star.svg';
 				<p class="b-custom-title__antetitulo has-h-2-font-size"><?php echo wp_kses_post( $antetitulo ); ?></p>
 			<?php endif; ?>
 			<?php if ( $title ) : ?>
-				<h2 class="b-custom-title__title"><?php echo wp_kses_post( $title ); ?></h2>
+				<h2 class="b-custom-title__title b-custom-title__title--antetitulo"><?php echo wp_kses_post( $title ); ?></h2>
 			<?php endif; ?>
 		</div>
 
