@@ -1,12 +1,11 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { useBisiestoBlockPropsSave } from '../../hooks/useBisiestoBlockProps';
 
-
-export default function save({ attributes }) {
+export default function save( { attributes } ) {
 	const { align } = attributes;
-	const customProps = useBisiestoBlockPropsSave({
-		className: `align${align}`,
-	});
+	const customProps = useBisiestoBlockPropsSave( {
+		className: `align${ align }`,
+	} );
 
 	return (
 		<div { ...customProps }>

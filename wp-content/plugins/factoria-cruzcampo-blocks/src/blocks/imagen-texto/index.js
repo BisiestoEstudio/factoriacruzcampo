@@ -6,12 +6,7 @@ import Edit from './edit';
 import metadata from './block.json';
 
 function Save() {
-
-	return (
-
-			<InnerBlocks.Content />
-
-	);
+	return <InnerBlocks.Content />;
 }
 
 registerBlockType( metadata.name, {

@@ -11,10 +11,10 @@ import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import MediaPicker from '../../components/MediaPicker';
 
 const CONTENT_SIZE_OPTIONS = [
-	{ value: 'expand', label: __('Extra wide', 'factoria-cruzcampo-blocks') },
-	{ value: 'wide', label: __('Wide', 'factoria-cruzcampo-blocks') },
-	{ value: 'medium', label: __('Medium', 'factoria-cruzcampo-blocks') },
-	{ value: 'content', label: __('Content', 'factoria-cruzcampo-blocks') },
+	{ value: 'expand', label: __( 'Extra wide', 'factoria-cruzcampo-blocks' ) },
+	{ value: 'wide', label: __( 'Wide', 'factoria-cruzcampo-blocks' ) },
+	{ value: 'medium', label: __( 'Medium', 'factoria-cruzcampo-blocks' ) },
+	{ value: 'content', label: __( 'Content', 'factoria-cruzcampo-blocks' ) },
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -24,28 +24,36 @@ export default function Edit( { attributes, setAttributes } ) {
 		className: `align${ align } is-layout-constrained`,
 	} );
 
-	const contentClass = `align${contentSize}`;
+	const contentClass = `align${ contentSize }`;
 
-	useEffect(() => {
+	useEffect( () => {
 		let newBlockGap = gap ?? false;
-		if (style?.spacing?.blockGap) {
+		if ( style?.spacing?.blockGap ) {
 			newBlockGap = style.spacing.blockGap;
-			if (newBlockGap.startsWith('var:')) {
-				newBlockGap = newBlockGap.split('|').pop();
-				newBlockGap = "var(--wp--preset--spacing--" + newBlockGap + ")";
+			if ( newBlockGap.startsWith( 'var:' ) ) {
+				newBlockGap = newBlockGap.split( '|' ).pop();
+				newBlockGap = 'var(--wp--preset--spacing--' + newBlockGap + ')';
 			}
 		}
-		setAttributes({ gap: newBlockGap });
-	}, [attributes]);
+		setAttributes( { gap: newBlockGap } );
+	}, [ attributes ] );
 
 	return (
 		<>
 			<InspectorControls group="styles">
-				<PanelBody title={ __( 'Layout', 'factoria-cruzcampo-blocks' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Layout', 'factoria-cruzcampo-blocks' ) }
+					initialOpen={ true }
+				>
 					<ToggleGroupControl
-						label={ __( 'Content width', 'factoria-cruzcampo-blocks' ) }
+						label={ __(
+							'Content width',
+							'factoria-cruzcampo-blocks'
+						) }
 						value={ contentSize }
-						onChange={ ( value ) => value && setAttributes( { contentSize: value } ) }
+						onChange={ ( value ) =>
+							value && setAttributes( { contentSize: value } )
+						}
 						isBlock
 					>
 						{ CONTENT_SIZE_OPTIONS.map( ( opt ) => (
@@ -58,16 +66,32 @@ export default function Edit( { attributes, setAttributes } ) {
 					</ToggleGroupControl>
 				</PanelBody>
 
-				<PanelBody title={ __( 'Vídeo de fondo', 'factoria-cruzcampo-blocks' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __(
+						'Vídeo de fondo',
+						'factoria-cruzcampo-blocks'
+					) }
+					initialOpen={ false }
+				>
 					<MediaPicker
 						mode="video-only"
 						videoUrl={ backgroundVideo?.url || '' }
 						onVideoUrlChange={ ( url ) =>
-							setAttributes( { backgroundVideo: { url, posterId: backgroundVideo?.posterId || 0 } } )
+							setAttributes( {
+								backgroundVideo: {
+									url,
+									posterId: backgroundVideo?.posterId || 0,
+								},
+							} )
 						}
 						posterId={ backgroundVideo?.posterId || 0 }
 						onPosterChange={ ( posterId ) =>
-							setAttributes( { backgroundVideo: { url: backgroundVideo?.url || '', posterId } } )
+							setAttributes( {
+								backgroundVideo: {
+									url: backgroundVideo?.url || '',
+									posterId,
+								},
+							} )
 						}
 					/>
 				</PanelBody>
@@ -88,7 +112,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					style={ gap ? { '--section-gap': gap } : undefined }
 				>
 					<InnerBlocks
-						allowedBlocks={[
+						allowedBlocks={ [
 							'bisiesto/list-item',
 							'core/group',
 							'core/paragraph',
@@ -111,9 +135,9 @@ export default function Edit( { attributes, setAttributes } ) {
 							'bisiesto/maps',
 							'bisiesto/banner',
 							'bisiesto/custom-title',
-							'bisiesto/imagen-texto'
-						]}
-						templateLock={false}
+							'bisiesto/imagen-texto',
+						] }
+						templateLock={ false }
 					/>
 				</div>
 			</div>

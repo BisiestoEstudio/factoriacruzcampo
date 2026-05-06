@@ -20,7 +20,9 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const imageUrl = useSelect(
 		( select ) => {
-			if ( ! image ) return null;
+			if ( ! image ) {
+				return null;
+			}
 			return select( coreStore ).getMedia( image )?.source_url ?? null;
 		},
 		[ image ]
@@ -31,11 +33,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Imagen', 'factoria-cruzcampo-blocks' ) }>
+				<PanelBody
+					title={ __( 'Imagen', 'factoria-cruzcampo-blocks' ) }
+				>
 					<MediaPicker
 						mode="image-only"
 						imageId={ image }
-						onImageChange={ ( id ) => setAttributes( { image: id } ) }
+						onImageChange={ ( id ) =>
+							setAttributes( { image: id } )
+						}
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -52,7 +58,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						<img src={ imageUrl } alt="" />
 					) : (
 						<div className="b-banner__placeholder">
-							{ __( 'Selecciona una imagen desde el panel lateral', 'factoria-cruzcampo-blocks' ) }
+							{ __(
+								'Selecciona una imagen desde el panel lateral',
+								'factoria-cruzcampo-blocks'
+							) }
 						</div>
 					) }
 				</div>

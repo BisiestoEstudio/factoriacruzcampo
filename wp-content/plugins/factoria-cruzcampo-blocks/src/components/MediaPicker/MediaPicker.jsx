@@ -8,7 +8,9 @@ import './MediaPicker.scss';
 function ImageSelector( { imageId, onImageChange } ) {
 	const imageUrl = useSelect(
 		( select ) => {
-			if ( ! imageId ) return null;
+			if ( ! imageId ) {
+				return null;
+			}
 			return select( coreStore ).getMedia( imageId )?.source_url ?? null;
 		},
 		[ imageId ]
@@ -23,14 +25,27 @@ function ImageSelector( { imageId, onImageChange } ) {
 				render={ ( { open } ) => (
 					<div className="media-picker__selector">
 						{ imageUrl && (
-							<div className="media-picker__preview" onClick={ open }>
+							<div
+								className="media-picker__preview"
+								onClick={ open }
+							>
 								<img src={ imageUrl } alt="" />
 							</div>
 						) }
-						<Button onClick={ open } variant="secondary" style={ { width: '100%' } }>
+						<Button
+							onClick={ open }
+							variant="secondary"
+							style={ { width: '100%' } }
+						>
 							{ imageId
-								? __( 'Cambiar imagen', 'factoria-cruzcampo-blocks' )
-								: __( 'Seleccionar imagen', 'factoria-cruzcampo-blocks' ) }
+								? __(
+										'Cambiar imagen',
+										'factoria-cruzcampo-blocks'
+								  )
+								: __(
+										'Seleccionar imagen',
+										'factoria-cruzcampo-blocks'
+								  ) }
 						</Button>
 						{ imageId > 0 && (
 							<Button
@@ -42,7 +57,10 @@ function ImageSelector( { imageId, onImageChange } ) {
 								isDestructive
 								style={ { width: '100%', marginTop: '4px' } }
 							>
-								{ __( 'Eliminar imagen', 'factoria-cruzcampo-blocks' ) }
+								{ __(
+									'Eliminar imagen',
+									'factoria-cruzcampo-blocks'
+								) }
 							</Button>
 						) }
 					</div>
@@ -52,10 +70,17 @@ function ImageSelector( { imageId, onImageChange } ) {
 	);
 }
 
-function VideoSelector( { videoUrl, onVideoUrlChange, posterId, onPosterChange } ) {
+function VideoSelector( {
+	videoUrl,
+	onVideoUrlChange,
+	posterId,
+	onPosterChange,
+} ) {
 	const posterUrl = useSelect(
 		( select ) => {
-			if ( ! posterId ) return null;
+			if ( ! posterId ) {
+				return null;
+			}
 			return select( coreStore ).getMedia( posterId )?.source_url ?? null;
 		},
 		[ posterId ]
@@ -80,14 +105,27 @@ function VideoSelector( { videoUrl, onVideoUrlChange, posterId, onPosterChange }
 					render={ ( { open } ) => (
 						<div className="media-picker__selector">
 							{ posterUrl && (
-								<div className="media-picker__preview" onClick={ open }>
+								<div
+									className="media-picker__preview"
+									onClick={ open }
+								>
 									<img src={ posterUrl } alt="" />
 								</div>
 							) }
-							<Button onClick={ open } variant="secondary" style={ { width: '100%' } }>
+							<Button
+								onClick={ open }
+								variant="secondary"
+								style={ { width: '100%' } }
+							>
 								{ posterId
-									? __( 'Cambiar póster', 'factoria-cruzcampo-blocks' )
-									: __( 'Seleccionar póster', 'factoria-cruzcampo-blocks' ) }
+									? __(
+											'Cambiar póster',
+											'factoria-cruzcampo-blocks'
+									  )
+									: __(
+											'Seleccionar póster',
+											'factoria-cruzcampo-blocks'
+									  ) }
 							</Button>
 							{ posterId > 0 && (
 								<Button
@@ -97,9 +135,15 @@ function VideoSelector( { videoUrl, onVideoUrlChange, posterId, onPosterChange }
 									} }
 									variant="tertiary"
 									isDestructive
-									style={ { width: '100%', marginTop: '4px' } }
+									style={ {
+										width: '100%',
+										marginTop: '4px',
+									} }
 								>
-									{ __( 'Eliminar póster', 'factoria-cruzcampo-blocks' ) }
+									{ __(
+										'Eliminar póster',
+										'factoria-cruzcampo-blocks'
+									) }
 								</Button>
 							) }
 						</div>
@@ -122,18 +166,24 @@ export default function MediaPicker( {
 	onPosterChange,
 } ) {
 	const showToggle = mode === 'both';
-	const showImage  = mode === 'image-only' || ( mode === 'both' && mediaType === 'image' );
-	const showVideo  = mode === 'video-only' || ( mode === 'both' && mediaType === 'video' );
+	const showImage =
+		mode === 'image-only' || ( mode === 'both' && mediaType === 'image' );
+	const showVideo =
+		mode === 'video-only' || ( mode === 'both' && mediaType === 'video' );
 
 	return (
 		<div className="media-picker">
 			{ showToggle && (
 				<ToggleControl
-					label={ mediaType === 'image'
-						? __( 'Imagen', 'factoria-cruzcampo-blocks' )
-						: __( 'Vídeo', 'factoria-cruzcampo-blocks' ) }
+					label={
+						mediaType === 'image'
+							? __( 'Imagen', 'factoria-cruzcampo-blocks' )
+							: __( 'Vídeo', 'factoria-cruzcampo-blocks' )
+					}
 					checked={ mediaType === 'video' }
-					onChange={ ( val ) => onMediaTypeChange( val ? 'video' : 'image' ) }
+					onChange={ ( val ) =>
+						onMediaTypeChange( val ? 'video' : 'image' )
+					}
 				/>
 			) }
 			{ showImage && (
