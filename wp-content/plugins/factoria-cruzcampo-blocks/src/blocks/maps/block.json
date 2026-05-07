@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/maps",
+	"version": "0.1.0",
+	"title": "Maps",
+	"category": "bisiesto",
+	"icon": {
+		"src": "location-alt",
+		"foreground": "#7900D8"
+	},
+	"description": "Bloque de localización con Google Maps embebido y contenido en InnerBlocks.",
+	"attributes": {
+		"mapUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
+

@@ -141,8 +141,14 @@ input[type="submit"]{
   }
 
   .has-red-background-color &{
-    border-color: var(--beige-bg);
-    color: var(--beige-bg);
+    border-color: var(--white);
+    color: var(--white);
+
+    &:hover,
+    &:enabled:active{
+      border-color: var(--beige-bg);
+      color: var(--beige-bg);
+    }
   }
 
 }

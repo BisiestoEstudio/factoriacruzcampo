@@ -110,6 +110,12 @@
       },
       "fontSizes": [
         {
+          "slug": "display-s",
+          "size": "var(--display-s-size)",
+          "name": "Display",
+          "fluid": false
+        },
+        {
           "slug": "h1",
           "size": "32px",
           "name": "H1",

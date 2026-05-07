@@ -250,6 +250,16 @@ h6, .has-h-6-font-size{
   }
 }
 
+.display-s, .has-display-s-font-size{
+  font-family: var(--display-font);
+  line-height: var(--display-height);
+  font-weight: 400;
+  text-transform: uppercase;
+  strong, b, &.u_bold{
+    font-weight: 400;
+  }
+}
+
 .has-h2-uppercase {
 
   h2,
