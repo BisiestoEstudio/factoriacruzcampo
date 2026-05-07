@@ -87,6 +87,44 @@ function bis_get_block_inline_styles( $block ) {
 	return '';
 }
 
+/**
+ * Pinta el elemento media (imagen o vídeo) de un MediaPicker con soporte a vídeo.
+ * $media: array con mediaType, imageId, videoUrl, posterId.
+ * $class: clase CSS aplicada al elemento resultante.
+ */
+function bis_paint_media( $media, $class = '' ) {
+	$type      = isset( $media['mediaType'] ) ? (string) $media['mediaType'] : 'image';
+	$image_id  = isset( $media['imageId'] ) ? (int) $media['imageId'] : 0;
+	$video_url = isset( $media['videoUrl'] ) ? trim( (string) $media['videoUrl'] ) : '';
+	$poster_id = isset( $media['posterId'] ) ? (int) $media['posterId'] : 0;
+
+	if ( $type === 'video' && $video_url ) {
+		$poster_url = $poster_id ? wp_get_attachment_image_url( $poster_id, 'full' ) : '';
+		?>
+		<div class="c-media <?php echo esc_attr( $class ); ?>">
+		<video
+			class="c-media__item c-media__item--video"
+			src="<?php echo esc_url( $video_url ); ?>"
+			<?php if ( $poster_url ) : ?>poster="<?php echo esc_url( $poster_url ); ?>"<?php endif; ?>
+			autoplay
+			muted
+			loop
+			playsinline
+		></video>
+		</div>
+		<?php
+		return;
+	}
+
+	if ( $image_id ) {
+		?>
+		<div class="c-media <?php echo esc_attr( $class ); ?>">
+		<?php echo wp_get_attachment_image( $image_id, 'full', false, [ 'class' => 'c-media__item', 'loading' => 'lazy' ] ); ?>
+		</div>
+		<?php
+	}
+}
+
 function bis_get_link_attributes( $link ) {
 	if ( empty( $link['url'] ) ) {
 		return [];
