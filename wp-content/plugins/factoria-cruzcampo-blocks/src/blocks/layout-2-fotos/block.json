@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/layout-2-fotos",
+	"version": "0.1.0",
+	"title": "Layout 2 fotos",
+	"category": "bisiesto",
+	"icon": {
+		"src": "format-image",
+		"foreground": "#7900D8"
+	},
+	"description": "Layout con dos medios centrales (imagen o vídeo) y dos iconos laterales.",
+	"example": {},
+	"parent": ["bisiesto/section"],
+	"attributes": {
+		"center1": {
+			"type": "object",
+			"default": {
+				"mediaType": "image",
+				"imageId": 0,
+				"videoUrl": "",
+				"posterId": 0
+			}
+		},
+		"center2": {
+			"type": "object",
+			"default": {
+				"mediaType": "image",
+				"imageId": 0,
+				"videoUrl": "",
+				"posterId": 0
+			}
+		},
+		"iconLeft": {
+			"type": "number",
+			"default": 0
+		},
+		"iconRight": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
+

@@ -112,31 +112,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					style={ gap ? { '--section-gap': gap } : undefined }
 				>
 					<InnerBlocks
-						allowedBlocks={ [
-							'bisiesto/list-item',
-							'core/group',
-							'core/paragraph',
-							'core/heading',
-							'bisiesto/cards',
-							'bisiesto/card-link',
-							'bisiesto/icon-list',
-							'core/buttons',
-							'core/spacer',
-							'core/image',
-							'core/gallery',
-							'bisiesto/spacer',
-							'contact-form-7/contact-form-selector',
-							'bisiesto/post-grid',
-							'bisiesto/columns',
-							'bisiesto/card-carrusel',
-							'core/list',
-							'core/separator',
-							'core/accordion',
-							'bisiesto/maps',
-							'bisiesto/banner',
-							'bisiesto/custom-title',
-							'bisiesto/imagen-texto',
-						] }
+		
 						templateLock={ false }
 					/>
 				</div>
@@ -144,3 +120,4 @@ export default function Edit( { attributes, setAttributes } ) {
 		</>
 	);
 }
+ 

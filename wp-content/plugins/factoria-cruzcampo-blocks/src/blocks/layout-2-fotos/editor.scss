@@ -1,0 +1,39 @@
+.b-layout-2-fotos__inspector-label {
+	margin: 16px 0 6px;
+	font-size: 11px;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: #1e1e1e;
+}
+
+.b-layout-2-fotos__preview-media {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.b-layout-2-fotos__preview-icon {
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: contain;
+}
+
+.b-layout-2-fotos__placeholder {
+	width: 100%;
+	height: 100%;
+	display: grid;
+	place-items: center;
+	border: 1px dashed rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.02);
+	font-size: 12px;
+}
+
+.b-layout-2-fotos__placeholder-icon {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border: 1px dashed rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.02);
+}
+
