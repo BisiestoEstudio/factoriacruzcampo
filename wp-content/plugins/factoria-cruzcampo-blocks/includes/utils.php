@@ -142,3 +142,86 @@ function bis_get_link_attributes( $link ) {
 
 	return array_filter( $attrs );
 }
+
+
+
+
+/**
+ * Pintar icono de menú si hay menú principal
+ */
+function bis_paint_menu_icon(){
+    //if main menú exist
+    if(has_nav_menu('main-menu')){
+        echo '<button id="hamburger-btn" class="hamburger-btn" aria-label="'. __('Alternar menú principal', 'hercesa') .'" aria-expanded="false" aria-haspopup="true" tabindex="0">
+                 <span class="hamburger-icon"></span>
+                 <span class="hamburger-btn__label">' . __('MENÚ', 'factoria-cruzcampo-blocks') . '</span>
+            </button>';
+    }
+
+}
+
+
+
+if (!function_exists('bis_paint_button')) {
+	function bis_paint_button($button, $type = 'primary', $wrap_class = '')
+	{
+		if (!$button) return;
+		$target = $button['target'] ?? '_self';
+		$rel = isset($button['rel']) ? ' rel="' . esc_attr($button['rel']) . '"' : '';
+		$button_html = '<a href="' . $button['url'] . '" class="btn btn-' . $type . ' " target="' . $target . '"' . $rel . '>' . $button['title'] . '</a>';
+		if ($wrap_class != '') {
+			$button_html = '<div class="' . $wrap_class . '" >' . $button_html . '</div>';
+		}
+		echo $button_html;
+	}
+}
+
+
+
+
+
+function bis_paint_pattern_block($block_id){
+    if(!$block_id) return;
+    $block = get_post($block_id) ?? false;
+    if(!$block) return;
+    echo apply_filters( 'the_content', $block->post_content );
+}
+
+
+/**
+ * incluye atributo según el dispositivo
+ */
+function bis_data_device_attribute(){
+    $device = wp_is_mobile() ? 'mobile' : 'desktop';
+    echo 'data-device="' . $device . '"';
+}
+
+
+
+
+
+/**
+ * Pinta paginación
+ */
+
+function bis_paint_pagination($anchor = false ){
+    $anchor = $anchor ? '#' . $anchor : '';
+    $nav = get_the_posts_pagination( array(
+        'screen_reader_text' => 'A',
+        'end_size' => 1,
+        'mid_size' => 1,
+        'prev_next' => true, // 'true' will show the next/prev links as well
+        'prev_text' => '',
+        'next_text' => '',
+        'format' => 'page/%#%/' . $anchor,
+    ) );
+    $nav = '<div data-aos="fade-up">' . $nav . '</div>';
+    $nav = str_replace('<h2 class="screen-reader-text">A</h2>', '', $nav);
+    echo $nav;
+}
+
+
+
+
+
+

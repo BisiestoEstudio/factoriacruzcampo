@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/text-button",
+	"version": "0.1.0",
+	"title": "Texto + Botón",
+	"category": "bisiesto",
+	"icon": {
+		"src": "align-right",
+		"foreground": "#7900D8"
+	},
+	"description": "Texto con InnerBlocks a la izquierda y botón enlace a la derecha",
+	"example": {},
+	"attributes": {
+		"anchor": {
+			"type": "string",
+			"default": ""
+		},
+		"link": {
+			"type": "object",
+			"default": {
+				"url": "",
+				"title": "",
+				"target": false,
+				"rel": ""
+			}
+		}
+	},
+	"parent": [ "bisiesto/section" ],
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

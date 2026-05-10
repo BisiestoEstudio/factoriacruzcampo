@@ -9,6 +9,10 @@ wp.domReady(() => {
         'expanded': 'Margen amplio',
     }
 
+    const columnsStyles = {
+        'text-button': 'Texto-Botón',
+    }
+
     
     wp.blocks.unregisterBlockStyle('core/button', ['fill', 'outline']);
     bisRegisterBlockVariation('core/button', buttonStyles);
@@ -22,6 +26,8 @@ wp.domReady(() => {
     bisRegisterBlockVariation('core/buttons', {
         movil_centered: 'Centrar móvil',
     });
+
+    bisRegisterBlockVariation('core/columns', columnsStyles);
 });
 
 

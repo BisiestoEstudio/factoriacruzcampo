@@ -1,0 +1,27 @@
+.b-text-button {
+	display: grid;
+	gap: 24px;
+
+	&__link {
+		display: inline-block;
+		white-space: nowrap;
+	}
+}
+
+@media (min-width: 768px) {
+	.b-text-button {
+		display: flex;
+		justify-content: space-between;
+		gap: 40px;
+
+		&__content {
+			flex-grow: 99;
+			flex-basis: 0;
+			max-width: max(60%, 825px);
+		}
+
+		&__button {
+			flex-shrink: 0;
+		}
+	}
+}

@@ -29,7 +29,7 @@
 		--gap: fluid(40px, 24px, 1500px, 780px);
 
 		&__grid {
-			grid-template-columns: 0.08fr 0.6fr 0.4fr 0.08fr;
+			grid-template-columns: 0.08fr 0.55fr 0.45fr 0.08fr;
 			gap: var(--gap);
 			align-items: center;
 			margin-inline: auto;

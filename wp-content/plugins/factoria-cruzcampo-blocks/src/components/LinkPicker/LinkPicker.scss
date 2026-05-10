@@ -1,0 +1,117 @@
+/**
+ * LinkPicker Component Styles
+ * 
+ * Styles for the reusable LinkPicker component
+ */
+
+.b-link-picker-popover {
+	&__content {
+		padding: 16px;
+		min-width: 320px;
+		max-width: 400px;
+	}
+}
+
+
+.b-link-picker-inspector {
+	width: 100%;
+	overflow: hidden;
+	padding-left: 12px;
+
+	// Raíz del LinkControl
+	.block-editor-link-control {
+		min-width: 0 !important;
+		width: 100% !important;
+		padding: 0 !important;
+		contain: inline-size;
+		box-sizing: border-box;
+	}
+
+	// Fila del input
+	.block-editor-link-control__search-input-wrapper {
+		padding: 0 !important;
+		margin: 0 !important;
+		width: 100% !important;
+		min-width: 0 !important;
+	}
+
+	.block-editor-link-control__search-input-container {
+		width: 100% !important;
+		min-width: 0 !important;
+	}
+
+	.block-editor-link-control__search-input {
+		width: 100% !important;
+		min-width: 0 !important;
+
+		.components-base-control__field {
+			margin: 0;
+			width: 100%;
+		}
+	}
+
+	// Todos los campos de texto y sus wrappers dentro del LinkControl
+	.components-base-control,
+	.components-text-control__input,
+	.components-input-control,
+	.components-input-control__container {
+		min-width: 0 !important;
+		max-width: 100% !important;
+		width: 100% !important;
+		box-sizing: border-box;
+	}
+
+	input[type="text"],
+	input[type="url"],
+	input[type="search"] {
+		min-width: 0 !important;
+		max-width: 100% !important;
+		width: 100% !important;
+		box-sizing: border-box;
+	}
+
+	// Botón de submit (flecha)
+	.block-editor-link-control__search-actions {
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	// Resultados de búsqueda
+	.block-editor-link-control__search-results {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.block-editor-link-control__search-results-label {
+		padding-inline: 0 !important;
+	}
+
+	// Enlace ya guardado (modo preview)
+	.block-editor-link-control__search-item {
+		padding-inline: 0 !important;
+
+		&.is-current {
+			padding: 8px 0 !important;
+			margin: 0 !important;
+		}
+	}
+
+	// Settings (open in new tab, nofollow)
+	.block-editor-link-control__settings {
+		padding: 8px 0 0 !important;
+		margin: 0 !important;
+		border-top: 1px solid #ddd;
+
+	}
+
+	.block-editor-link-control__setting {
+		margin: 0 !important;
+		padding: 4px 0 !important;
+	}
+
+	&__remove {
+		margin-top: 8px;
+		width: 100%;
+		justify-content: center;
+	}
+}

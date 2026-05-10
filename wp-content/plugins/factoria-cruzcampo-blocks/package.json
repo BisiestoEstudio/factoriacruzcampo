@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@lehoczky/postcss-fluid": "^1.0.3",
+    "@wordpress/icons": "^13.0.0",
     "@wordpress/scripts": "^30.0.0",
     "cssnano": "^7.1.9"
   }
