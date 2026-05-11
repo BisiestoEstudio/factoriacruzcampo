@@ -1,0 +1,12 @@
+.b-background-shape {
+	position: absolute;
+	z-index: 0;
+	pointer-events: none;
+	overflow: hidden;
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+}

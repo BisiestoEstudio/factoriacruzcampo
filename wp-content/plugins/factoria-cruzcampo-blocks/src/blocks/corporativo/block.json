@@ -1,0 +1,48 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/corporativo",
+	"version": "0.1.0",
+	"title": "Corporativo",
+	"category": "bisiesto",
+	"icon": {
+		"src": "building",
+		"foreground": "#7900D8"
+	},
+	"description": "Bloque corporativo con tres variantes de contenido.",
+	"example": {},
+	"parent": ["bisiesto/section"],
+	"attributes": {
+		"option": {
+			"type": "string",
+			"enum": ["1", "2", "3"],
+			"default": "1"
+		},
+		"media": {
+			"type": "object",
+			"default": {
+				"mediaType": "image",
+				"imageId": 0,
+				"videoUrl": "",
+				"posterId": 0
+			}
+		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"color": {
+			"background": true,
+			"text": true
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

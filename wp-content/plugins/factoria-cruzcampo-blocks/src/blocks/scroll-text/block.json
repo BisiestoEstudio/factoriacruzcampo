@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/scroll-text",
+	"version": "0.1.0",
+	"title": "Scroll Text",
+	"category": "bisiesto",
+	"icon": {
+		"src": "align-center",
+		"foreground": "#7900D8"
+	},
+	"description": "Tres bandas de texto marquee con imágenes posicionadas",
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"text1": { "type": "string", "default": "" },
+		"text2": { "type": "string", "default": "" },
+		"text3": { "type": "string", "default": "" },
+		"media1": { "type": "object", "default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 } },
+		"media2": { "type": "object", "default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 } }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
