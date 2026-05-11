@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, TextControl } from '@wordpress/components';
+import { PanelBody, TextControl, RangeControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
@@ -50,7 +50,7 @@ function MediaPreview( { media } ) {
 }
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { text1, text2, text3, media1, media2 } = attributes;
+	const { text1, text2, text3, speed1, speed2, speed3, media1, media2 } = attributes;
 
 	const blockProps = useBisiestoBlockProps( { className: 'alignfull' } );
 
@@ -66,21 +66,49 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Textos', 'factoria-cruzcampo-blocks' ) }>
+				<PanelBody title={ __( 'Banda 1', 'factoria-cruzcampo-blocks' ) }>
 					<TextControl
-						label={ __( 'Banda 1', 'factoria-cruzcampo-blocks' ) }
+						label={ __( 'Texto', 'factoria-cruzcampo-blocks' ) }
 						value={ text1 }
 						onChange={ ( value ) => setAttributes( { text1: value } ) }
 					/>
+					<RangeControl
+						label={ __( 'Velocidad', 'factoria-cruzcampo-blocks' ) }
+						value={ speed1 }
+						onChange={ ( value ) => setAttributes( { speed1: value } ) }
+						min={ -5 }
+						max={ 5 }
+						step={ 1 }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Banda 2', 'factoria-cruzcampo-blocks' ) }>
 					<TextControl
-						label={ __( 'Banda 2', 'factoria-cruzcampo-blocks' ) }
+						label={ __( 'Texto', 'factoria-cruzcampo-blocks' ) }
 						value={ text2 }
 						onChange={ ( value ) => setAttributes( { text2: value } ) }
 					/>
+					<RangeControl
+						label={ __( 'Velocidad', 'factoria-cruzcampo-blocks' ) }
+						value={ speed2 }
+						onChange={ ( value ) => setAttributes( { speed2: value } ) }
+						min={ -5 }
+						max={ 5 }
+						step={ 1 }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Banda 3', 'factoria-cruzcampo-blocks' ) }>
 					<TextControl
-						label={ __( 'Banda 3', 'factoria-cruzcampo-blocks' ) }
+						label={ __( 'Texto', 'factoria-cruzcampo-blocks' ) }
 						value={ text3 }
 						onChange={ ( value ) => setAttributes( { text3: value } ) }
+					/>
+					<RangeControl
+						label={ __( 'Velocidad', 'factoria-cruzcampo-blocks' ) }
+						value={ speed3 }
+						onChange={ ( value ) => setAttributes( { speed3: value } ) }
+						min={ -5 }
+						max={ 5 }
+						step={ 1 }
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Media 1', 'factoria-cruzcampo-blocks' ) }>

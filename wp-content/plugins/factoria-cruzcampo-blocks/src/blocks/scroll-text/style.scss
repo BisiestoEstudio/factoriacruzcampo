@@ -1,7 +1,10 @@
 .b-scroll-text {
+	--band-gap: 50px;
+	--text-size: clamp(72px, 13.20vw, 280px);
 	position: relative;
 	background-color: var(--red);
 	overflow: hidden;
+	padding: fluid(80px, 24px) 0;
 
 	&__bands {
 		display: flex;
@@ -10,6 +13,7 @@
 
 	&__band {
 		display: flex;
+		gap: var(--band-gap);
 		overflow: hidden;
 
 		&--invert {
@@ -24,13 +28,14 @@
 		white-space: nowrap;
 		display: flex;
 		align-items: center;
+		gap: var(--band-gap);
 		animation: scroll-text-marquee 12000ms linear infinite;
 		padding-block: clamp(8px, 1vw, 16px);
 	}
 
 	&__text {
 		font-family: var(--display-font);
-		font-size: clamp(64px, 9.5vw, 140px);
+		font-size: var(--text-size);
 		color: var(--white);
 		text-transform: uppercase;
 		line-height: 1;
@@ -39,11 +44,10 @@
 
 	&__sep {
 		font-family: var(--display-font);
-		font-size: clamp(64px, 9.5vw, 140px);
+		font-size: var(--text-size);
 		color: var(--white);
 		line-height: 1;
 		flex-shrink: 0;
-		opacity: 0.6;
 	}
 
 	&__media {
@@ -80,6 +84,6 @@
 		transform: translateX( 0 );
 	}
 	100% {
-		transform: translateX( -100% );
+		transform: translateX( calc(-100% - var(--band-gap)) );
 	}
 }

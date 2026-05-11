@@ -16,6 +16,9 @@
 		"text1": { "type": "string", "default": "" },
 		"text2": { "type": "string", "default": "" },
 		"text3": { "type": "string", "default": "" },
+		"speed1": { "type": "number", "default": 0 },
+		"speed2": { "type": "number", "default": 0 },
+		"speed3": { "type": "number", "default": 0 },
 		"media1": { "type": "object", "default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 } },
 		"media2": { "type": "object", "default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 } }
 	},
