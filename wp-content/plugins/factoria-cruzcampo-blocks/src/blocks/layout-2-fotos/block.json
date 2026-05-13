@@ -11,7 +11,7 @@
 	},
 	"description": "Layout con dos medios centrales (imagen o vídeo) y dos iconos laterales.",
 	"example": {},
-	"parent": ["bisiesto/section"],
+	"parent": ["bisiesto/section", "bisiesto/scroll-over"],
 	"attributes": {
 		"center1": {
 			"type": "object",

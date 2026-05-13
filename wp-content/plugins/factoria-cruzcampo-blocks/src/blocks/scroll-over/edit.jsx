@@ -56,7 +56,16 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</div>
 				<div className="b-scroll-over__content">
-					<InnerBlocks templateLock={ false } />
+					<InnerBlocks
+					allowedBlocks={ 
+						[ 
+							'bisiesto/layout-2-fotos',
+							'bisiesto/spacer',
+							'bisiesto/separator',
+							'bisiesto/button',
+						 ] }
+					templateLock={ false }
+					 />
 				</div>
 			</section>
 		</>
