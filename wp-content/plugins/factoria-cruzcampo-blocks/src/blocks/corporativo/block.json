@@ -11,7 +11,6 @@
 	},
 	"description": "Bloque corporativo con tres variantes de contenido.",
 	"example": {},
-	"parent": ["bisiesto/section"],
 	"attributes": {
 		"option": {
 			"type": "string",
