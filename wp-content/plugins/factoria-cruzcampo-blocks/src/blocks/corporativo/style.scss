@@ -27,6 +27,37 @@
 	}
 }
 
+.b-corporativo-3 {
+	position: relative;
+	overflow: hidden;
+
+	&__media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+
+		.c-media {
+			width: 100%;
+			height: 100%;
+		}
+
+		.c-media__item {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+		}
+	}
+
+	&__mask {
+		display: block;
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		aspect-ratio: 1512 / 794;
+	}
+}
+
 .b-corporativo-2 {
 	padding: fluid(230px, 120px) inherit;
 	display: flex;
