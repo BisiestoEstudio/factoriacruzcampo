@@ -26,3 +26,45 @@
 		display: block;
 	}
 }
+
+.b-corporativo-2 {
+	padding: fluid(230px, 120px) inherit;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	position: relative;
+
+	span{
+		display: block;
+		z-index: 2;
+		&:first-child{
+			margin-bottom: -24px;
+		}
+		&:last-child{
+			margin-top: -20px;
+		}
+		
+	}
+
+}
+
+@media (min-width: 768px) {
+	.b-corporativo-2 {
+		flex-direction: row;
+		span{
+			&:first-child{
+				margin-bottom: 0px;
+				margin-right: -20px;
+			}
+			&:last-child{
+				margin-top: 0px;
+				margin-left: -20px;
+			}
+		}
+	}
+}
+
+
+
