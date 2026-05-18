@@ -78,6 +78,6 @@ if ( $max_height !== '' ) {
 
 $style_attr = implode( ';', $styles );
 ?>
-<div class="b-background-shape" style="<?php echo esc_attr( $style_attr ); ?>">
+<div <?php echo bis_get_block_prop($block, false); ?> style="<?php echo esc_attr( $style_attr ); ?>">
 	<img src="<?php echo esc_url( $image_url ); ?>" alt="" loading="lazy">
 </div>

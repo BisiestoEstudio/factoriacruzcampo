@@ -8,7 +8,7 @@ $media  = isset( $attributes['media'] ) && is_array( $attributes['media'] ) ? $a
 $anchor = isset( $attributes['anchor'] ) ? trim( (string) $attributes['anchor'] ) : '';
 ?>
 
-<div class="b-corporativo-3 alignfull"<?php if ( $anchor ) : ?> id="<?php echo esc_attr( $anchor ); ?>"<?php endif; ?>>
+<div class="b-bisiesto b-corporativo-3 alignfull"<?php if ( $anchor ) : ?> id="<?php echo esc_attr( $anchor ); ?>"<?php endif; ?>>
 	<div class="b-corporativo-3__media">
 		<?php bis_paint_media( $media ); ?>
 	</div>

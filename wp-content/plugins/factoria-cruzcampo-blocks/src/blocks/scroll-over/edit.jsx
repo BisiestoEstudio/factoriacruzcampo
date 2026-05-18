@@ -62,7 +62,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							'bisiesto/layout-2-fotos',
 							'bisiesto/spacer',
 							'bisiesto/separator',
-							'bisiesto/button',
+							'core/buttons',
 						 ] }
 					templateLock={ false }
 					 />

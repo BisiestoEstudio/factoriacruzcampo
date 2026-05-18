@@ -35,9 +35,9 @@
 }
 
 .wp-block-accordion-heading__toggle-title {
-    font-family: var(--heading-font);
-    line-height: var(--h5-height);
-    font-size: var(--wp--preset--font-size--h-5);
+    font-family: var(--base-font);
+    line-height: var(--base-height);
+    font-size: var(--wp--preset--font-size--base);
     font-weight: var(--font-weight-bold);
     color: var(--negro);
     padding-right: 32px;
@@ -54,20 +54,32 @@
 }
 
 .wp-block-accordion-item{
-    border-top: 1px solid var(--gris);
+    border-bottom: 1px solid var(--red);
     margin-top: 0 !important;
-
-
-    &:last-child {
-        border-bottom: 1px solid var(--gris);
-    }
 }
 
 .wp-block-accordion-panel{
-    padding: 16px 40px 16px 16px;
+    overflow: hidden;
+    display: block !important;
+    padding: 0 40px 0 16px;
     margin-top: 0 !important;
-    min-height: 0;
+    max-height: 0;
+    transition: max-height 0.35s ease-in-out;
 
+    @supports (interpolate-size: allow-keywords) {
+        interpolate-size: allow-keywords;
+        max-height: none;
+        height: 0;
+        transition: height 0.3s ease-in-out;
+    }
+}
+
+.wp-block-accordion-item.is-open .wp-block-accordion-panel{
+    max-height: 1000px;
+
+    @supports (interpolate-size: allow-keywords) {
+        height: auto;
+    }
 }
 
 .b-section .wp-block-accordion{

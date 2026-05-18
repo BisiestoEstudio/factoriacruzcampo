@@ -1,9 +1,5 @@
 .b-imagen-texto {
 	padding: var(--block-padding) 0;
-	.b-section &{
-		padding-top: 0;
-		padding-bottom: 0;
-	}
 
 
 	&__wrapper {
@@ -82,6 +78,10 @@
 		}
 	}
 }
+
+	.b-section .b-imagen-texto{
+		padding: 0;
+	}
 
 
 @media (min-width: 768px) {

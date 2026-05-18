@@ -15,7 +15,7 @@
   font-display: swap;
   font-family: 'Suisse Intl';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   src: url('../fonts/SuisseIntl-Bold.woff2') format('woff2'),
        url('../fonts/SuisseIntl-Bold.woff') format('woff');
 }
@@ -179,7 +179,7 @@ main .is-style-display_s:not(main .b-bisiesto .is-style-display_s){
   line-height: var(--base-height);
   font-weight: var(--font-weight-regular);
   strong, b, &.u_bold{
-    font-weight: bold;
+    font-weight: var(--font-weight-bold);
   }
 }
 
@@ -260,19 +260,6 @@ h6, .has-h-6-font-size{
   }
 }
 
-.has-h2-uppercase {
-
-  h2,
-  .has-h-2-font-size {
-    text-transform: uppercase;
-  }
-
-  .has-h-1-font-size,
-  .has-h-3-font-size {
-    text-transform: none;
-  }
-
-}
 
 
 

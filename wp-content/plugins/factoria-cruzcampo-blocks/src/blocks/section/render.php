@@ -37,7 +37,7 @@ foreach ( $block->inner_blocks as $inner_block ) {
 			<source src="<?php echo esc_url( $video_url ); ?>" type="video/mp4">
 		</video>
 	<?php endif; ?>
-	<div class="b-section__content has-h2-uppercase <?php echo esc_attr( $contentClass ); ?>"<?php echo $gapStyles; ?>>
+	<div class="b-section__content <?php echo esc_attr( $contentClass ); ?>"<?php echo $gapStyles; ?>>
 		<?php echo $content_html; ?>
 	</div>
 </section>

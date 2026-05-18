@@ -19,6 +19,18 @@
 		"offsetY": { "type": "object", "default": { "value": 0, "unit": "px" } },
 		"rotation": { "type": "number", "default": 0 }
 	},
+	"styles": [
+		{
+			"name": "hidden_mobile",
+			"label": "Escritorio",
+			"isDefault": false
+		},
+		{
+			"name": "hidden_desktop",
+			"label": "Móvil",
+			"isDefault": false
+		}
+	],
 	"supports": {
 		"html": false,
 		"anchor": false,

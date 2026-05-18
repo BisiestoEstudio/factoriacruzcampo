@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/card-image",
+	"version": "0.1.0",
+	"title": "Card Image",
+	"category": "bisiesto",
+	"icon": {
+		"src": "format-image",
+		"foreground": "#7900D8"
+	},
+	"description": "Card con imagen e inner blocks de texto",
+	"example": {},
+	"parent": ["bisiesto/cards"],
+	"attributes": {
+		"image": {
+			"type": "number",
+			"default": 0
+		},
+		"link": {
+			"type": "object",
+			"default": { "url": "", "title": "", "target": null, "rel": null }
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": false,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
