@@ -13,8 +13,27 @@
 	"example": {},
 	"parent": ["bisiesto/section", "bisiesto/scroll-over"],
 	"attributes": {
-		"anchor": { "type": "string", "default": "" }
+		"anchor": { "type": "string", "default": "" },
+		"cardType": { "type": "string", "default": "card-image" }
 	},
+	"providesContext": {
+		"bisiesto/cardType": "cardType"
+	},
+	"styles": [
+		{
+			"name": "4-columns",
+			"label": "4 columnas",
+			"isDefault": true
+		},
+		{
+			"name": "3-columns",
+			"label": "3 columnas"
+		},
+		{
+			"name": "2-columns",
+			"label": "2 columnas"
+		}
+	],
 	"supports": {
 		"html": false,
 		"anchor": true,
