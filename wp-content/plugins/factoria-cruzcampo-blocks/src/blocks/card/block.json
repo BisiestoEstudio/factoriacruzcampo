@@ -15,6 +15,7 @@
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
 		"image": { "type": "number", "default": 0 },
+		"cardTitle": { "type": "string", "default": "" },
 		"link": { "type": "object", "default": { "url": "", "title": "", "target": null, "rel": null } }
 	},
 	"usesContext": [ "bisiesto/cardType" ],

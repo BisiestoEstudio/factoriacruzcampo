@@ -101,7 +101,7 @@
       "lineHeight": false,
       "fontFamilies": false,
       "fontWeight": false,
-      "fontStyle": false,
+      "fontStyle": true,
       "customFontSize": false,
       "dropCap": true,
       "fluid": {

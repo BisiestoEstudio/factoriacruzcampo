@@ -1,5 +1,37 @@
 .b-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-	gap: var(--spacing-fluid-m, 1.5rem);
+	gap: 24px;
 }
+
+@media (min-width: 768px) {
+	.b-cards {
+		grid-template-columns: repeat(3, 1fr);
+
+		&.is-style-4-columns{
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		&.is-style-2-columns{
+			grid-template-columns: repeat(2, 1fr);
+		}	
+	}
+}
+
+@media (min-width: 1024px) {
+	.b-cards {
+		&.is-style-4-columns{
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		&.is-style-2-columns{
+			grid-template-columns: repeat(6, 1fr);
+
+			.b-card:nth-child(odd)  { grid-column: 2 / 4; }
+			.b-card:nth-child(even) { grid-column: 4 / 6; }
+		}
+
+
+	}
+}
+
+
