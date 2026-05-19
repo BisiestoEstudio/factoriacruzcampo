@@ -32,12 +32,19 @@
 			"type": "string",
 			"enum": [ "left", "center", "right" ],
 			"default": "center"
+		},
+		"gap": {
+			"type": "string",
+			"default": false
 		}
 	},
 	"parent": [ "bisiesto/section", "bisiesto/scroll-over" ],
 	"supports": {
 		"html": false,
-		"anchor": true
+		"anchor": true,
+		"spacing": {
+			"blockGap": true
+		}
 	},
 	"textdomain": "factoria-cruzcampo-blocks",
 	"editorScript": "file:./index.js",

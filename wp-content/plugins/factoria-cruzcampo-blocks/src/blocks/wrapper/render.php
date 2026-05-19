@@ -8,6 +8,7 @@ $width         = $attributes['width'] ?? '';
 $max_width     = $attributes['maxWidth'] ?? '';
 $min_width     = $attributes['minWidth'] ?? '';
 $justification = $attributes['justification'] ?? 'center';
+$gap           = $attributes['gap'] ?? '';
 
 $styles = [];
 if ( $width ) {
@@ -19,6 +20,9 @@ if ( $max_width ) {
 if ( $min_width ) {
 	$styles[] = 'min-width: ' . esc_attr( $min_width );
 }
+if ( $gap ) {
+	$styles[] = '--section-gap: ' . esc_attr( $gap );
+}
 ?>
 
 <div <?php echo bis_get_block_prop( $block, false, [
@@ -27,3 +31,4 @@ if ( $min_width ) {
 ] ); ?>>
 	<?php echo $content; ?>
 </div>
+

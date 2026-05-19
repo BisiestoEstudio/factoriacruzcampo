@@ -6,7 +6,8 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOptionIcon as ToggleGroupControlOptionIcon,
 } from '@wordpress/components';
-import { alignLeft, alignCenter, alignRight } from '@wordpress/icons';
+import { justifyLeft, justifyCenter, justifyRight } from '@wordpress/icons';
+import { useEffect } from '@wordpress/element';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 
 const UNITS = [
@@ -17,12 +18,25 @@ const UNITS = [
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { width, maxWidth, minWidth, justification } = attributes;
+	const { width, maxWidth, minWidth, justification, gap, style } = attributes;
+
+	useEffect( () => {
+		let newGap = gap ?? false;
+		if ( style?.spacing?.blockGap ) {
+			newGap = style.spacing.blockGap;
+			if ( newGap.startsWith( 'var:' ) ) {
+				newGap = newGap.split( '|' ).pop();
+				newGap = 'var(--wp--preset--spacing--' + newGap + ')';
+			}
+		}
+		setAttributes( { gap: newGap } );
+	}, [ attributes ] );
 
 	const inlineStyle = {};
 	if ( width ) inlineStyle.width = width;
 	if ( maxWidth ) inlineStyle.maxWidth = maxWidth;
 	if ( minWidth ) inlineStyle.minWidth = minWidth;
+	if ( gap ) inlineStyle[ '--wrapper-gap' ] = gap;
 
 	const blockProps = useBisiestoBlockProps( {
 		style: inlineStyle,
@@ -78,17 +92,17 @@ export default function Edit( { attributes, setAttributes } ) {
 					>
 						<ToggleGroupControlOptionIcon
 							value="left"
-							icon={ alignLeft }
+							icon={ justifyLeft }
 							label={ __( 'Izquierda', 'factoria-cruzcampo-blocks' ) }
 						/>
 						<ToggleGroupControlOptionIcon
 							value="center"
-							icon={ alignCenter }
+							icon={ justifyCenter }
 							label={ __( 'Centro', 'factoria-cruzcampo-blocks' ) }
 						/>
 						<ToggleGroupControlOptionIcon
 							value="right"
-							icon={ alignRight }
+							icon={ justifyRight }
 							label={ __( 'Derecha', 'factoria-cruzcampo-blocks' ) }
 						/>
 					</ToggleGroupControl>

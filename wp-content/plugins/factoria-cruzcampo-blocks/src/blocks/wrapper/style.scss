@@ -1,4 +1,12 @@
 .b-wrapper {
+
+	> *:not(:last-child) {
+		margin-block-start: 0;
+		margin-block-end: var(--section-gap);
+		
+	}
+
+
 	&[data-justification='left'] {
 		margin-inline: 0 auto;
 	}
