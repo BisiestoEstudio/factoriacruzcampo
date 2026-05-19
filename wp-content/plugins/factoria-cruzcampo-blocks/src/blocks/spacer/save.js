@@ -1,9 +1,8 @@
 import { useBisiestoBlockPropsSave } from '../../hooks/useBisiestoBlockProps';
-import { getFluidValue } from '../../utils/getFluidValue';
+import { computeSpacerHeight } from './computeSpacerHeight';
 
 export default function save( { attributes } ) {
-	const { heightMobile, heightDesktop } = attributes;
-	const height = getFluidValue( heightMobile, heightDesktop );
+	const height = computeSpacerHeight( attributes );
 
 	const customProps = useBisiestoBlockPropsSave( {
 		style: {

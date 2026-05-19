@@ -18,8 +18,8 @@ wp.domReady(() => {
     bisRegisterBlockVariation('core/button', buttonStyles);
 
     bisRegisterBlockVariation('core/spacer', {
-        hidden_mobile: 'Ocultar móvil',
-        hidden_desktop: 'Ocultar escritorio',
+        only_mobile: 'Solo móvil',
+        only_desktop: 'Solo escritorio',
     });
 
     bisRegisterBlockVariation('core/list', listStyles);

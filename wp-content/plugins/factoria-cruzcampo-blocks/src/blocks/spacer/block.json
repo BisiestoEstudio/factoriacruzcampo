@@ -2,26 +2,77 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "bisiesto/spacer",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"title": "Espaciador Responsive",
 	"category": "bisiesto",
 	"icon": {
 		"src": "editor-expand",
 		"foreground": "#7900D8"
 	},
-	"description": "Espaciador responsive",
+	"description": "Espaciador con altura responsive",
 	"example": {},
 	"attributes": {
-		"heightMobile": {
-			"type": "number",
-			"default": "0"
+		"mode": {
+			"type": "string",
+			"default": "interpolate"
 		},
-		"heightDesktop": {
+		"height1": {
 			"type": "number",
-			"default": "0"
+			"default": 0
+		},
+		"height2": {
+			"type": "number",
+			"default": 0
+		},
+		"viewport1": {
+			"type": "number",
+			"default": 500
+		},
+		"viewport2": {
+			"type": "number",
+			"default": 1200
+		},
+		"fixedValue": {
+			"type": "number",
+			"default": 0
+		},
+		"fixedUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"useMinMax": {
+			"type": "boolean",
+			"default": false
+		},
+		"minValue": {
+			"type": "number",
+			"default": 0
+		},
+		"minUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"maxValue": {
+			"type": "number",
+			"default": 0
+		},
+		"maxUnit": {
+			"type": "string",
+			"default": "px"
 		}
 	},
-	"supports": {
+	"styles": [
+		{
+			"name": "only_mobile",
+			"label": "Móvil",
+			"isDefault": false
+		},
+		{
+			"name": "only_desktop",
+			"label": "Escritorio",
+			"isDefault": false
+		}
+	],	"supports": {
 		"html": false,
 		"anchor": false,
 		"className": false,

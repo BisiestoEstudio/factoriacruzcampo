@@ -21,12 +21,12 @@
 	},
 	"styles": [
 		{
-			"name": "hidden_mobile",
+			"name": "only_desktop",
 			"label": "Escritorio",
 			"isDefault": false
 		},
 		{
-			"name": "hidden_desktop",
+			"name": "only_mobile",
 			"label": "Móvil",
 			"isDefault": false
 		}
@@ -34,9 +34,7 @@
 	"supports": {
 		"html": false,
 		"anchor": false,
-		"align": false,
-		"spacing": false,
-		"color": false
+		"align": false
 	},
 	"textdomain": "factoria-cruzcampo-blocks",
 	"render": "file:./render.php",

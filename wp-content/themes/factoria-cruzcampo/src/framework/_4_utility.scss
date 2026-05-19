@@ -93,9 +93,14 @@
   color: transparent;
 }
 
+@media screen and (max-width: calc($md - 1px)) {
+  .is-style-only_desktop{
+    display: none !important;
+  }
+}
 
 @media screen and (min-width: $md) {
-  .u_only-mobile{
+  .u_only-mobile, .is-style-only_mobile {
     display: none !important;
   }
   .u_hide-mobile{
