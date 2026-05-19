@@ -5,12 +5,14 @@ class FCC_Loader {
 
 	public static function init() {
 		require_once FCC_PLUGIN_DIR . 'includes/class-cpt-manager.php';
+		require_once FCC_PLUGIN_DIR . 'includes/class-taxonomy-manager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-meta-boxes.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-covermanager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-debug.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-api.php';
 
 		add_action( 'init', array( 'FCC_CPT_Manager', 'register' ) );
+		add_action( 'init', array( 'FCC_Taxonomy_Manager', 'register' ) );
 		add_action( 'init', array( 'FCC_Meta_Boxes', 'register' ) );
 		FCC_Debug::init();
 		FCC_API::register();
@@ -18,6 +20,7 @@ class FCC_Loader {
 
 	public static function activate() {
 		FCC_CPT_Manager::register();
+		FCC_Taxonomy_Manager::register();
 		flush_rewrite_rules();
 	}
 
