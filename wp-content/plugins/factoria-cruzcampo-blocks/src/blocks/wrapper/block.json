@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/wrapper",
+	"version": "0.1.0",
+	"title": "Wrapper",
+	"category": "bisiesto",
+	"icon": {
+		"src": "align-center",
+		"foreground": "#7900D8"
+	},
+	"description": "Contenedor con ancho, ancho máximo, ancho mínimo y justificación horizontal",
+	"example": {},
+	"attributes": {
+		"anchor": {
+			"type": "string",
+			"default": ""
+		},
+		"width": {
+			"type": "string",
+			"default": ""
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": ""
+		},
+		"minWidth": {
+			"type": "string",
+			"default": ""
+		},
+		"justification": {
+			"type": "string",
+			"enum": [ "left", "center", "right" ],
+			"default": "center"
+		}
+	},
+	"parent": [ "bisiesto/section", "bisiesto/scroll-over" ],
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

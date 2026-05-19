@@ -1,0 +1,13 @@
+.b-wrapper {
+	&[data-justification='left'] {
+		margin-inline: 0 auto;
+	}
+
+	&[data-justification='center'] {
+		margin-inline: auto;
+	}
+
+	&[data-justification='right'] {
+		margin-inline: auto 0;
+	}
+}
