@@ -1,6 +1,4 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
 import {
 	InnerBlocks,
 	InspectorControls,
@@ -12,19 +10,10 @@ import {
 import { PanelBody, Button, ButtonGroup } from '@wordpress/components';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import MediaPicker from '../../components/MediaPicker';
+import PaintImage from '../../utils/PaintImage';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { image, verticalAlignment, imagePosition } = attributes;
-
-	const imageUrl = useSelect(
-		( select ) => {
-			if ( ! image ) {
-				return null;
-			}
-			return select( coreStore ).getMedia( image )?.source_url ?? null;
-		},
-		[ image ]
-	);
 
 	const blockProps = useBisiestoBlockProps( {
 		// Match `render.php` which uses bis_get_block_prop($block, true, ...)
@@ -129,8 +118,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					</div>
 
 					<div className="b-imagen-texto__image">
-						{ imageUrl ? (
-							<img src={ imageUrl } alt="" />
+						{ image ? (
+							<PaintImage image={ image } />
 						) : (
 							<MediaUploadCheck>
 								<MediaUpload

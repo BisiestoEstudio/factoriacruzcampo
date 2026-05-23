@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /** @var array $attributes */
 /** @var WP_Block|null $block */
 
-$image_id           = $attributes['image'] ?? 0;
+$image              = $attributes['image'] ?? 0;
 $vertical_alignment = $attributes['verticalAlignment'] ?? 'center';
 $image_position     = $attributes['imagePosition'] ?? 'left';
 $extra_classes      = 'is-vertically-aligned-' . esc_attr($vertical_alignment) . ' is-image-position-' . esc_attr($image_position);
@@ -29,9 +29,7 @@ if($variation === 'wide') {
 		</div>
 		</div>
 		<div class="b-imagen-texto__image">
-			<?php if ($image_id) : ?>
-				<?php echo wp_get_attachment_image($image_id, 'full', false, ['loading' => 'lazy']); ?>
-			<?php endif; ?>
+			<?php bis_paint_image( $image ); ?>
 		</div>
 	</div>
 </div>

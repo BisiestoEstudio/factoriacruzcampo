@@ -125,6 +125,25 @@ function bis_paint_media( $media, $class = '' ) {
 	}
 }
 
+/**
+ * Pinta una imagen a partir de un ID de media library o una URL de fallback.
+ * Si se proporciona $id tiene prioridad sobre $url.
+ */
+function bis_paint_image( $image, string $class = '' ): void {
+	if ( is_numeric( $image ) && (int) $image > 0 ) {
+		$attrs = [ 'loading' => 'lazy' ];
+		if ( $class ) {
+			$attrs['class'] = $class;
+		}
+		echo wp_get_attachment_image( (int) $image, 'full', false, $attrs );
+		return;
+	}
+	if ( is_string( $image ) && $image ) {
+		$class_attr = $class ? ' class="' . esc_attr( $class ) . '"' : '';
+		echo '<img src="' . esc_url( $image ) . '"' . $class_attr . ' alt="" loading="lazy">';
+	}
+}
+
 function bis_get_link_attributes( $link ) {
 	if ( empty( $link['url'] ) ) {
 		return [];
@@ -219,6 +238,10 @@ function bis_paint_pagination($anchor = false ){
     $nav = str_replace('<h2 class="screen-reader-text">A</h2>', '', $nav);
     echo $nav;
 }
+
+/** Pinta imágenes */
+
+
 
 
 

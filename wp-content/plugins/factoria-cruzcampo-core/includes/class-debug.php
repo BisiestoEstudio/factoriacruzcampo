@@ -11,7 +11,7 @@ class FCC_Debug {
 			return;
 		}
 
-		add_action( 'wp_footer', array( __CLASS__, 'render' ) );
+		//add_action( 'wp_footer', array( __CLASS__, 'render' ) );
 	}
 
 	public static function render() {
