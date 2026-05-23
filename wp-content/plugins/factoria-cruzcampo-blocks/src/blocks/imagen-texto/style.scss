@@ -1,5 +1,6 @@
 .b-imagen-texto {
-	padding: var(--block-padding) 0;
+	padding: var(--block-padding);
+
 
 
 	&__wrapper {
@@ -69,8 +70,8 @@
 
 	&.is-style-wide &{
 		&__content{
-			max-width: unset;
-			padding: 24px var(--layout-margin);
+			max-width: 1200px;
+			padding: 24px var(--layout-margin) 24px 0;
 		}
 
 		&__image {

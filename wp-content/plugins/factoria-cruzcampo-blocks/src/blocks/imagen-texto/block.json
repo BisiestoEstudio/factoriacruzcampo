@@ -44,6 +44,9 @@
 	"supports": {
 		"html": false,
 		"anchor": true,
+		"spacing": {
+			"padding": true
+		},
 		"color": {
 			"background": true,
 			"text": true
