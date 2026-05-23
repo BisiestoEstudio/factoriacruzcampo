@@ -14,6 +14,8 @@ $speed1 = (int) ($attributes['speed1'] ?? 0);
 $speed2 = (int) ($attributes['speed2'] ?? 0);
 $speed3 = (int) ($attributes['speed3'] ?? 0);
 
+$min_letters_length = 60;
+
 $bands = [
 	['text' => $text1, 'invert' => false, 'speed' => $speed1],
 	['text' => $text2, 'invert' => true,  'speed' => $speed2],
@@ -26,7 +28,11 @@ $bands = [
 		<?php foreach ($bands as $band) :
 			$t = $band['text'];
 			if (empty($t)) continue;
-			$duration    = max(8000, mb_strlen($t) * 400);
+			$letter_count = mb_strlen( $t );
+			$repeat_text  = $letter_count > 0
+				? max( 2, (int) ceil( $min_letters_length / $letter_count ) )
+				: 2;
+			$duration    = max(8000, $letter_count * 400);
 			$speed_index = $band['speed'];
 			if ($speed_index !== 0) {
 				$duration = $speed_index > 0 ? $duration / $speed_index : $duration * $speed_index * -1;
@@ -35,7 +41,7 @@ $bands = [
 			$band_class = 'b-scroll-text__band' . ($band['invert'] ? ' b-scroll-text__band--invert' : '');
 		?>
 			<div class="<?php echo esc_attr($band_class); ?>">
-				<?php for ($i = 0; $i < 5; $i++) : ?>
+				<?php for ($i = 0; $i < $repeat_text; $i++) : ?>
 					<div class="b-scroll-text__track" style="animation-duration:<?php echo (int) $duration; ?>ms">
 						<span class="b-scroll-text__text"><?php echo esc_html($t); ?></span>
 						<span class="b-scroll-text__sep" aria-hidden="true"> · </span>

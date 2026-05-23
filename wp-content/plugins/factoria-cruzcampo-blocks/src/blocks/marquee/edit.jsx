@@ -12,8 +12,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	const { marqueeText, speed, invertDirection } = attributes;
 
 	// Calculate speed logic similar to render.php
+	const minLettersLength = 35;
 	const letterCount = marqueeText ? marqueeText.length : 0;
-	const repeatText = letterCount > 35 ? 3 : 2;
+	const repeatText =
+		letterCount > 0
+			? Math.max( 1, Math.ceil( minLettersLength / letterCount ) )
+			: 1;
 
 	let calculatedSpeed = letterCount * repeatText * 250;
 

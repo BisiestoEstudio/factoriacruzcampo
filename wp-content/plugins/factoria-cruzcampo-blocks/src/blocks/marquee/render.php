@@ -12,10 +12,13 @@
 /** @var array $attributes */
 /** @var WP_Block $block */
 
+$min_letters_length = 60;
 $marquee_text = $attributes['marqueeText'] ?? '';
 $speed_index = $attributes['speed'] ?? 0;
-$letter_count = strlen($marquee_text);
-$repeat_text = strlen($marquee_text) > 35 ? 3 : 2;
+$letter_count = strlen( $marquee_text );
+$repeat_text  = $letter_count > 0
+	? max( 2, (int) ceil( $min_letters_length / $letter_count ) )
+	: 2;
 
 $speed = $letter_count * $repeat_text * 250;
 

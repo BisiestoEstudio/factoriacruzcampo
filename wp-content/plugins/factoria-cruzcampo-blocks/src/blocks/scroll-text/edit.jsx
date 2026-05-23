@@ -7,8 +7,15 @@ import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import MediaPicker from '../../components/MediaPicker';
 import './editor.scss';
 
-const REPEAT = 5;
+const MIN_LETTERS_LENGTH = 60;
 const SEP = ' · ';
+
+function getRepeatCount( text ) {
+	const letterCount = text ? text.length : 0;
+	return letterCount > 0
+		? Math.max( 2, Math.ceil( MIN_LETTERS_LENGTH / letterCount ) )
+		: 2;
+}
 
 function MediaPreview( { media } ) {
 	const { mediaType, imageId, videoUrl, posterId } = media;
@@ -162,7 +169,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							key={ i }
 							className={ `b-scroll-text__band${ invert ? ' b-scroll-text__band--invert' : '' }` }
 						>
-							{ Array.from( { length: REPEAT }, ( _, j ) => (
+							{ Array.from( { length: getRepeatCount( text ) }, ( _, j ) => (
 								<div key={ j } className="b-scroll-text__track">
 									<span className="b-scroll-text__text">
 										{ text }
