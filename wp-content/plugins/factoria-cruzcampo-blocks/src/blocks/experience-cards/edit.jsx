@@ -10,6 +10,7 @@ import {
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
+import PaintImage from '../../utils/PaintImage';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { mode, clasification, selectedIds } = attributes;
@@ -22,13 +23,34 @@ export default function Edit( { attributes, setAttributes } ) {
 		} );
 	}, [] );
 
-	const experiences = useSelect( ( select ) => {
+	const allExperiences = useSelect( ( select ) => {
 		return select( coreStore ).getEntityRecords( 'postType', 'experience', {
 			per_page: -1,
 			status: 'publish',
 			_fields: 'id,title',
 		} );
 	}, [] );
+
+	const previewExperiences = useSelect(
+		( select ) => {
+			if ( mode === 'manual' && selectedIds.length === 0 ) {
+				return [];
+			}
+			const query = {
+				per_page: -1,
+				status: 'publish',
+				_fields: 'id,title,featured_media',
+			};
+			if ( mode === 'manual' ) {
+				query.include = selectedIds;
+				query.orderby = 'include';
+			} else if ( clasification !== 'all' ) {
+				query.clasification = parseInt( clasification, 10 );
+			}
+			return select( coreStore ).getEntityRecords( 'postType', 'experience', query );
+		},
+		[ mode, clasification, selectedIds.join( ',' ) ]
+	);
 
 	const termOptions = [
 		{ label: __( 'Todas', 'factoria-cruzcampo-blocks' ), value: 'all' },
@@ -44,15 +66,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			: [ ...selectedIds, id ];
 		setAttributes( { selectedIds: next } );
 	}
-
-	const previewLabel =
-		mode === 'manual'
-			? selectedIds.length === 0
-				? __( 'Ninguna seleccionada', 'factoria-cruzcampo-blocks' )
-				: `${ selectedIds.length } ${ __( 'experiencia(s)', 'factoria-cruzcampo-blocks' ) }`
-			: clasification === 'all'
-			? __( 'Todas las experiencias', 'factoria-cruzcampo-blocks' )
-			: termOptions.find( ( o ) => o.value === clasification )?.label ?? clasification;
 
 	return (
 		<>
@@ -94,14 +107,14 @@ export default function Edit( { attributes, setAttributes } ) {
 
 				{ mode === 'manual' && (
 					<PanelBody title={ __( 'Experiencias', 'factoria-cruzcampo-blocks' ) }>
-						{ experiences === null ? (
+						{ allExperiences === null ? (
 							<Spinner />
-						) : experiences.length === 0 ? (
+						) : allExperiences.length === 0 ? (
 							<p>
 								{ __( 'No hay experiencias publicadas.', 'factoria-cruzcampo-blocks' ) }
 							</p>
 						) : (
-							experiences.map( ( exp ) => (
+							allExperiences.map( ( exp ) => (
 								<CheckboxControl
 									key={ exp.id }
 									label={ exp.title?.rendered ?? `#${ exp.id }` }
@@ -115,10 +128,33 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<p className="b-experience-cards__placeholder">
-					{ __( 'Experience Cards', 'factoria-cruzcampo-blocks' ) }{ ' ' }
-					&mdash; { previewLabel }
-				</p>
+				{ previewExperiences === null ? (
+					<Spinner />
+				) : previewExperiences.length === 0 ? (
+					<p className="b-experience-cards__empty">
+						{ mode === 'manual' && selectedIds.length === 0
+							? __( 'Selecciona experiencias en el panel lateral.', 'factoria-cruzcampo-blocks' )
+							: __( 'No hay experiencias disponibles.', 'factoria-cruzcampo-blocks' )
+						}
+					</p>
+				) : (
+					previewExperiences.map( ( exp ) => (
+						<div key={ exp.id } className="b-experience-cards__item">
+							{ !! exp.featured_media && (
+								<div className="b-experience-cards__image">
+									<PaintImage
+										image={ exp.featured_media }
+										className="b-experience-cards__img"
+									/>
+								</div>
+							) }
+							<h3
+								className="b-experience-cards__title has-display-xs-font-size"
+								dangerouslySetInnerHTML={ { __html: exp.title?.rendered } }
+							/>
+						</div>
+					) )
+				) }
 			</div>
 		</>
 	);
