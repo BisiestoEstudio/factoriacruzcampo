@@ -11,12 +11,32 @@
 	},
 	"description": "Grid de experiencias filtrable por clasificación",
 	"example": {},
+	"parent": ["bisiesto/section","bisiesto/scroll-over"],
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
 		"mode": { "type": "string", "default": "category" },
 		"clasification": { "type": "string", "default": "all" },
 		"selectedIds": { "type": "array", "items": { "type": "integer" }, "default": [] }
 	},
+	"styles": [
+		{
+			"name": "grid",
+			"label": "Grid",
+			"isDefault": true
+		},
+		{
+			"name": "4-columns",
+			"label": "4 columnas"
+		},
+		{
+			"name": "3-columns",
+			"label": "3 columnas"
+		},
+		{
+			"name": "2-columns",
+			"label": "2 columnas"
+		}
+	],
 	"supports": {
 		"html": false,
 		"anchor": true,

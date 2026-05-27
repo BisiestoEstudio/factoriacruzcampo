@@ -110,9 +110,24 @@
       },
       "fontSizes": [
         {
+          "slug": "display-xs",
+          "size": "24px",
+          "name": "Display XS",
+          "fluid":{
+            "min": "24px",
+            "max": "32px"
+          }
+        },
+        {
           "slug": "display-s",
           "size": "var(--display-s-size)",
-          "name": "Display",
+          "name": "Display S",
+          "fluid": false
+        },
+        {
+          "slug": "display-l",
+          "size": "var(--display-l-size)",
+          "name": "Display L",
           "fluid": false
         },
         {

@@ -250,7 +250,9 @@ h6, .has-h-6-font-size{
   }
 }
 
-.display-s, .has-display-s-font-size{
+.display-s, .has-display-s-font-size,
+.display-xs, .has-display-xs-font-size,
+.display-l, .has-display-l-font-size{
   font-family: var(--display-font);
   line-height: var(--display-height);
   font-weight: 400;
@@ -259,6 +261,8 @@ h6, .has-h-6-font-size{
     font-weight: 400;
   }
 }
+
+
 
 
 

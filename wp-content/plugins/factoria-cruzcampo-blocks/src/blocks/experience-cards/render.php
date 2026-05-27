@@ -45,12 +45,7 @@ $experiences = new WP_Query( $query_args );
 						<?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, [ 'class' => 'b-experience-cards__img' ] ); ?>
 					</div>
 				<?php endif; ?>
-				<div class="b-experience-cards__body">
-					<h3 class="b-experience-cards__title"><?php the_title(); ?></h3>
-					<?php if ( has_excerpt() ) : ?>
-						<p class="b-experience-cards__excerpt"><?php echo wp_kses_post( get_the_excerpt() ); ?></p>
-					<?php endif; ?>
-				</div>
+					<h3 class="b-experience-cards__title has-display-xs-font-size"><?php the_title(); ?></h3>
 			</a>
 		<?php endwhile; ?>
 		<?php wp_reset_postdata(); ?>

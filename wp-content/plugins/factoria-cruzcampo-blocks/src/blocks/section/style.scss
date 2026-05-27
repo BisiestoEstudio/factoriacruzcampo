@@ -39,12 +39,7 @@
 			place-items: center;
 			text-align: center;
 
-			> *:not(.alignextrawide):not(.alignfull):not(.alignwide):not(.alignmedium):not(.aligncontent) 
-			{
-				max-width: var(--contentsize);
-				margin-right: auto;
-				margin-left: auto;
-			}
+
 
 		}
 
