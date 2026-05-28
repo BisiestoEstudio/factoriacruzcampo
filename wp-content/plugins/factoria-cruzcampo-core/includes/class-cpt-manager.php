@@ -32,5 +32,23 @@ class FCC_CPT_Manager {
 			'single'       => true,
 			'show_in_rest' => true,
 		) );
+
+		register_post_meta( 'experience', 'precio', array(
+			'type'         => 'number',
+			'single'       => true,
+			'show_in_rest' => true,
+		) );
+
+		register_post_meta( 'experience', 'dias', array(
+			'type'         => 'string',
+			'single'       => true,
+			'show_in_rest' => true,
+		) );
+
+		register_post_meta( 'experience', 'duracion', array(
+			'type'         => 'string',
+			'single'       => true,
+			'show_in_rest' => true,
+		) );
 	}
 }

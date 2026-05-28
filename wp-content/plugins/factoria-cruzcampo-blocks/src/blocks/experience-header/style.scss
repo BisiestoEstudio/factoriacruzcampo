@@ -1,0 +1,124 @@
+.b-experience-header {
+	background-color: var(--beige-bg);
+
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		padding: fluid(80px, 40px) var(--layout-margin);
+	}
+
+	&__title {
+		font-family: var(--display-font);
+		color: var(--red);
+		text-transform: uppercase;
+		line-height: 0.88;
+		font-size: fluid(140px, 52px);
+		margin: 0 0 fluid(32px, 20px);
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+		gap: fluid(48px, 32px);
+	}
+
+	&__image {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		place-items: center;
+		aspect-ratio: 672 / 697;
+
+		img {
+			width: 80%;
+			aspect-ratio: 541 / 453;
+			object-fit: cover;
+			height: auto;
+			display: block;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background-image: url("../../../assets/images/garabato.gif");
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: contain;
+			pointer-events: none;
+			z-index: -1;
+		}
+	}
+
+	&__image-placeholder {
+		width: 80%;
+		aspect-ratio: 541 / 453;
+		background-color: var(--beige-dark);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--black);
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: fluid(48px, 32px);
+	}
+
+	&__details {
+		display: flex;
+		flex-wrap: wrap;
+		gap: fluid(20px, 16px) fluid(56px, 24px);
+		align-items: center;
+	}
+
+	&__detail {
+		display: flex;
+		align-items: center;
+		gap: fluid(16px, 10px);
+	}
+
+	&__icon {
+		display: inline-block;
+		width: fluid(60px, 36px);
+		height: fluid(60px, 36px);
+		flex-shrink: 0;
+		object-fit: contain;
+
+		// En el editor los iconos son <span> con fondo CSS
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		&--money    { background-image: url("../../../assets/images/money-icon.svg"); }
+		&--calendar { background-image: url("../../../assets/images/calendar-icon.svg"); }
+		&--time     { background-image: url("../../../assets/images/time-icon.svg"); }
+	}
+
+	&__detail-text {
+		font-family: var(--heading-font);
+		font-weight: var(--font-weight-bold);
+		text-transform: uppercase;
+		font-size: fluid(28px, 18px);
+		letter-spacing: 0.03em;
+		line-height: 1;
+	}
+
+	@media (min-width: 768px) {
+		&__body {
+			flex-direction: row;
+			align-items: flex-start;
+		}
+
+		&__image {
+			width: 45%;
+			flex-shrink: 0;
+		}
+
+		&__content {
+			flex: 1;
+			min-width: 0;
+			padding-top: fluid(20px, 0px);
+		}
+	}
+}

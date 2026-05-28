@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 class Blocks {
 	function __construct() {
 		add_action( 'init', array( $this, 'register_blocks' ) );
+		add_action( 'init', array( $this, 'register_patterns' ) );
 		add_action( 'block_categories_all', array( $this, 'register_category' ), 10, 1 );
 	}
 
@@ -19,6 +20,49 @@ class Blocks {
 			),
 			$categories
 		);
+	}
+
+	function register_patterns() {
+		register_block_pattern_category( 'cruzcampo', array(
+			'label' => __( 'Factoría Cruzcampo', 'factoria-cruzcampo-blocks' ),
+		) );
+
+		$patterns_dir = FCB_PLUGIN_DIR . 'patterns/';
+		if ( ! is_dir( $patterns_dir ) ) {
+			return;
+		}
+
+		foreach ( glob( $patterns_dir . '*.php' ) as $file ) {
+			$headers = get_file_data( $file, array(
+				'title'       => 'Title',
+				'slug'        => 'Slug',
+				'categories'  => 'Categories',
+				'blockTypes'  => 'Block Types',
+				'description' => 'Description',
+			) );
+
+			if ( empty( $headers['title'] ) || empty( $headers['slug'] ) ) {
+				continue;
+			}
+
+			ob_start();
+			include $file;
+			$content = trim( ob_get_clean() );
+
+			$args = array( 'title' => $headers['title'], 'content' => $content );
+
+			if ( ! empty( $headers['categories'] ) ) {
+				$args['categories'] = array_map( 'trim', explode( ',', $headers['categories'] ) );
+			}
+			if ( ! empty( $headers['blockTypes'] ) ) {
+				$args['blockTypes'] = array_map( 'trim', explode( ',', $headers['blockTypes'] ) );
+			}
+			if ( ! empty( $headers['description'] ) ) {
+				$args['description'] = $headers['description'];
+			}
+
+			register_block_pattern( $headers['slug'], $args );
+		}
 	}
 
 	function register_blocks() {
