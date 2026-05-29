@@ -1,24 +1,32 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "bisiesto/experience-header",
+	"name": "bisiesto/text-form",
 	"version": "0.1.0",
-	"title": "Experiencia Header",
+	"title": "Texto y Formulario",
 	"category": "bisiesto",
 	"icon": {
-		"src": "awards",
+		"src": "email-alt",
 		"foreground": "#7900D8"
 	},
-	"description": "Cabecera dinámica para el CPT experience",
+	"description": "Bloque de dos columnas con contenido a la izquierda y formulario CF7 a la derecha",
+	"example": {},
 	"attributes": {
-		"anchor": { "type": "string", "default": "" }
+		"formId": {
+			"type": "number",
+			"default": 0
+		}
 	},
 	"supports": {
 		"html": false,
 		"anchor": true,
-		"align": false,
-		"spacing": { "padding": false },
-		"color": { "background": false, "text": false }
+		"spacing": {
+			"padding": true
+		},
+		"color": {
+			"background": true,
+			"text": true
+		}
 	},
 	"textdomain": "factoria-cruzcampo-blocks",
 	"editorScript": "file:./index.js",

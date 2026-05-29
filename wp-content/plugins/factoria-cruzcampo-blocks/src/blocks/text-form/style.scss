@@ -1,0 +1,35 @@
+.b-text-form {
+	padding: var(--block-padding);
+
+	&__wrapper {
+		display: grid;
+		gap: var(--spacing-fluid-l);
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	&__form-placeholder,
+	&__form-preview {
+		padding: 16px;
+		border: 1px dashed currentColor;
+		opacity: 0.5;
+		font-size: 14px;
+	}
+
+	@media (min-width: 768px) {
+		&__wrapper {
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+		}
+	}
+}

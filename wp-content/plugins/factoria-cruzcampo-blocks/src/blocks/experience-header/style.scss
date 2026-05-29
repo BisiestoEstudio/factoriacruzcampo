@@ -1,11 +1,5 @@
 .b-experience-header {
-	background-color: var(--beige-bg);
-
-	&__wrapper {
-		display: flex;
-		flex-direction: column;
-		padding: fluid(80px, 40px) var(--layout-margin);
-	}
+	padding: var(--block-padding);
 
 	&__title {
 		font-family: var(--display-font);
@@ -19,7 +13,9 @@
 	&__body {
 		display: flex;
 		flex-direction: column;
-		gap: fluid(48px, 32px);
+		gap: fluid(48px, 0px);
+		transform: translateY(-16px);
+
 	}
 
 	&__image {
@@ -30,8 +26,8 @@
 		aspect-ratio: 672 / 697;
 
 		img {
-			width: 80%;
-			aspect-ratio: 541 / 453;
+			width: 70%;
+			aspect-ratio: 430 / 530;
 			object-fit: cover;
 			height: auto;
 			display: block;
@@ -63,28 +59,33 @@
 	&__content {
 		display: flex;
 		flex-direction: column;
-		gap: fluid(48px, 32px);
+		gap: fluid(48px, 24px);
+	
 	}
 
 	&__details {
 		display: flex;
 		flex-wrap: wrap;
-		gap: fluid(20px, 16px) fluid(56px, 24px);
-		align-items: center;
+		gap: fluid(60px, 16px);
+		row-gap: 24px;
+		padding-top: 24px;
 	}
 
 	&__detail {
 		display: flex;
+		position: relative;
 		align-items: center;
-		gap: fluid(16px, 10px);
+		gap: 8px;
 	}
 
 	&__icon {
+		--icon-size: fluid(80px, 24px, 1500px, 540px);
 		display: inline-block;
-		width: fluid(60px, 36px);
-		height: fluid(60px, 36px);
+		width: var(--icon-size);
+		height: var(--icon-size);
 		flex-shrink: 0;
 		object-fit: contain;
+		z-index: 2;
 
 		// En el editor los iconos son <span> con fondo CSS
 		background-size: contain;
@@ -108,10 +109,12 @@
 		&__body {
 			flex-direction: row;
 			align-items: flex-start;
+			transform: translateY(-32px);
 		}
 
 		&__image {
-			width: 45%;
+			width: 40%;
+			min-width: 390px;
 			flex-shrink: 0;
 		}
 
@@ -120,5 +123,26 @@
 			min-width: 0;
 			padding-top: fluid(20px, 0px);
 		}
+
+		&__details {
+			min-height: fluid(280px, 50px, 1500px, 780px);
+			align-content: start;
+		}
+
+		&__detail {
+			align-content: start;
+			gap: 0;
+		}
+
+
+	 & &__detail-text {
+		transform: translate(-8px, 24px);
+		font-size: var(--display-s-size) !important;
+	}
+
+	&__content-inner {
+		align-self: stretch;
+	}
+
 	}
 }

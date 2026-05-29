@@ -23,10 +23,9 @@ if ( $precio ) {
 }
 ?>
 
-<section <?php echo bis_get_block_prop( $block, false ); ?>>
-	<div class="b-experience-header__wrapper">
+<section <?php echo bis_get_block_prop( $block, false, [ 'class' => 'alignwide' ] ); ?>>
 
-		<h1 class="b-experience-header__title"><?php echo esc_html( $title ); ?></h1>
+		<h1 class="b-experience-header__title has-display-l-font-size"><?php echo esc_html( $title ); ?></h1>
 
 		<div class="b-experience-header__body">
 
@@ -39,7 +38,7 @@ if ( $precio ) {
 			<div class="b-experience-header__content">
 
 				<?php if ( $precio_display || $dias || $duracion ) : ?>
-					<div class="b-experience-header__details">
+					<div class="b-experience-header__details has-red-color">
 
 						<?php if ( $precio_display ) : ?>
 							<div class="b-experience-header__detail">
@@ -51,7 +50,7 @@ if ( $precio ) {
 									width="60"
 									height="60"
 								/>
-								<span class="b-experience-header__detail-text"><?php echo esc_html( $precio_display ); ?></span>
+								<span class="b-experience-header__detail-text has-display-xs-font-size"><?php echo esc_html( $precio_display ); ?></span>
 							</div>
 						<?php endif; ?>
 
@@ -65,7 +64,7 @@ if ( $precio ) {
 									width="60"
 									height="60"
 								/>
-								<span class="b-experience-header__detail-text"><?php echo esc_html( $dias ); ?></span>
+								<span class="b-experience-header__detail-text has-display-xs-font-size"><?php echo esc_html( $dias ); ?></span>
 							</div>
 						<?php endif; ?>
 
@@ -79,16 +78,15 @@ if ( $precio ) {
 									width="60"
 									height="60"
 								/>
-								<span class="b-experience-header__detail-text"><?php echo esc_html( $duracion ); ?></span>
+								<span class="b-experience-header__detail-text has-display-xs-font-size"><?php echo esc_html( $duracion ); ?></span>
 							</div>
 						<?php endif; ?>
 
 					</div>
 				<?php endif; ?>
-
+				<div class="b-experience-header__content-inner is-prose">
 				<?php echo $content; ?>
-
-			</div>
+				</div>
 		</div>
 	</div>
 </section>
