@@ -1,0 +1,115 @@
+.b-hero {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-height: 100svh;
+	color: var(--white);
+	overflow: hidden;
+
+	&__bg {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+
+		// Overlay gradient para legibilidad del texto
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			z-index: 1;
+			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%);
+		}
+
+		.c-media {
+			position: absolute;
+			inset: 0;
+		}
+	}
+
+	&__content {
+		position: relative;
+		z-index: 1;
+		flex: 1;
+		display: flex;
+		align-items: flex-end;
+		padding: var(--spacing-fluid-l) var(--layout-margin) var(--spacing-fluid-s);
+	}
+
+	&__claim {
+		font-family: var(--display-font);
+		font-size: clamp(3.5rem, 11vw, 10rem);
+		font-weight: var(--font-weight-bold);
+		line-height: 1;
+		text-align: justify;
+		text-align-last: justify;
+		text-transform: uppercase;
+		color: var(--white);
+		width: 100%;
+		margin: 0;
+	}
+
+	&__bottom {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-fluid-m);
+		padding: var(--spacing-fluid-s) var(--layout-margin);
+	}
+
+	&__cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.875em 1.5em;
+		background-color: var(--red);
+		color: var(--white);
+		font-family: var(--heading-font);
+		font-weight: var(--font-weight-bold);
+		font-size: clamp(0.875rem, 1.5vw, 1rem);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+		flex-shrink: 0;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: var(--red-dark);
+			color: var(--white);
+		}
+	}
+
+	&__cta-arrow {
+		font-size: 1.25em;
+		line-height: 1;
+	}
+
+	&__nav {
+		flex: 1;
+	}
+
+	&__menu {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-fluid-m);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li a {
+			font-family: var(--heading-font);
+			font-weight: var(--font-weight-bold);
+			font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--white);
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: var(--red);
+			}
+		}
+	}
+}

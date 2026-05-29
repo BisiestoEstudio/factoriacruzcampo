@@ -1,0 +1,75 @@
+.b-experiences-carrusel {
+	width: 100%;
+	position: relative;
+
+	&__swiper {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		text-decoration: none;
+		color: inherit;
+		width: 100%;
+
+		&:hover,
+		&:focus-visible {
+			.b-experiences-carrusel__img {
+				transform: rotate(10deg) scale(1.5);
+			}
+		}
+	}
+
+	&__image {
+		overflow: hidden;
+		aspect-ratio: 390 / 524;
+		margin-bottom: 16px;
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		transition: transform 0.1s ease-in-out;
+	}
+
+	&__title {
+		font-size: fluid(32px, 24px);
+		font-family: var(--display-font);
+		text-align: left;
+	}
+
+	&__btn {
+		color: var(--white);
+
+		&::after {
+			font-size: 20px;
+		}
+	}
+
+	&__pagination {
+		.swiper-pagination-bullet {
+			background: var(--white);
+			opacity: 0.5;
+
+			&-active {
+				opacity: 1;
+			}
+		}
+	}
+
+	// Editor preview
+	&__preview {
+		display: flex;
+		gap: 24px;
+		overflow: hidden;
+	}
+
+	&__empty {
+		opacity: 0.5;
+	}
+}

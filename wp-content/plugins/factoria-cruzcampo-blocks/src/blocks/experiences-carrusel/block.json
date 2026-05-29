@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/experiences-carrusel",
+	"version": "0.1.0",
+	"title": "Carrusel de experiencias",
+	"category": "bisiesto",
+	"icon": {
+		"src": "slides",
+		"foreground": "#7900D8"
+	},
+	"description": "Carrusel de experiencias filtrable por clasificación",
+	"example": {},
+	"parent": ["bisiesto/section"],
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"mode": { "type": "string", "default": "category" },
+		"clasification": { "type": "string", "default": "all" },
+		"selectedIds": { "type": "array", "items": { "type": "integer" }, "default": [] }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

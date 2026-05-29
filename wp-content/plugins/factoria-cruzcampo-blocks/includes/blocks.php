@@ -7,6 +7,23 @@ class Blocks {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_action( 'init', array( $this, 'register_patterns' ) );
 		add_action( 'block_categories_all', array( $this, 'register_category' ), 10, 1 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_swiper' ) );
+	}
+
+	function register_swiper() {
+		wp_register_script(
+			'fcb-swiper',
+			FCB_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
+			[],
+			FCB_VERSION,
+			true
+		);
+		wp_register_style(
+			'fcb-swiper',
+			FCB_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
+			[],
+			FCB_VERSION
+		);
 	}
 
 	function register_category( $categories ) {

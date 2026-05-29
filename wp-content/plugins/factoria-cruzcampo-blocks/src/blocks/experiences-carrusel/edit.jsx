@@ -14,29 +14,31 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ previewExperiences === null ? (
 						<Spinner />
 					) : previewExperiences.length === 0 ? (
-						<p className="b-experience-cards__empty">
+						<p className="b-experiences-carrusel__empty">
 							{ mode === 'manual' && selectedIds.length === 0
 								? __( 'Selecciona experiencias en el panel lateral.', 'factoria-cruzcampo-blocks' )
 								: __( 'No hay experiencias disponibles.', 'factoria-cruzcampo-blocks' )
 							}
 						</p>
 					) : (
-						previewExperiences.map( ( exp ) => (
-							<div key={ exp.id } className="b-experience-cards__item">
-								{ !! exp.featured_media && (
-									<div className="b-experience-cards__image">
-										<PaintImage
-											image={ exp.featured_media }
-											className="b-experience-cards__img"
-										/>
-									</div>
-								) }
-								<h3
-									className="b-experience-cards__title has-display-xs-font-size"
-									dangerouslySetInnerHTML={ { __html: exp.title?.rendered } }
-								/>
-							</div>
-						) )
+						<div className="b-experiences-carrusel__preview">
+							{ previewExperiences.map( ( exp ) => (
+								<div key={ exp.id } className="b-experiences-carrusel__item">
+									{ !! exp.featured_media && (
+										<div className="b-experiences-carrusel__image">
+											<PaintImage
+												image={ exp.featured_media }
+												className="b-experiences-carrusel__img"
+											/>
+										</div>
+									) }
+									<h3
+										className="b-experiences-carrusel__title has-display-xs-font-size"
+										dangerouslySetInnerHTML={ { __html: exp.title?.rendered } }
+									/>
+								</div>
+							) ) }
+						</div>
 					) }
 				</div>
 			) }

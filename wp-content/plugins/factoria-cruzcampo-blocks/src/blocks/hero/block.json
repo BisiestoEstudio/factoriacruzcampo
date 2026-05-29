@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/hero",
+	"version": "0.1.0",
+	"title": "Hero",
+	"category": "bisiesto",
+	"icon": {
+		"src": "cover-image",
+		"foreground": "#7900D8"
+	},
+	"description": "Bloque hero con vídeo/imagen de fondo, claim y menú de navegación",
+	"example": {},
+	"attributes": {
+		"anchor": { "type": "string", "default": "" },
+		"claim": { "type": "string", "default": "" },
+		"link": {
+			"type": "object",
+			"default": { "url": "", "title": "", "target": "", "rel": "" }
+		},
+		"menuId": { "type": "number", "default": 0 },
+		"media": {
+			"type": "object",
+			"default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 }
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"color": {
+			"background": false,
+			"text": false
+		}
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
