@@ -63,6 +63,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							'bisiesto/spacer',
 							'bisiesto/separator',
 							'core/buttons',
+							'bisiesto/cards',
+							'bisiesto/experience-cards'
 						 ] }
 					templateLock={ false }
 					 />
