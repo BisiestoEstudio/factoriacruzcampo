@@ -8,6 +8,21 @@ class Blocks {
 		add_action( 'init', array( $this, 'register_patterns' ) );
 		add_action( 'block_categories_all', array( $this, 'register_category' ), 10, 1 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_swiper' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'register_editor_scripts' ) );
+	}
+
+	function register_editor_scripts() {
+		$asset_file = FCB_PLUGIN_DIR . 'build/index.asset.php';
+		if ( ! file_exists( $asset_file ) ) {
+			return;
+		}
+		$asset = include $asset_file;
+		wp_enqueue_script(
+			'fcb-editor-scripts',
+			FCB_PLUGIN_URL . 'build/index.js',
+			$asset['dependencies'],
+			$asset['version']
+		);
 	}
 
 	function register_swiper() {

@@ -2,8 +2,14 @@ const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 const CopyPlugin = require( 'copy-webpack-plugin' );
 const path = require( 'path' );
 
+const defaultEntry = defaultConfig.entry;
+
 module.exports = {
 	...defaultConfig,
+	entry: () => ( {
+		...( typeof defaultEntry === 'function' ? defaultEntry() : defaultEntry ),
+		index: path.resolve( __dirname, 'src/index.js' ),
+	} ),
 	plugins: [
 		...defaultConfig.plugins,
 		new CopyPlugin( {
