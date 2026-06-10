@@ -3,8 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	min-height: 100svh;
-	color: var(--white);
-	overflow: hidden;
+	gap: 60px;
 
 	&__bg {
 		position: absolute;
@@ -29,10 +28,8 @@
 	&__content {
 		position: relative;
 		z-index: 1;
-		flex: 1;
-		display: flex;
-		align-items: flex-end;
-		padding: var(--spacing-fluid-l) var(--layout-margin) var(--spacing-fluid-s);
+		flex-grow: 99;
+		padding: 80px var(--layout-margin) 0;
 	}
 
 	&__claim {
@@ -53,63 +50,61 @@
 		z-index: 1;
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-fluid-m);
-		padding: var(--spacing-fluid-s) var(--layout-margin);
+		justify-content: space-between;
+		gap: 24px;
+		padding: 0;
 	}
 
 	&__cta {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.875em 1.5em;
-		background-color: var(--red);
-		color: var(--white);
-		font-family: var(--heading-font);
-		font-weight: var(--font-weight-bold);
-		font-size: clamp(0.875rem, 1.5vw, 1rem);
-		text-decoration: none;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		white-space: nowrap;
 		flex-shrink: 0;
-		transition: background-color 0.2s ease;
+		width: 100%;
 
-		&:hover {
-			background-color: var(--red-dark);
-			color: var(--white);
+
+		.btn:after {
+			transform: rotate(-45deg);
 		}
-	}
 
-	&__cta-arrow {
-		font-size: 1.25em;
-		line-height: 1;
 	}
 
 	&__nav {
-		flex: 1;
+		display: none;
 	}
 
 	&__menu {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--spacing-fluid-m);
+		gap: fluid(80px, 16px, 1500px, 768px);
+		row-gap: 4px;
 		list-style: none;
-		margin: 0;
+		margin-right: var(--layout-margin);
 		padding: 0;
 
 		li a {
-			font-family: var(--heading-font);
 			font-weight: var(--font-weight-bold);
-			font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+			font-size: var(--wp--preset--font-size--display-xs);
+			font-family: var(--display-font);
 			text-decoration: none;
 			text-transform: uppercase;
-			letter-spacing: 0.08em;
 			color: var(--white);
-			transition: color 0.2s ease;
-
-			&:hover {
-				color: var(--red);
-			}
+			display: inline-block;
 		}
 	}
 }
+
+@media screen and (min-width: 768px) {
+	.b-hero {
+
+		&__nav {
+			display: block;
+		}
+
+
+		&__cta {
+			width: auto;
+			min-width: min(550px, 40%);
+		}
+	}
+}
+
+

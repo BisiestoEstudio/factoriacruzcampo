@@ -64,6 +64,14 @@ function bis_get_block_prop( $block, $is_layout_constrained = false, $extra_attr
 	return trim( $html );
 }
 
+function bis_get_block_variation( $block_attrs ) {
+	$class_name = $block_attrs['className'] ?? '';
+	if ( preg_match( '/\bis-style-([\w-]+)\b/', $class_name, $matches ) ) {
+		return $matches[1];
+	}
+	return null;
+}
+
 function bis_get_block_classes( $block, $is_layout_constrained = false ) {
 	$parts     = explode( '/', $block->name );
 	$namespace = $parts[0];
