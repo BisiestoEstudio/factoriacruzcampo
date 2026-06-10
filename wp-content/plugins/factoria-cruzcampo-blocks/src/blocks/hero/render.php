@@ -13,6 +13,19 @@ $custom_overlay_color = $attributes['customOverlayColor'] ?? '';
 $dim_ratio           = isset( $attributes['dimRatio'] ) ? (int) $attributes['dimRatio'] : 50;
 $has_overlay         = $overlay_color_slug || $custom_overlay_color;
 $overlay_style       = '';
+$claim_size = (float) ( $attributes['claimFontSize'] ?? 11 );
+$claim_min  = isset( $attributes['claimFontSizeMin'] ) ? (int) $attributes['claimFontSizeMin'] : null;
+$claim_max  = isset( $attributes['claimFontSizeMax'] ) ? (int) $attributes['claimFontSizeMax'] : null;
+
+if ( $claim_min !== null && $claim_max !== null ) {
+	$claim_font_size = "clamp({$claim_min}px, {$claim_size}vw, {$claim_max}px)";
+} elseif ( $claim_min !== null ) {
+	$claim_font_size = "max({$claim_min}px, {$claim_size}vw)";
+} elseif ( $claim_max !== null ) {
+	$claim_font_size = "min({$claim_size}vw, {$claim_max}px)";
+} else {
+	$claim_font_size = "{$claim_size}vw";
+}
 
 if ( $has_overlay ) {
 	$overlay_bg    = $custom_overlay_color
@@ -37,7 +50,7 @@ if ( empty( $link['title'] ) ) {
 
 	<div class="b-hero__content alignexpand">
 		<?php if ( $claim ) : ?>
-			<h1 class="b-hero__claim"><?php echo wp_kses_post( $claim ); ?></h1>
+			<h1 class="b-hero__claim" style="font-size:<?php echo esc_attr( $claim_font_size ); ?>"><?php echo wp_kses_post( $claim ); ?></h1>
 		<?php endif; ?>
 	</div>
 

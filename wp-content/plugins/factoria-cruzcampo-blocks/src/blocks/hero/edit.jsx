@@ -10,6 +10,7 @@ import {
 	PanelBody,
 	SelectControl,
 	RangeControl,
+	__experimentalNumberControl as NumberControl,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
@@ -20,8 +21,15 @@ import LinkPicker from '../../components/LinkPicker';
 import PaintImage from '../../utils/PaintImage';
 import './editor.scss';
 
+function buildClaimFontSize( sizeVw, minPx, maxPx ) {
+	if ( minPx && maxPx ) return `clamp(${ minPx }px, ${ sizeVw }vw, ${ maxPx }px)`;
+	if ( minPx ) return `max(${ minPx }px, ${ sizeVw }vw)`;
+	if ( maxPx ) return `min(${ sizeVw }vw, ${ maxPx }px)`;
+	return `${ sizeVw }vw`;
+}
+
 function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayColor } ) {
-	const { claim, link, menuId, media, dimRatio } = attributes;
+	const { claim, link, menuId, media, dimRatio, claimFontSize, claimFontSizeMin, claimFontSizeMax } = attributes;
 	const blockProps = useBisiestoBlockProps( { className: 'alignfull' } );
 	const colorGradientSettings = useMultipleOriginColorsAndGradients();
 
@@ -69,6 +77,39 @@ function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayCo
 						value={ menuId }
 						options={ menuOptions }
 						onChange={ ( val ) => setAttributes( { menuId: parseInt( val, 10 ) } ) }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Tipografía del claim', 'factoria-cruzcampo-blocks' ) } initialOpen={ false }>
+					<RangeControl
+						label={ __( 'Tamaño (vw)', 'factoria-cruzcampo-blocks' ) }
+						value={ claimFontSize ?? 11 }
+						onChange={ ( val ) => setAttributes( { claimFontSize: val } ) }
+						min={ 1 }
+						max={ 30 }
+						step={ 0.5 }
+						__next40pxDefaultSize
+					/>
+					<NumberControl
+						label={ __( 'Mínimo (px)', 'factoria-cruzcampo-blocks' ) }
+						value={ claimFontSizeMin ?? '' }
+						onChange={ ( val ) => {
+							const n = parseInt( val, 10 );
+							setAttributes( { claimFontSizeMin: isNaN( n ) ? undefined : n } );
+						} }
+						min={ 8 }
+						step={ 4 }
+						__next40pxDefaultSize
+					/>
+					<NumberControl
+						label={ __( 'Máximo (px)', 'factoria-cruzcampo-blocks' ) }
+						value={ claimFontSizeMax ?? '' }
+						onChange={ ( val ) => {
+							const n = parseInt( val, 10 );
+							setAttributes( { claimFontSizeMax: isNaN( n ) ? undefined : n } );
+						} }
+						min={ 32 }
+						step={ 4 }
+						__next40pxDefaultSize
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -146,6 +187,7 @@ function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayCo
 					<RichText
 						tagName="h1"
 						className="b-hero__claim"
+						style={ { fontSize: buildClaimFontSize( claimFontSize ?? 11, claimFontSizeMin, claimFontSizeMax ) } }
 						value={ claim }
 						onChange={ ( val ) => setAttributes( { claim: val } ) }
 						placeholder={ __( 'Escribe el claim…', 'factoria-cruzcampo-blocks' ) }

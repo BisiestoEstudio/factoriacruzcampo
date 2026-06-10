@@ -25,7 +25,10 @@
 		},
 		"overlayColor": { "type": "string" },
 		"customOverlayColor": { "type": "string" },
-		"dimRatio": { "type": "number", "default": 50 }
+		"dimRatio": { "type": "number", "default": 50 },
+		"claimFontSize": { "type": "number", "default": 11 },
+		"claimFontSizeMin": { "type": "number" },
+		"claimFontSizeMax": { "type": "number" }
 	},
 	"supports": {
 		"html": false,
