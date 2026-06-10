@@ -3,6 +3,16 @@
 	margin-right: calc(var(--layout-margin) * -1);
 	position: relative;
 
+	@media (min-width: 768px) {
+		padding-top: 12px;
+		padding-bottom: 60px;
+	}
+
+	@media (min-width: 1024px) {
+		padding-top: 20px;
+		padding-bottom: 90px;
+	}
+
 	&__swiper {
 		width: 100%;
 		overflow: visible !important;
