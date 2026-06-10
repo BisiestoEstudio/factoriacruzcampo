@@ -4,10 +4,22 @@ defined( 'ABSPATH' ) || exit;
 /** @var array    $attributes */
 /** @var WP_Block $block */
 
-$claim   = $attributes['claim'] ?? '';
-$link    = $attributes['link'] ?? [];
-$menu_id = (int) ( $attributes['menuId'] ?? 0 );
-$media   = $attributes['media'] ?? [];
+$claim               = $attributes['claim'] ?? '';
+$link                = $attributes['link'] ?? [];
+$menu_id             = (int) ( $attributes['menuId'] ?? 0 );
+$media               = $attributes['media'] ?? [];
+$overlay_color_slug  = $attributes['overlayColor'] ?? '';
+$custom_overlay_color = $attributes['customOverlayColor'] ?? '';
+$dim_ratio           = isset( $attributes['dimRatio'] ) ? (int) $attributes['dimRatio'] : 50;
+$has_overlay         = $overlay_color_slug || $custom_overlay_color;
+$overlay_style       = '';
+
+if ( $has_overlay ) {
+	$overlay_bg    = $custom_overlay_color
+		? 'background-color:' . sanitize_hex_color( $custom_overlay_color ) . ';'
+		: 'background-color:var(--wp--preset--color--' . sanitize_html_class( $overlay_color_slug ) . ');';
+	$overlay_style = $overlay_bg . 'opacity:' . round( $dim_ratio / 100, 2 ) . ';';
+}
 
 if ( empty( $link['title'] ) ) {
 	$link['title'] = __( 'Reserva ahora', 'factoria-cruzcampo-blocks' );
@@ -18,6 +30,9 @@ if ( empty( $link['title'] ) ) {
 
 	<div class="b-hero__bg alignfull">
 		<?php bis_paint_media( $media ); ?>
+		<?php if ( $has_overlay ) : ?>
+			<div class="b-hero__overlay" style="<?php echo esc_attr( $overlay_style ); ?>"></div>
+		<?php endif; ?>
 	</div>
 
 	<div class="b-hero__content alignexpand">
@@ -26,7 +41,7 @@ if ( empty( $link['title'] ) ) {
 		<?php endif; ?>
 	</div>
 
-	<div class="b-hero__bottom alignexpand">
+	<div class="b-hero__bottom alignfull">
 		<?php bis_paint_button( $link, 'large', 'b-hero__cta' ); ?>
 
 		<?php if ( $menu_id ) : ?>

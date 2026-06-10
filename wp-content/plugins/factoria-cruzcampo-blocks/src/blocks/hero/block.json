@@ -22,15 +22,23 @@
 		"media": {
 			"type": "object",
 			"default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 }
-		}
+		},
+		"overlayColor": { "type": "string" },
+		"customOverlayColor": { "type": "string" },
+		"dimRatio": { "type": "number", "default": 50 }
 	},
 	"supports": {
 		"html": false,
 		"anchor": true,
 		"align": false,
 		"color": {
-			"background": false,
-			"text": false
+			"background": true,
+			"text": true,
+			"heading": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
 		}
 	},
 	"textdomain": "factoria-cruzcampo-blocks",

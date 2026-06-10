@@ -4,20 +4,13 @@
 	flex-direction: column;
 	min-height: 100svh;
 	gap: 60px;
+	color: var(--white);
+	padding: 80px 0 0;
 
 	&__bg {
 		position: absolute;
 		inset: 0;
 		z-index: 0;
-
-		// Overlay gradient para legibilidad del texto
-		&::after {
-			content: '';
-			position: absolute;
-			inset: 0;
-			z-index: 1;
-			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.55) 100%);
-		}
 
 		.c-media {
 			position: absolute;
@@ -25,11 +18,19 @@
 		}
 	}
 
+	&__overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		pointer-events: none;
+	}
+
 	&__content {
+		padding: 0 var(--layout-margin);
 		position: relative;
 		z-index: 1;
 		flex-grow: 99;
-		padding: 80px var(--layout-margin) 0;
+
 	}
 
 	&__claim {
@@ -40,7 +41,7 @@
 		text-align: justify;
 		text-align-last: justify;
 		text-transform: uppercase;
-		color: var(--white);
+
 		width: 100%;
 		margin: 0;
 	}
@@ -60,9 +61,16 @@
 		width: 100%;
 
 
-		.btn:after {
-			transform: rotate(-45deg);
+
+		.btn{
+
+			color: var(--white) !important;
+			&:after {
+				transition: all 0.3s ease-in-out;
+				transform: rotate(-45deg);
+			}
 		}
+
 
 	}
 
@@ -80,14 +88,21 @@
 		margin-right: var(--layout-margin);
 		padding: 0;
 
+
 		li a {
+			color: var(--white);
 			font-weight: var(--font-weight-bold);
 			font-size: var(--wp--preset--font-size--display-xs);
 			font-family: var(--display-font);
 			text-decoration: none;
 			text-transform: uppercase;
-			color: var(--white);
 			display: inline-block;
+			transition: all 0.3s ease-in-out;
+
+			&:hover {
+				transform: rotate(-7deg);
+			}
+
 		}
 	}
 }

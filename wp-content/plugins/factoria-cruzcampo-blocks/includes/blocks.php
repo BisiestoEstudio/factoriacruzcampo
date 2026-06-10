@@ -46,7 +46,7 @@ class Blocks {
 			array(
 				array(
 					'slug'  => 'bisiesto',
-					'title' => 'Proyecto',
+					'title' => 'Factoría Cruzcampo',
 					'icon'  => null,
 				),
 			),

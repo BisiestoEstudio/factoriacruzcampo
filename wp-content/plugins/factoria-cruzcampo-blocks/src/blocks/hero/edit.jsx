@@ -1,6 +1,17 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, RichText } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import {
+	InspectorControls,
+	RichText,
+	withColors,
+	__experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
+	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
+} from '@wordpress/block-editor';
+import {
+	PanelBody,
+	SelectControl,
+	RangeControl,
+	__experimentalToolsPanelItem as ToolsPanelItem,
+} from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
@@ -9,9 +20,10 @@ import LinkPicker from '../../components/LinkPicker';
 import PaintImage from '../../utils/PaintImage';
 import './editor.scss';
 
-export default function Edit( { attributes, setAttributes } ) {
-	const { claim, link, menuId, media } = attributes;
+function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayColor } ) {
+	const { claim, link, menuId, media, dimRatio } = attributes;
 	const blockProps = useBisiestoBlockProps( { className: 'alignfull' } );
+	const colorGradientSettings = useMultipleOriginColorsAndGradients();
 
 	const menus = useSelect( ( select ) => {
 		return select( coreStore ).getEntityRecords( 'root', 'menu', { per_page: -1 } ) ?? [];
@@ -26,6 +38,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const isVideo = media?.mediaType === 'video';
 	const hasBackground = isVideo ? !! media?.videoUrl : !! media?.imageId;
+	const hasOverlay = !! overlayColor?.color;
 
 	return (
 		<>
@@ -60,6 +73,45 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 			</InspectorControls>
 
+			{ colorGradientSettings.hasColorsOrGradients && (
+				<InspectorControls group="color">
+					<ColorGradientSettingsDropdown
+						__experimentalIsRenderedInSidebar
+						settings={ [ {
+							colorValue: overlayColor?.color,
+							label: __( 'Overlay', 'factoria-cruzcampo-blocks' ),
+							onColorChange: setOverlayColor,
+							isShownByDefault: true,
+							resetAllFilter: () => ( {
+								overlayColor: undefined,
+								customOverlayColor: undefined,
+							} ),
+							clearable: true,
+						} ] }
+						panelId={ clientId }
+						{ ...colorGradientSettings }
+					/>
+					<ToolsPanelItem
+						hasValue={ () => dimRatio !== undefined && dimRatio !== 50 }
+						label={ __( 'Overlay opacity', 'factoria-cruzcampo-blocks' ) }
+						onDeselect={ () => setAttributes( { dimRatio: 50 } ) }
+						resetAllFilter={ () => ( { dimRatio: 50 } ) }
+						isShownByDefault
+						panelId={ clientId }
+					>
+						<RangeControl
+							label={ __( 'Overlay opacity', 'factoria-cruzcampo-blocks' ) }
+							value={ dimRatio ?? 50 }
+							onChange={ ( val ) => setAttributes( { dimRatio: val } ) }
+							min={ 0 }
+							max={ 100 }
+							step={ 10 }
+							__next40pxDefaultSize
+						/>
+					</ToolsPanelItem>
+				</InspectorControls>
+			) }
+
 			<section { ...blockProps }>
 				<div className="b-hero__bg">
 					{ isVideo && media?.videoUrl ? (
@@ -79,9 +131,18 @@ export default function Edit( { attributes, setAttributes } ) {
 							{ __( 'Selecciona un fondo desde el panel lateral', 'factoria-cruzcampo-blocks' ) }
 						</div>
 					) }
+					{ hasOverlay && (
+						<div
+							className="b-hero__overlay"
+							style={ {
+								backgroundColor: overlayColor.color,
+								opacity: ( dimRatio ?? 50 ) / 100,
+							} }
+						/>
+					) }
 				</div>
 
-				<div className="b-hero__content">
+				<div className="b-hero__content alignexpand">
 					<RichText
 						tagName="h1"
 						className="b-hero__claim"
@@ -120,3 +181,5 @@ export default function Edit( { attributes, setAttributes } ) {
 		</>
 	);
 }
+
+export default withColors( { overlayColor: 'background-color' } )( Edit );
