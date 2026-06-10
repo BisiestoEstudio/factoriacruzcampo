@@ -1,10 +1,11 @@
 .b-experiences-carrusel {
-	width: 100%;
+	margin-left: calc(var(--layout-margin) * -1);
+	margin-right: calc(var(--layout-margin) * -1);
 	position: relative;
 
 	&__swiper {
 		width: 100%;
-		overflow: hidden;
+		overflow: visible !important;
 	}
 
 	&__item {

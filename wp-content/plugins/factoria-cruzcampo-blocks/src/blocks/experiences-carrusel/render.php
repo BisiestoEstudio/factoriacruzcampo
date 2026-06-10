@@ -40,7 +40,7 @@ wp_enqueue_style( 'fcb-swiper' );
 
 <section <?php echo bis_get_block_prop( $block, true ); ?>>
 	<?php if ( $experiences->have_posts() ) : ?>
-		<div class="b-experiences-carrusel__swiper swiper">
+		<div class="b-experiences-carrusel__swiper swiper  alignwide">
 			<div class="swiper-wrapper">
 				<?php while ( $experiences->have_posts() ) : $experiences->the_post(); ?>
 					<div class="swiper-slide b-experiences-carrusel__slide">
@@ -57,9 +57,6 @@ wp_enqueue_style( 'fcb-swiper' );
 				<?php wp_reset_postdata(); ?>
 			</div>
 
-			<button class="swiper-button-prev b-experiences-carrusel__btn b-experiences-carrusel__btn--prev" aria-label="<?php esc_attr_e( 'Anterior', 'factoria-cruzcampo-blocks' ); ?>"></button>
-			<button class="swiper-button-next b-experiences-carrusel__btn b-experiences-carrusel__btn--next" aria-label="<?php esc_attr_e( 'Siguiente', 'factoria-cruzcampo-blocks' ); ?>"></button>
-			<div class="swiper-pagination b-experiences-carrusel__pagination"></div>
 		</div>
 	<?php else : ?>
 		<p class="b-experiences-carrusel__empty"><?php esc_html_e( 'No hay experiencias disponibles.', 'factoria-cruzcampo-blocks' ); ?></p>
