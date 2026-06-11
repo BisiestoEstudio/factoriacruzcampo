@@ -99,7 +99,71 @@
     },
     "typography": {
       "lineHeight": false,
-      "fontFamilies": false,
+      "fontFamilies": [
+        {
+          "fontFamily": "'Suisse Intl', sans-serif",
+          "name": "Suisse Intl",
+          "slug": "heading",
+          "fontFace": [
+            {
+              "fontFamily": "Suisse Intl",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/SuisseIntl-Regular.woff2", "file:./assets/fonts/SuisseIntl-Regular.woff"]
+            },
+            {
+              "fontFamily": "Suisse Intl",
+              "fontWeight": "500",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/SuisseIntl-Bold.woff2", "file:./assets/fonts/SuisseIntl-Bold.woff"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'Gobold', sans-serif",
+          "name": "Gobold",
+          "slug": "display",
+          "fontFace": [
+            {
+              "fontFamily": "Gobold",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/Gobold-Regular.woff2", "file:./assets/fonts/Gobold-Regular.woff"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'Playfair Display', serif",
+          "name": "Playfair Display",
+          "slug": "playfair-display",
+          "fontFace": [
+            {
+              "fontFamily": "Playfair Display",
+              "fontWeight": "500",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/playfair-display-v40-latin-500.woff2", "file:./assets/fonts/playfair-display-v40-latin-500.ttf"]
+            },
+            {
+              "fontFamily": "Playfair Display",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/playfair-display-v40-latin-600.woff2", "file:./assets/fonts/playfair-display-v40-latin-600.ttf"]
+            },
+            {
+              "fontFamily": "Playfair Display",
+              "fontWeight": "600",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/playfair-display-v40-latin-600italic.woff2", "file:./assets/fonts/playfair-display-v40-latin-600italic.ttf"]
+            }
+          ]
+        }
+      ],
       "fontWeight": false,
       "fontStyle": true,
       "customFontSize": false,
