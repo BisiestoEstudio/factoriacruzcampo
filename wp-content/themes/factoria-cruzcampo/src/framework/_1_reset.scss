@@ -91,3 +91,21 @@ img{
 /* a:has( > img){
   line-height: 0;
 } */
+
+/* Admin bar: mover de arriba a abajo */
+body:has(#wpadminbar) {
+  margin-top: -32px;
+  padding-bottom: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  body:has(#wpadminbar) {
+    margin-top: -46px;
+    padding-bottom: 46px;
+  }
+}
+
+#wpadminbar {
+  top: auto !important;
+  bottom: 0;
+}
