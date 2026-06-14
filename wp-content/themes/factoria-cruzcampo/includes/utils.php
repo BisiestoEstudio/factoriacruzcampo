@@ -8,3 +8,7 @@ function bis_debug($datos){
     print_r($datos);
     echo '</pre>';
 }
+
+add_shortcode( 'year', function() {
+    return date_i18n( 'Y' );
+} );

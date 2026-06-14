@@ -1,7 +1,76 @@
-<!-- wp:group {"tagName":"footer","layout":{"type":"constrained"}} -->
-<footer class="wp-block-group">
-	<!-- wp:paragraph {"align":"center"} -->
-	<p class="has-text-align-center">© Factoría Cruzcampo</p>
-	<!-- /wp:paragraph -->
+<!-- wp:group {"tagName":"footer","className":"footer","backgroundColor":"red","textColor":"white","layout":{"type":"constrained","contentSize":"1440px"}} -->
+<footer class="wp-block-group footer has-red-background-color has-white-color has-background has-text-color">
+
+	<!-- wp:group {"className":"footer__main","layout":{"type":"default"}} -->
+	<div class="wp-block-group footer__main">
+
+		<!-- wp:columns {"isStackedOnMobile":true,"className":"footer__columns"} -->
+		<div class="wp-block-columns footer__columns">
+
+			<!-- wp:column {"width":"40%","className":"footer__logo-area"} -->
+			<div class="wp-block-column footer__logo-area" style="flex-basis:40%">
+
+				<!-- wp:paragraph {"className":"footer__tagline"} -->
+				<p class="footer__tagline">Una iniciativa de</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:site-logo {"width":280,"className":"footer__logo","shouldSyncIcon":false} /-->
+
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column {"className":"footer__nav"} -->
+			<div class="wp-block-column footer__nav">
+
+				<!-- wp:navigation {"overlayMenu":"never","textColor":"white","layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"style":{"spacing":{"blockGap":"14px"}},"className":"footer__nav-menu"} -->
+				<!-- wp:navigation-link {"label":"NUESTRA AGENDA","url":"#","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"LA FACTORÍA","url":"#","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"EXPERIENCIAS","url":"#","isTopLevelLink":true} /-->
+				<!-- wp:navigation-link {"label":"RESTAURANTE","url":"#","isTopLevelLink":true} /-->
+				<!-- /wp:navigation -->
+
+			</div>
+			<!-- /wp:column -->
+
+			<!-- wp:column {"className":"footer__contact"} -->
+			<div class="wp-block-column footer__contact">
+
+				<!-- wp:paragraph {"className":"footer__contact-title"} -->
+				<p class="footer__contact-title">CONTACTO</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:paragraph -->
+				<p>900 10 29 83</p>
+				<!-- /wp:paragraph -->
+
+				<!-- wp:paragraph -->
+				<p>Av. de Andalucía, 1, 41007 Sevilla</p>
+				<!-- /wp:paragraph -->
+
+			</div>
+			<!-- /wp:column -->
+
+		</div>
+		<!-- /wp:columns -->
+
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"className":"footer__bottom","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group footer__bottom">
+
+		<!-- wp:shortcode -->
+		FACTORÍA CRUZCAMPO [year]
+		<!-- /wp:shortcode -->
+
+		<!-- wp:navigation {"overlayMenu":"never","textColor":"white","layout":{"type":"flex","orientation":"horizontal","justifyContent":"right","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"24px"}},"className":"footer__legal-nav"} -->
+		<!-- wp:navigation-link {"label":"AVISO LEGAL","url":"#","isTopLevelLink":true} /-->
+		<!-- wp:navigation-link {"label":"COOKIES","url":"#","isTopLevelLink":true} /-->
+		<!-- wp:navigation-link {"label":"POLÍTICA DE PRIVACIDAD","url":"#","isTopLevelLink":true} /-->
+		<!-- /wp:navigation -->
+
+	</div>
+	<!-- /wp:group -->
+
 </footer>
 <!-- /wp:group -->

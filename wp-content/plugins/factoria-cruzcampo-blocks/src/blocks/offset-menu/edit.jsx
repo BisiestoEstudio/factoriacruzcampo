@@ -17,7 +17,7 @@ import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import PaintImage from '../../utils/PaintImage';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { logoId, logoUrl, menuId, ctaButtons } = attributes;
+	const { logoId, menuId, ctaButtons } = attributes;
 	const blockProps = useBisiestoBlockProps( { className: 'alignfull' } );
 
 	const menus = useSelect( ( select ) => {
@@ -57,7 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							allowedTypes={ [ 'image' ] }
 							value={ logoId }
 							render={ ( { open } ) => (
-								<Button onClick={ open } variant="secondary" style={ { marginBottom: '8px' } }>
+								<Button onClick={ open } variant="secondary">
 									{ logoId
 										? __( 'Cambiar logo', 'factoria-cruzcampo-blocks' )
 										: __( 'Seleccionar logo', 'factoria-cruzcampo-blocks' ) }
@@ -65,13 +65,6 @@ export default function Edit( { attributes, setAttributes } ) {
 							) }
 						/>
 					</MediaUploadCheck>
-					<TextControl
-						label={ __( 'URL del logo', 'factoria-cruzcampo-blocks' ) }
-						value={ logoUrl }
-						onChange={ ( val ) => setAttributes( { logoUrl: val } ) }
-						placeholder="/"
-						__nextHasNoMarginBottom
-					/>
 				</PanelBody>
 
 				<PanelBody title={ __( 'Menú de navegación', 'factoria-cruzcampo-blocks' ) }>
@@ -127,7 +120,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<header { ...blockProps }>
 				<div className="b-offset-menu__bar">
-					<div className="b-offset-menu__logo-wrap">
+					<div className="b-offset-menu__logo">
 						{ logoId ? (
 							<PaintImage image={ logoId } className="b-offset-menu__logo-img" />
 						) : (

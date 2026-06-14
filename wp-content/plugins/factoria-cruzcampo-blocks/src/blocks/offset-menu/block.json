@@ -13,7 +13,6 @@
 	"example": {},
 	"attributes": {
 		"logoId": { "type": "number", "default": 0 },
-		"logoUrl": { "type": "string", "default": "" },
 		"menuId": { "type": "number", "default": 0 },
 		"ctaButtons": {
 			"type": "array",

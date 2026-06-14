@@ -53,13 +53,22 @@ $dur-panel: 0.45s;
 		@media (min-width: $lg) {
 			height: 36px;
 		}
-	}
 
-	&__logo-img {
-		height: 100%;
-		width: auto;
-		display: block;
-		object-fit: contain;
+		// Output de get_custom_logo() y preview del editor
+		.custom-logo-link,
+		a {
+			display: flex;
+			align-items: center;
+			height: 100%;
+		}
+
+		.custom-logo,
+		&-img {
+			height: 100%;
+			width: auto;
+			display: block;
+			object-fit: contain;
+		}
 	}
 
 	// -------------------------------------------------------

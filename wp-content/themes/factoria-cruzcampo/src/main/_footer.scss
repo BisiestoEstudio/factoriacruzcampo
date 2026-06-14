@@ -1,72 +1,141 @@
-.footer{
+.footer {
     position: relative;
     z-index: 1400;
-    a{
-        text-decoration: none !important;
 
+    a {
+        color: var(--white) !important;
+        text-decoration: none !important;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    &__main {
+        padding: var(--spacing-fluid-l) var(--layout-margin) var(--spacing-fluid-m);
+    }
+
+    &__columns {
+        gap: clamp(24px, 4vw, 60px) !important;
+        align-items: flex-start !important;
+    }
+
+    &__logo-area {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__tagline {
+        font-size: 13px !important;
+        font-weight: var(--font-weight-regular) !important;
+        letter-spacing: 0.03em;
+        opacity: 0.85;
+        margin: 0 !important;
     }
 
     &__logo {
-        width: 100%;
-        img{
+        margin: 0 !important;
+        max-width: 280px;
+
+        img {
             width: 100%;
+            height: auto;
+            display: block;
+            filter: var(--filter-to-white);
         }
+    }
+
+    &__nav {
+        padding-top: 4px;
+
+        .wp-block-navigation__container {
+            align-items: flex-start !important;
+        }
+
+        .wp-block-navigation-item__content {
+            padding: 0 !important;
+            font-size: clamp(12px, 1vw, 14px);
+            font-weight: var(--font-weight-bold) !important;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+    }
+
+    &__contact {
+        padding-top: 4px;
+
+        p {
+            margin: 0 0 10px !important;
+            font-size: clamp(13px, 1.1vw, 15px);
+
+            &:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+
+    &__contact-title {
+        font-size: clamp(12px, 1vw, 14px) !important;
+        font-weight: var(--font-weight-bold) !important;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 16px !important;
     }
 
     &__bottom {
-        padding: 40px 0;
-        border-top: 1px solid var(--neutral-50);
-        gap: 24px;
-        display: grid;
+        padding: 20px var(--layout-margin);
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
 
-
+        .wp-block-shortcode {
+            font-size: 11px;
+            font-weight: var(--font-weight-bold);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin: 0;
+            white-space: nowrap;
+        }
     }
 
-    &__legal-menu{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        row-gap: 16px;
-        justify-content: center;
+    &__legal-nav {
+        .wp-block-navigation-item__content {
+            padding: 0 !important;
+            font-size: 11px !important;
+            font-weight: var(--font-weight-bold) !important;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
     }
-
-    &__gallery {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
-
 }
 
-
-
-
-
-@media (min-width: $md ) {
-
+@media (max-width: #{$md - 1px}) {
     .footer {
+        &__main {
+            padding-bottom: var(--spacing-fluid-s);
+        }
+
+        &__columns {
+            flex-direction: column;
+        }
+
+        &__logo-area,
+        &__nav,
+        &__contact {
+            padding-top: 0;
+        }
+
         &__bottom {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px;
         }
 
-        &__logo {
-            flex-grow: 999;
-            flex-basis: 0;
+        &__legal-nav {
+            .wp-block-navigation__container {
+                flex-wrap: wrap !important;
+                justify-content: flex-start !important;
+            }
         }
-
-        &__legal-menu{
-            justify-content: flex-start;
-        }
-
-
-
-
     }
-}
-
-@media (min-width: $lg ) {
-
 }

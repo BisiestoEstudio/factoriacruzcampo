@@ -5,23 +5,20 @@ defined( 'ABSPATH' ) || exit;
 /** @var WP_Block $block */
 
 $logo_id     = (int) ( $attributes['logoId'] ?? 0 );
-$logo_url    = $attributes['logoUrl'] ?? home_url( '/' );
 $menu_id     = (int) ( $attributes['menuId'] ?? 0 );
 $cta_buttons = $attributes['ctaButtons'] ?? [];
-
-if ( empty( $logo_url ) ) {
-	$logo_url = home_url( '/' );
-}
 ?>
 
 <header <?php echo bis_get_block_prop( $block, false, [ 'class' => 'alignfull' ] ); ?>>
 
 	<div class="b-offset-menu__bar">
-		<a href="<?php echo esc_url( $logo_url ); ?>" class="b-offset-menu__logo" aria-label="<?php esc_attr_e( 'Ir a inicio', 'factoria-cruzcampo-blocks' ); ?>">
+		<div class="b-offset-menu__logo">
 			<?php if ( $logo_id ) : ?>
-				<?php echo wp_get_attachment_image( $logo_id, 'full', false, [ 'class' => 'b-offset-menu__logo-img', 'loading' => 'eager' ] ); ?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php esc_attr_e( 'Ir a inicio', 'factoria-cruzcampo-blocks' ); ?>">
+					<?php echo wp_get_attachment_image( $logo_id, 'full', false, [ 'class' => 'b-offset-menu__logo-img', 'loading' => 'eager' ] ); ?>
+				</a>
 			<?php endif; ?>
-		</a>
+		</div>
 
 		<button
 			class="b-offset-menu__toggle"
