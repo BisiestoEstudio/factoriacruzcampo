@@ -23,22 +23,32 @@ $dur-panel: 0.45s;
 		justify-content: space-between;
 		padding: 0 var(--layout-margin, 24px);
 		height: 64px;
-		background-color: var(--red);
-		color: var(--white);
+		background-color: transparent;
+		color: var(--black);
 		position: relative;
 		z-index: 2;
 
 		transform: translateY(0);
-		transition: transform $dur-bar ease;
+		visibility: visible;
+		transition: transform $dur-bar ease, background-color $dur-bar ease, color $dur-bar ease, visibility 0s 0s;
 
 		@media (min-width: $lg) {
 			height: 72px;
 		}
 	}
 
+	// Barra con fondo rojo cuando se ha hecho scroll o el panel está abierto
+	&.is-scrolled &__bar,
+	&.is-open &__bar {
+		background-color: var(--red);
+		color: var(--white);
+	}
+
 	// Ocultar barra al bajar el scroll
 	&.is-scrolled-down &__bar {
 		transform: translateY(-100%);
+		visibility: hidden;
+		transition: transform $dur-bar ease, background-color $dur-bar ease, color $dur-bar ease, visibility 0s $dur-bar;
 	}
 
 	// -------------------------------------------------------
@@ -81,7 +91,7 @@ $dur-panel: 0.45s;
 		background: none;
 		border: none;
 		cursor: pointer;
-		color: var(--white);
+		color: inherit;
 		padding: 0;
 		font-family: var(--heading-font);
 		font-weight: var(--font-weight-bold);

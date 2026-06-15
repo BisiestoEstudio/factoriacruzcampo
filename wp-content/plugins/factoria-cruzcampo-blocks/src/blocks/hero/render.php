@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 $claim               = $attributes['claim'] ?? '';
 $link                = $attributes['link'] ?? [];
-$menu_id             = (int) ( $attributes['menuId'] ?? 0 );
+$navigation_id       = (int) ( $attributes['navigationId'] ?? 0 );
 $media               = $attributes['media'] ?? [];
 $overlay_color_slug  = $attributes['overlayColor'] ?? '';
 $custom_overlay_color = $attributes['customOverlayColor'] ?? '';
@@ -57,18 +57,13 @@ if ( empty( $link['title'] ) ) {
 	<div class="b-hero__bottom alignfull">
 		<?php bis_paint_button( $link, 'large', 'b-hero__cta' ); ?>
 
-		<?php if ( $menu_id ) : ?>
-			<nav class="b-hero__nav" aria-label="<?php esc_attr_e( 'Navegación', 'factoria-cruzcampo-blocks' ); ?>">
-				<?php
-				wp_nav_menu( [
-					'menu'        => $menu_id,
-					'menu_class'  => 'b-hero__menu',
-					'container'   => false,
-					'items_wrap'  => '<ul class="%2$s">%3$s</ul>',
-					'depth'       => 1,
-				] );
-				?>
-			</nav>
+		<?php if ( $navigation_id ) : ?>
+			<?php
+			echo do_blocks( sprintf(
+				'<!-- wp:navigation {"ref":%d,"overlayMenu":"never","className":"b-hero__nav"} /-->',
+				$navigation_id
+			) );
+			?>
 		<?php endif; ?>
 	</div>
 

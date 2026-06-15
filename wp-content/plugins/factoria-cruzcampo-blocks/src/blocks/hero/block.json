@@ -18,7 +18,7 @@
 			"type": "object",
 			"default": { "url": "", "title": "", "target": "", "rel": "" }
 		},
-		"menuId": { "type": "number", "default": 0 },
+		"navigationId": { "type": "number", "default": 0 },
 		"media": {
 			"type": "object",
 			"default": { "mediaType": "image", "imageId": 0, "videoUrl": "", "posterId": 0 }

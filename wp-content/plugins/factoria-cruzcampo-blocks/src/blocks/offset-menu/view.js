@@ -6,19 +6,57 @@ addEventListener( 'DOMContentLoaded', function () {
 	const panel  = menu.querySelector( '.b-offset-menu__panel' );
 	if ( ! toggle || ! panel ) return;
 
-	// --- Scroll hide / show ---
-	let lastScrollY = window.scrollY;
-	let ticking     = false;
+	// --- Scroll hide / show / transparent-at-top ---
+	// $dur-bar en SCSS es 0.35s — el delay iguala esa duración para que
+	// el color cambie mientras la barra ya está fuera de pantalla.
+	const BAR_HIDE_THRESHOLD = 80;
+	const BAR_ANIM_MS        = 350;
+
+	let lastScrollY      = window.scrollY;
+	let ticking          = false;
+	let scrolledTimer    = null;
 
 	function onScroll() {
 		const currentY = window.scrollY;
-		if ( currentY > lastScrollY && currentY > 80 ) {
+
+		const delta = currentY - lastScrollY;
+
+		// Ocultar barra: solo cuando hay movimiento hacia abajo real (delta > 0)
+		if ( delta > 0 && currentY > BAR_HIDE_THRESHOLD ) {
 			menu.classList.add( 'is-scrolled-down' );
-		} else {
+
+			// Programar el cambio a rojo para cuando la barra ya esté oculta
+			if ( ! menu.classList.contains( 'is-scrolled' ) && ! scrolledTimer ) {
+				scrolledTimer = setTimeout( () => {
+					menu.classList.add( 'is-scrolled' );
+					scrolledTimer = null;
+				}, BAR_ANIM_MS );
+			}
+		} else if ( delta < 0 || currentY <= BAR_HIDE_THRESHOLD ) {
+			// Mostrar barra: solo cuando hay movimiento hacia arriba real (delta < 0)
+			// o hemos vuelto al top
 			menu.classList.remove( 'is-scrolled-down' );
+
+			// Cancelar si el usuario sube antes de que dispare el timer
+			if ( scrolledTimer ) {
+				clearTimeout( scrolledTimer );
+				scrolledTimer = null;
+			}
 		}
+		// delta === 0 → Lenis todavía interpolando sin avance real, no hacer nada
+
+		// Quitar el fondo rojo al volver al top
+		if ( currentY <= BAR_HIDE_THRESHOLD ) {
+			menu.classList.remove( 'is-scrolled' );
+		}
+
 		lastScrollY = currentY;
 		ticking = false;
+	}
+
+	// Estado inicial según posición de scroll al cargar
+	if ( window.scrollY > BAR_HIDE_THRESHOLD ) {
+		menu.classList.add( 'is-scrolled' );
 	}
 
 	window.addEventListener( 'scroll', () => {

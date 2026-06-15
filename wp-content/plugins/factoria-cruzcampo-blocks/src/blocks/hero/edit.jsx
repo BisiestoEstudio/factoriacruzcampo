@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { decodeEntities } from '@wordpress/html-entities';
 import {
 	InspectorControls,
 	RichText,
@@ -29,19 +30,19 @@ function buildClaimFontSize( sizeVw, minPx, maxPx ) {
 }
 
 function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayColor } ) {
-	const { claim, link, menuId, media, dimRatio, claimFontSize, claimFontSizeMin, claimFontSizeMax } = attributes;
+	const { claim, link, navigationId, media, dimRatio, claimFontSize, claimFontSizeMin, claimFontSizeMax } = attributes;
 	const blockProps = useBisiestoBlockProps( { className: 'alignfull' } );
 	const colorGradientSettings = useMultipleOriginColorsAndGradients();
 
-	const menus = useSelect( ( select ) => {
-		return select( coreStore ).getEntityRecords( 'root', 'menu', { per_page: -1 } ) ?? [];
+	const navMenus = useSelect( ( select ) => {
+		return select( coreStore ).getEntityRecords( 'postType', 'wp_navigation', { per_page: -1, status: 'publish' } ) ?? [];
 	}, [] );
 
-	const selectedMenu = menus?.find( ( m ) => m.id === menuId );
+	const selectedNav = navMenus?.find( ( n ) => n.id === navigationId );
 
-	const menuOptions = [
+	const navOptions = [
 		{ label: __( '— Sin menú —', 'factoria-cruzcampo-blocks' ), value: 0 },
-		...( menus || [] ).map( ( menu ) => ( { label: menu.name, value: menu.id } ) ),
+		...( navMenus || [] ).map( ( nav ) => ( { label: decodeEntities( nav.title?.rendered ?? nav.slug ), value: nav.id } ) ),
 	];
 
 	const isVideo = media?.mediaType === 'video';
@@ -74,9 +75,9 @@ function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayCo
 				<PanelBody title={ __( 'Menú', 'factoria-cruzcampo-blocks' ) }>
 					<SelectControl
 						label={ __( 'Seleccionar menú', 'factoria-cruzcampo-blocks' ) }
-						value={ menuId }
-						options={ menuOptions }
-						onChange={ ( val ) => setAttributes( { menuId: parseInt( val, 10 ) } ) }
+						value={ navigationId }
+						options={ navOptions }
+						onChange={ ( val ) => setAttributes( { navigationId: parseInt( val, 10 ) } ) }
 					/>
 				</PanelBody>
 				<PanelBody title={ __( 'Tipografía del claim', 'factoria-cruzcampo-blocks' ) } initialOpen={ false }>
@@ -207,10 +208,10 @@ function Edit( { attributes, setAttributes, clientId, overlayColor, setOverlayCo
 						</span>
 					) }
 					<div className="b-hero__nav-preview">
-						{ selectedMenu ? (
+						{ selectedNav ? (
 							<span className="b-hero__nav-label">
 								{ __( 'Menú:', 'factoria-cruzcampo-blocks' ) }{ ' ' }
-								<em>{ selectedMenu.name }</em>
+								<em>{ decodeEntities( selectedNav.title?.rendered ?? selectedNav.slug ) }</em>
 							</span>
 						) : (
 							<span className="b-hero__nav-empty">

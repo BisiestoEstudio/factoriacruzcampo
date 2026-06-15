@@ -5,25 +5,10 @@ class Bisiestheme_Config
 
     static function init()
     {
-        add_action('init', array(__CLASS__, 'menu_register'));
         add_action('after_setup_theme', array(__CLASS__, 'customize_bisiestheme'));
         add_filter('style_loader_tag', array(__CLASS__, 'add_rel_preload'), 10, 4);
         add_action('init', array(__CLASS__, 'remove_headlinks'));
         add_filter('upload_mimes', array(__CLASS__, 'allow_svg'));
-    }
-
-
-    /**
-     * Register menu for theme
-     */
-    static function menu_register()
-    {
-        register_nav_menus(
-            array(
-                'menu-principal'    =>  __('Main menu', 'factoria-cruzcampo'),
-                'menu-footer'       =>  __('Footer menu', 'factoria-cruzcampo')
-            )
-        );
     }
 
 
