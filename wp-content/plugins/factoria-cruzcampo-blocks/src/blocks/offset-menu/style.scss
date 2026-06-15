@@ -54,6 +54,16 @@ $dur-panel: 0.45s;
 	// -------------------------------------------------------
 	// Logo
 	// -------------------------------------------------------
+	&__logo-img {
+		filter: brightness(0);
+		transition: filter $dur-bar ease;
+	}
+
+	&.is-scrolled &__logo-img,
+	&.is-open &__logo-img {
+		filter: brightness(0) invert(1);
+	}
+
 	&__logo {
 		display: flex;
 		align-items: center;
@@ -292,4 +302,13 @@ $dur-panel: 0.45s;
 // Evitar scroll en body cuando el menú está abierto
 body.menu-is-open {
 	overflow: hidden;
+}
+
+// Versión en blanco: el setting de página invierte el color del menú en el top
+body.has-header-white .b-offset-menu:not(.is-scrolled):not(.is-open) .b-offset-menu__bar {
+	color: var(--white);
+}
+
+body.has-header-white .b-offset-menu:not(.is-scrolled):not(.is-open) .b-offset-menu__logo-img {
+	filter: brightness(0) invert(1);
 }
