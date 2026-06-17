@@ -1,4 +1,4 @@
-const lenis = new Lenis({
+window.window.lenis = new Lenis({
     duration: 1.8,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 });
@@ -12,7 +12,7 @@ let marqueeAnims    = null;
 let scrollVelocity  = 0;
 let marqueeRate     = 1;
 
-lenis.on('scroll', ({ velocity }) => {
+window.lenis.on('scroll', ({ velocity }) => {
     scrollVelocity = velocity;
 });
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // ------------------------------------
 
 function raf(time) {
-    lenis.raf(time);
+    window.lenis.raf(time);
 
     if (marqueeAnims && marqueeAnims.length) {
         const targetRate = 1 + Math.min(Math.abs(scrollVelocity) * MARQUEE_SPEED_FACTOR, MARQUEE_MAX_BOOST);

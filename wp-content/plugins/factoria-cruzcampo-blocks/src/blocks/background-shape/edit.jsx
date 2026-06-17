@@ -6,10 +6,9 @@ import {
 	__experimentalUnitControl as UnitControl,
 	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
 import { useBisiestoBlockProps } from '../../hooks/useBisiestoBlockProps';
 import MediaPicker from '../../components/MediaPicker';
+import PaintImage from '../../utils/PaintImage';
 import './editor.scss';
 
 const SIZE_UNITS = [
@@ -97,14 +96,6 @@ function OffsetControl( { label, value, onChange } ) {
 export default function Edit( { attributes, setAttributes } ) {
 	const { imageId, width, maxWidth, maxHeight, anchor, offsetX, offsetY, rotation } =
 		attributes;
-
-	const imageUrl = useSelect(
-		( select ) => {
-			if ( ! imageId ) return null;
-			return select( coreStore ).getMedia( imageId )?.source_url ?? null;
-		},
-		[ imageId ]
-	);
 
 	const blockProps = useBisiestoBlockProps( {} );
 
@@ -225,8 +216,8 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ imageUrl ? (
-					<img src={ imageUrl } alt="" />
+				{ imageId ? (
+					<PaintImage image={ imageId } />
 				) : (
 					<div className="b-background-shape__placeholder">
 						<span>

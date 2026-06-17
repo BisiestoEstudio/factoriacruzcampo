@@ -7,10 +7,10 @@
 	"category": "bisiesto",
 	"icon": { "src": "format-image", "foreground": "#7900D8" },
 	"description": "Imagen decorativa posicionada en el fondo de un section",
-	"parent": [ "bisiesto/section" ],
+	"parent": [ "bisiesto/section", "bisiesto/offset-menu" ],
 	"example": {},
 	"attributes": {
-		"imageId": { "type": "number", "default": 0 },
+		"imageId": { "type": ["number", "string"], "default": 0 },
 		"width": { "type": "string", "default": "" },
 		"maxWidth": { "type": "string", "default": "" },
 		"maxHeight": { "type": "string", "default": "" },

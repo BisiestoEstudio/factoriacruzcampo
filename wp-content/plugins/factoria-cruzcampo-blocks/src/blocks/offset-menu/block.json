@@ -12,15 +12,7 @@
 	"description": "Barra de navegación retráctil con panel offset",
 	"example": {},
 	"attributes": {
-		"logoId": { "type": "number", "default": 0 },
-		"menuId": { "type": "number", "default": 0 },
-		"ctaButtons": {
-			"type": "array",
-			"default": [
-				{ "label": "Reserva", "url": "", "target": "" },
-				{ "label": "Regala", "url": "", "target": "" }
-			]
-		}
+		"logoId": { "type": ["number", "string"], "default": 0 }
 	},
 	"supports": {
 		"html": false,

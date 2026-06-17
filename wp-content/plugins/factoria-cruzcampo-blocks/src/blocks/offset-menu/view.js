@@ -19,6 +19,13 @@ addEventListener( 'DOMContentLoaded', function () {
 	function onScroll() {
 		const currentY = window.scrollY;
 
+		// No hacer nada mientras el panel está abierto
+		if ( menu.classList.contains( 'is-open' ) ) {
+			lastScrollY = currentY;
+			ticking = false;
+			return;
+		}
+
 		const delta = currentY - lastScrollY;
 
 		// Ocultar barra: solo cuando hay movimiento hacia abajo real (delta > 0)
@@ -69,10 +76,12 @@ addEventListener( 'DOMContentLoaded', function () {
 	// --- Toggle open / close ---
 	function openMenu() {
 		menu.classList.add( 'is-open' );
+		menu.classList.remove( 'is-scrolled-down' );
 		toggle.setAttribute( 'aria-expanded', 'true' );
 		toggle.setAttribute( 'aria-label', toggle.dataset.labelClose || 'Cerrar menú' );
 		panel.setAttribute( 'aria-hidden', 'false' );
 		document.body.classList.add( 'menu-is-open' );
+		window.lenis?.stop();
 	}
 
 	function closeMenu() {
@@ -81,6 +90,7 @@ addEventListener( 'DOMContentLoaded', function () {
 		toggle.setAttribute( 'aria-label', toggle.dataset.labelOpen || 'Abrir menú' );
 		panel.setAttribute( 'aria-hidden', 'true' );
 		document.body.classList.remove( 'menu-is-open' );
+		window.lenis?.start();
 	}
 
 	toggle.dataset.labelOpen  = toggle.getAttribute( 'aria-label' ) || 'Abrir menú';

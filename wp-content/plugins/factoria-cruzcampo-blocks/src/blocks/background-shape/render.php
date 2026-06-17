@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 /** @var array $attributes */
 /** @var WP_Block|null $block */
 
-$image_id   = intval( $attributes['imageId'] ?? 0 );
+$image      = $attributes['imageId'] ?? 0;
 $width      = $attributes['width'] ?? '';
 $max_width  = $attributes['maxWidth'] ?? '';
 $max_height = $attributes['maxHeight'] ?? '';
@@ -13,12 +13,12 @@ $offset_x   = $attributes['offsetX'] ?? array( 'value' => 0, 'unit' => 'px' );
 $offset_y   = $attributes['offsetY'] ?? array( 'value' => 0, 'unit' => 'px' );
 $rotation   = intval( $attributes['rotation'] ?? 0 );
 
-if ( ! $image_id ) {
+if ( ! $image ) {
 	return;
 }
 
-$image_url = wp_get_attachment_image_url( $image_id, 'full' );
-if ( ! $image_url ) {
+// For numeric IDs, verify the attachment exists before rendering.
+if ( is_numeric( $image ) && ! wp_get_attachment_image_url( intval( $image ), 'full' ) ) {
 	return;
 }
 
@@ -79,5 +79,5 @@ if ( $max_height !== '' ) {
 $style_attr = implode( ';', $styles );
 ?>
 <div <?php echo bis_get_block_prop($block, false); ?> style="<?php echo esc_attr( $style_attr ); ?>">
-	<img src="<?php echo esc_url( $image_url ); ?>" alt="" loading="lazy">
+	<?php bis_paint_image( is_numeric( $image ) ? intval( $image ) : $image ); ?>
 </div>
