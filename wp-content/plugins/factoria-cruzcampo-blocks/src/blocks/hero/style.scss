@@ -78,14 +78,7 @@
 	}
 
 	&__menu {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: fluid(80px, 16px, 1500px, 768px);
-		row-gap: 4px;
-		list-style: none;
-		margin-right: var(--layout-margin);
-		padding: 0;
+
 
 
 		li a {
@@ -111,6 +104,35 @@
 
 		&__nav {
 			display: block;
+
+			.wp-block-navigation__container{
+				display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: fluid(80px, 16px, 1500px, 768px);
+			row-gap: 4px;
+			list-style: none;
+			margin-right: var(--layout-margin);
+			padding: 0;
+			}
+
+			.wp-block-navigation-item__label {
+				color: var(--white);
+				font-weight: var(--font-weight-bold);
+				font-size: var(--wp--preset--font-size--display-xs);
+				font-family: var(--display-font);
+				text-decoration: none;
+				text-transform: uppercase;
+				display: inline-block;
+				transition: all 0.3s ease-in-out;
+	
+				&:hover {
+					transform: rotate(-2deg);
+				}
+	
+			}
+
+
 		}
 
 

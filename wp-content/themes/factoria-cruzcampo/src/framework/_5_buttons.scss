@@ -17,10 +17,10 @@ input[type="submit"]
   font-size: 24px;
   font-weight: var(--font-weight-regular);
   text-transform: uppercase;
+  text-align: left;
   padding: 16px;
   border-radius: 0;
   text-decoration: none;
-  text-align: center;
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
   background-color: $buttons-background-color;
   color: var(--beige-bg);
@@ -107,8 +107,8 @@ input[type="submit"]{
 .btn-large,
 .wp-block-button.is-style-large .wp-element-button
 {
-  font-size: fluid(48px, 32px);
-  padding: fluid(32px, 24px) fluid(40px, 32px);
+  font-size: fluid(48px, 32px, 1200px, 900px);
+  padding: fluid(32px, 24px, 1200px, 900px) fluid(40px, 32px, 1200px, 900px);
   min-width: min(550px, 100%);
 
 }

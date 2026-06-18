@@ -190,12 +190,9 @@
         },
         {
           "slug": "display-m",
-          "size": "28px",
+          "size": "var(--display-m-size)",
           "name": "Display M",
-          "fluid": {
-            "min": "28px",
-            "max": "40px"
-          }
+          "fluid": false
         },
         {
           "slug": "display-l",

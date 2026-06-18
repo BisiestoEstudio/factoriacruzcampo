@@ -27,7 +27,7 @@ class FCC_Meta_Boxes {
 		wp_nonce_field( 'experience_save', 'experience_nonce' );
 		?>
 		<p>
-			<label for="fcc_product_id"><strong><?php esc_html_e( 'Product ID', 'factoria-cruzcampo-core' ); ?> <span style="color:red;">*</span></strong></label>
+			<label for="fcc_product_id"><strong><?php esc_html_e( 'Product ID', 'factoria-cruzcampo-core' ); ?></strong></label>
 			<input
 				type="text"
 				id="fcc_product_id"
@@ -85,19 +85,6 @@ class FCC_Meta_Boxes {
 		}
 
 		$product_id = isset( $_POST['fcc_product_id'] ) ? sanitize_text_field( wp_unslash( $_POST['fcc_product_id'] ) ) : '';
-
-		if ( empty( $product_id ) ) {
-			// Campo requerido: revertir a borrador si se intenta publicar sin él.
-			if ( 'publish' === $post->post_status ) {
-				remove_action( 'save_post_experience', array( __CLASS__, 'save_experience' ), 10 );
-				wp_update_post( array(
-					'ID'          => $post_id,
-					'post_status' => 'draft',
-				) );
-				add_action( 'save_post_experience', array( __CLASS__, 'save_experience' ), 10, 2 );
-			}
-			return;
-		}
 
 		update_post_meta( $post_id, 'product_id', $product_id );
 

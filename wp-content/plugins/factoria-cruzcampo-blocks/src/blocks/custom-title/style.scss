@@ -2,13 +2,8 @@
 	
 
 	&__title {
-		font-family: var(--display-font);
 		color: var(--red);
-		text-transform: uppercase;
 
-		&--antetitulo {
-			font-size: clamp(36px, 5.3vw, 120px);
-		}
 	}
 
 	&__antetitulo {

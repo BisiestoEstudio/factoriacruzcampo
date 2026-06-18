@@ -24,7 +24,7 @@ class FCC_CPT_Manager {
 			'public'              => true,
 			'has_archive'         => false,
 			'rewrite'             => array( 'slug' => 'experiencia' ),
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'custom-fields' ),
 			'menu_icon'           => 'dashicons-star-filled',
 			'show_in_rest'        => true,
 			'show_in_nav_menus'   => true,
