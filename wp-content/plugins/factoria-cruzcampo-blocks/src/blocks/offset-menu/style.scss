@@ -251,7 +251,7 @@ $dur-panel: 0.45s;
 	// Vista previa en el editor (no se muestra en frontend)
 	// -------------------------------------------------------
 	&__panel-preview {
-		background-color: var(--red, #d71920);
+		background-color: var(--red);
 		color: var(--white, #fcfcfc);
 
 		.b-offset-menu__panel-inner {
@@ -278,14 +278,27 @@ $dur-panel: 0.45s;
 		pointer-events: none;
 	}
 
-	.wp-block-navigation-item__label{
+	.wp-block-navigation-item__label {
 		font-family: var(--display-font);
 		text-transform: uppercase;
-		font-size: 10cqw;
+		font-size: min(8svh, 10cqw);
 		line-height: var(--display-height);
 		display: block;
 	}
 
+}
+
+@media (min-width: $md) {
+	.b-offset-menu {
+		&__panel-inner {
+			padding: 40px var(--layout-margin, 24px) var(--layout-margin, 24px);
+		}
+
+		&__columns {
+			flex-direction: column !important;
+			justify-content: space-between !important;
+		}
+	}
 }
 
 
@@ -303,6 +316,12 @@ $dur-panel: 0.45s;
 			align-items: end;
 			padding: 100px var(--layout-margin, 48px) 48px;
 		}
+
+		&__columns {
+			flex-direction: row !important;
+			justify-content: default !important;
+		}
+
 
 	}
 }

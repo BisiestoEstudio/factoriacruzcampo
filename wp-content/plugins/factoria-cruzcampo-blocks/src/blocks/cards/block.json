@@ -11,7 +11,7 @@
 	},
 	"description": "Contenedor de cards",
 	"example": {},
-	"parent": ["bisiesto/section", "bisiesto/scroll-over"],
+	"parent": ["bisiesto/section", "bisiesto/scroll-over", "bisiesto/wrapper"],
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
 		"cardType": { "type": "string", "default": "card-image" }

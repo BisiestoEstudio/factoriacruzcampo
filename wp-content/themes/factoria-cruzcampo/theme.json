@@ -189,6 +189,15 @@
           "fluid": false
         },
         {
+          "slug": "display-m",
+          "size": "28px",
+          "name": "Display M",
+          "fluid": {
+            "min": "28px",
+            "max": "40px"
+          }
+        },
+        {
           "slug": "display-l",
           "size": "var(--display-l-size)",
           "name": "Display L",
