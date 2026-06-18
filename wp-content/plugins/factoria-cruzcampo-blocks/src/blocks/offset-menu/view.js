@@ -4,20 +4,22 @@ addEventListener( 'DOMContentLoaded', function () {
 
 	const toggle = menu.querySelector( '.b-offset-menu__toggle' );
 	const panel  = menu.querySelector( '.b-offset-menu__panel' );
-	if ( ! toggle || ! panel ) return;
+	const bar    = menu.querySelector( '.b-offset-menu__bar' );
+	if ( ! toggle || ! panel || ! bar ) return;
 
-	// --- Scroll hide / show / transparent-at-top ---
-	// $dur-bar en SCSS es 0.35s — el delay iguala esa duración para que
-	// el color cambie mientras la barra ya está fuera de pantalla.
-	const BAR_HIDE_THRESHOLD = 80;
-	const BAR_ANIM_MS        = 350;
+	// $dur-bar en SCSS es 0.35s
+	const BAR_ANIM_MS = 350;
 
-	let lastScrollY      = window.scrollY;
-	let ticking          = false;
-	let scrolledTimer    = null;
+	let lastScrollY   = window.scrollY;
+	let ticking       = false;
+	let scrolledTimer = null;
+	let isRetractable = false; // true una vez que el menú ha salido de pantalla por primera vez
+
+	// --- Lógica de scroll ---
 
 	function onScroll() {
-		const currentY = window.scrollY;
+		const currentY   = window.scrollY;
+		const menuHeight = bar.offsetHeight;
 
 		// No hacer nada mientras el panel está abierto
 		if ( menu.classList.contains( 'is-open' ) ) {
@@ -28,42 +30,62 @@ addEventListener( 'DOMContentLoaded', function () {
 
 		const delta = currentY - lastScrollY;
 
-		// Ocultar barra: solo cuando hay movimiento hacia abajo real (delta > 0)
-		if ( delta > 0 && currentY > BAR_HIDE_THRESHOLD ) {
-			menu.classList.add( 'is-scrolled-down' );
+		if ( currentY <= 0 ) {
+			// De vuelta al top — reset completo
+			isRetractable = false;
+			bar.style.transition = '';
+			bar.style.transform  = '';
+			menu.classList.remove( 'is-scrolled', 'is-scrolled-down' );
+			if ( scrolledTimer ) { clearTimeout( scrolledTimer ); scrolledTimer = null; }
 
-			// Programar el cambio a rojo para cuando la barra ya esté oculta
-			if ( ! menu.classList.contains( 'is-scrolled' ) && ! scrolledTimer ) {
-				scrolledTimer = setTimeout( () => {
-					menu.classList.add( 'is-scrolled' );
-					scrolledTimer = null;
-				}, BAR_ANIM_MS );
+		} else if ( ! isRetractable ) {
+			// Fase 1: scroll natural — el menú sigue la página como si no fuera fixed
+			if ( currentY < menuHeight ) {
+				bar.style.transition = 'none';
+				bar.style.transform  = `translateY(-${ currentY }px)`;
+				menu.classList.remove( 'is-scrolled', 'is-scrolled-down' );
+			} else {
+				// El menú acaba de salir de pantalla — activar modo retráctil
+				isRetractable = true;
+				bar.style.transition = '';
+				bar.style.transform  = '';
+				menu.classList.add( 'is-scrolled-down', 'is-scrolled' );
 			}
-		} else if ( delta < 0 || currentY <= BAR_HIDE_THRESHOLD ) {
-			// Mostrar barra: solo cuando hay movimiento hacia arriba real (delta < 0)
-			// o hemos vuelto al top
-			menu.classList.remove( 'is-scrolled-down' );
 
-			// Cancelar si el usuario sube antes de que dispare el timer
-			if ( scrolledTimer ) {
-				clearTimeout( scrolledTimer );
-				scrolledTimer = null;
+		} else {
+			// Fase 2: modo retráctil
+			if ( delta > 0 ) {
+				// Bajando → ocultar barra
+				menu.classList.add( 'is-scrolled-down' );
+				if ( ! menu.classList.contains( 'is-scrolled' ) && ! scrolledTimer ) {
+					scrolledTimer = setTimeout( () => {
+						menu.classList.add( 'is-scrolled' );
+						scrolledTimer = null;
+					}, BAR_ANIM_MS );
+				}
+			} else if ( delta < 0 ) {
+				// Subiendo → mostrar barra
+				menu.classList.remove( 'is-scrolled-down' );
+				if ( scrolledTimer ) { clearTimeout( scrolledTimer ); scrolledTimer = null; }
+				menu.classList.add( 'is-scrolled' );
 			}
-		}
-		// delta === 0 → Lenis todavía interpolando sin avance real, no hacer nada
-
-		// Quitar el fondo rojo al volver al top
-		if ( currentY <= BAR_HIDE_THRESHOLD ) {
-			menu.classList.remove( 'is-scrolled' );
+			// delta === 0 → Lenis todavía interpolando sin avance real, no hacer nada
 		}
 
 		lastScrollY = currentY;
 		ticking = false;
 	}
 
-	// Estado inicial según posición de scroll al cargar
-	if ( window.scrollY > BAR_HIDE_THRESHOLD ) {
-		menu.classList.add( 'is-scrolled' );
+	// Estado inicial si la página carga con scroll > 0 (p.ej. historial del navegador)
+	if ( window.scrollY > 0 ) {
+		const initH = bar.offsetHeight;
+		if ( window.scrollY >= initH ) {
+			isRetractable = true;
+			menu.classList.add( 'is-scrolled' );
+		} else {
+			bar.style.transition = 'none';
+			bar.style.transform  = `translateY(-${ window.scrollY }px)`;
+		}
 	}
 
 	window.addEventListener( 'scroll', () => {
@@ -73,7 +95,7 @@ addEventListener( 'DOMContentLoaded', function () {
 		}
 	}, { passive: true } );
 
-	// --- Toggle open / close ---
+	// --- Toggle abrir / cerrar ---
 	function openMenu() {
 		menu.classList.add( 'is-open' );
 		menu.classList.remove( 'is-scrolled-down' );

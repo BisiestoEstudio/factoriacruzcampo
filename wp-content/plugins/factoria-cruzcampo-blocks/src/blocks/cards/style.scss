@@ -13,7 +13,18 @@
 
 		&.is-style-2-columns{
 			grid-template-columns: repeat(2, 1fr);
+			
+
+
 		}	
+
+		&.is-type-card-square{
+			max-width: min(calc(0.73 * var(--mediumsize)), 77vw) !important;
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+
 	}
 }
 
