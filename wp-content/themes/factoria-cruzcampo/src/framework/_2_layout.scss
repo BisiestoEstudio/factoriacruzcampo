@@ -12,6 +12,18 @@ body{
 
 }
 
+.wp-site-blocks{
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+
+  > main{
+    flex-grow: 1;
+  }
+}
+
+
+
 .alignright {
 	float:right;
 }
@@ -30,11 +42,6 @@ body{
   max-width: unset;
 }
 
-.alignextrawide{
-  max-width: var(--extrawidesize) !important;
-  margin-right: auto;
-  margin-left: auto;
-}
 
 .alignwide{
   max-width: var(--widesize);

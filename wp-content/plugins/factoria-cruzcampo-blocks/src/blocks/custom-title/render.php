@@ -16,7 +16,7 @@ $star_url   = FCB_PLUGIN_URL . 'assets/images/star.svg';
 
 		<div class="b-custom-title__inner b-custom-title__inner--embellecedor">
 			<?php if ( $title ) : ?>
-				<p class="b-custom-title__title"><?php echo wp_kses_post( $title ); ?></p>
+				<span class="b-custom-title__title has-display-xs-font-size"><?php echo wp_kses_post( $title ); ?></span>
 			<?php endif; ?>
 			<img class="b-custom-title__star" src="<?php echo esc_url( $star_url ); ?>" alt="" aria-hidden="true" width="16" height="16" />
 		</div>

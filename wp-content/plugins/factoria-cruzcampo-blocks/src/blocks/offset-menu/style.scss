@@ -22,12 +22,13 @@ $dur-panel: 0.45s;
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 var(--layout-margin, 24px);
-		height: 64px;
+		height: 56px;
 		background-color: transparent;
 		color: var(--black);
 		position: relative;
 		z-index: 2;
 
+		border-bottom: 2px solid currentColor;
 		transform: translateY(0);
 		visibility: visible;
 		transition: transform $dur-bar ease, background-color $dur-bar ease, color $dur-bar ease, visibility 0s 0s;
@@ -39,6 +40,11 @@ $dur-panel: 0.45s;
 		background-color: var(--red);
 		color: var(--white);
 	}
+
+	// Borde rojo cuando está scrolled pero el panel no está abierto
+/* 	&.is-scrolled:not(.is-open) &__bar {
+		border-bottom-color: var(--red);
+	} */
 
 	// Ocultar barra al bajar el scroll
 	&.is-scrolled-down &__bar {
@@ -169,11 +175,11 @@ $dur-panel: 0.45s;
 	}
 
 	&__panel-inner {
-		overflow: scroll;
+		overflow: auto;
 		display: grid;
 		grid-template-columns: 1fr;
 		width: 100%;
-		padding: fluid(80px, 40px) var(--layout-margin);
+		padding: 80px var(--layout-margin) fluid(80px, 40px);
 		gap: fluid(40px, 24px);
 	}
 
@@ -265,6 +271,9 @@ $dur-panel: 0.45s;
 
 @media (min-width: $md) {
 	.b-offset-menu {
+		&__bar {
+			height: 64px;
+		}
 		&__columns {
 			flex-direction: column !important;
 			justify-content: space-between !important;
