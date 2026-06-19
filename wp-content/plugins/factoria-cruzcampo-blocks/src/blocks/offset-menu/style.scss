@@ -169,11 +169,12 @@ $dur-panel: 0.45s;
 	}
 
 	&__panel-inner {
+		overflow: scroll;
 		display: grid;
 		grid-template-columns: 1fr;
 		width: 100%;
-		padding: 80px var(--layout-margin, 24px) var(--layout-margin, 24px);
-		gap: 40px;
+		padding: fluid(80px, 40px) var(--layout-margin);
+		gap: fluid(40px, 24px);
 	}
 
 	// -------------------------------------------------------
@@ -215,37 +216,6 @@ $dur-panel: 0.45s;
 		}
 	}
 
-	// -------------------------------------------------------
-	// Botonera CTA
-	// -------------------------------------------------------
-	&__cta {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		align-self: end;
-	}
-
-	&__cta-btn {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 20px 24px;
-		border: 1.5px solid var(--white);
-		color: var(--white);
-		text-decoration: none;
-		font-family: var(--heading-font);
-		font-weight: var(--font-weight-bold);
-		font-size: clamp(14px, 2vw, 18px);
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		transition: background-color 0.2s ease, color 0.2s ease;
-
-		&:hover,
-		&:focus-visible {
-			background-color: var(--white);
-			color: var(--red);
-		}
-	}
 
 	// -------------------------------------------------------
 	// Vista previa en el editor (no se muestra en frontend)
@@ -281,19 +251,20 @@ $dur-panel: 0.45s;
 	.wp-block-navigation-item__label {
 		font-family: var(--display-font);
 		text-transform: uppercase;
-		font-size: min(8svh, 10cqw);
+		font-size: min(14.5svh, 10cqw);
 		line-height: var(--display-height);
 		display: block;
+		line-height: 1;
+		transition: color 0.5s ease;
+		&:hover {
+			color: var(--black);
+		}
 	}
 
 }
 
 @media (min-width: $md) {
 	.b-offset-menu {
-		&__panel-inner {
-			padding: 40px var(--layout-margin, 24px) var(--layout-margin, 24px);
-		}
-
 		&__columns {
 			flex-direction: column !important;
 			justify-content: space-between !important;
@@ -314,7 +285,6 @@ $dur-panel: 0.45s;
 
 		&__panel-inner {
 			align-items: end;
-			padding: 100px var(--layout-margin, 48px) 48px;
 		}
 
 		&__columns {

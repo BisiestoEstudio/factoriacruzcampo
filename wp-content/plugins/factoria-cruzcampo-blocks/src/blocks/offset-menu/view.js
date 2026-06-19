@@ -67,7 +67,12 @@ addEventListener( 'DOMContentLoaded', function () {
 				// Subiendo → mostrar barra
 				menu.classList.remove( 'is-scrolled-down' );
 				if ( scrolledTimer ) { clearTimeout( scrolledTimer ); scrolledTimer = null; }
-				menu.classList.add( 'is-scrolled' );
+				// Quitar el fondo rojo al entrar en la zona natural (antes de llegar al top)
+				if ( currentY >= menuHeight ) {
+					menu.classList.add( 'is-scrolled' );
+				} else {
+					menu.classList.remove( 'is-scrolled' );
+				}
 			}
 			// delta === 0 → Lenis todavía interpolando sin avance real, no hacer nada
 		}
