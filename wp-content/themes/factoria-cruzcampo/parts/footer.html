@@ -1,41 +1,36 @@
-<!-- wp:group {"tagName":"footer","className":"footer","backgroundColor":"red","textColor":"white","layout":{"type":"constrained","contentSize":"1440px"}} -->
-<footer class="wp-block-group c-footer has-red-background-color has-white-color has-background has-text-color">
-
-	<!-- wp:group {"className":"footer__main","layout":{"type":"default"}} -->
-	<div class="wp-block-group footer__main">
-
-		<!-- wp:columns {"isStackedOnMobile":true,"className":"footer__columns"} -->
-		<div class="wp-block-columns footer__columns">
-
+<!-- wp:group {"tagName":"footer","className":"footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|fluid-m","bottom":"var:preset|spacing|fluid-m"},"margin":{"top":"var:preset|spacing|0","bottom":"var:preset|spacing|0"}}},"backgroundColor":"red","textColor":"white","layout":{"type":"constrained"}} -->
+<footer class="wp-block-group footer has-white-color has-red-background-color has-text-color has-background"
+	style="margin-top:var(--wp--preset--spacing--0);margin-bottom:var(--wp--preset--spacing--0);padding-top:var(--wp--preset--spacing--fluid-m);padding-bottom:var(--wp--preset--spacing--fluid-m)">
+	<!-- wp:group {"align":"wide","className":"footer__main","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group alignwide footer__main">
+		<!-- wp:columns {"align":"wide","className":"footer__columns"} -->
+		<div class="wp-block-columns alignwide footer__columns">
 			<!-- wp:column {"width":"40%","className":"footer__logo-area"} -->
 			<div class="wp-block-column footer__logo-area" style="flex-basis:40%">
-
 				<!-- wp:paragraph {"className":"footer__tagline"} -->
 				<p class="footer__tagline">Una iniciativa de</p>
 				<!-- /wp:paragraph -->
 
-				<!-- wp:site-logo {"width":280,"className":"footer__logo","shouldSyncIcon":false} /-->
-
+				<!-- wp:site-logo {"width":280,"shouldSyncIcon":false,"className":"footer__logo"} /-->
 			</div>
 			<!-- /wp:column -->
 
 			<!-- wp:column {"className":"footer__nav"} -->
 			<div class="wp-block-column footer__nav">
-
-				<!-- wp:navigation {"overlayMenu":"never","textColor":"white","layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"style":{"spacing":{"blockGap":"14px"}},"className":"footer__nav-menu"} -->
+				<!-- wp:navigation {"textColor":"white","overlayMenu":"never","className":"footer__nav-menu","style":{"spacing":{"blockGap":"24px"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"left"}} -->
 				<!-- wp:navigation-link {"label":"LINK 1","url":"#","isTopLevelLink":true} /-->
+
 				<!-- wp:navigation-link {"label":"LINK 2","url":"#","isTopLevelLink":true} /-->
+
 				<!-- wp:navigation-link {"label":"LINK 3","url":"#","isTopLevelLink":true} /-->
+
 				<!-- wp:navigation-link {"label":"Link 4","url":"#","isTopLevelLink":true} /-->
 				<!-- /wp:navigation -->
-
 			</div>
 			<!-- /wp:column -->
 
 			<!-- wp:column {"className":"footer__contact"} -->
-			<div class="wp-block-column footer__contact">
-
-				<!-- wp:paragraph {"className":"footer__contact-title"} -->
+			<div class="wp-block-column footer__contact"><!-- wp:paragraph {"className":"footer__contact-title"} -->
 				<p class="footer__contact-title">Título de la sección</p>
 				<!-- /wp:paragraph -->
 
@@ -46,31 +41,20 @@
 				<!-- wp:paragraph -->
 				<p>Texto 2</p>
 				<!-- /wp:paragraph -->
-
 			</div>
 			<!-- /wp:column -->
-
 		</div>
 		<!-- /wp:columns -->
-
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"metadata":{"name":"Footer bottom"}, "className":"footer__bottom","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group footer__bottom">
-
-		<!-- wp:paragraph -->
-		FACTORÍA CRUZCAMPO [year]
+	<!-- wp:group {"metadata":{"name":"Footer bottom"},"align":"full","className":"footer__bottom","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group alignfull footer__bottom"><!-- wp:paragraph -->
+		<p>FACTORÍA CRUZCAMPO [year]</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:navigation {"metadata":{"menu-name":"Menú legales"}, "textColor":"white","layout":{"type":"flex","orientation":"horizontal","justifyContent":"right","flexWrap":"wrap"},"style":{"spacing":{"blockGap":"24px"}},"className":"footer__legal-nav"} -->
-		<!-- wp:navigation-link {"label":"Bottom Link 1","url":"#","isTopLevelLink":true} /-->
-		<!-- wp:navigation-link {"label":"Bottom Link 2","url":"#","isTopLevelLink":true} /-->
-		<!-- wp:navigation-link {"label":"Bottom Link 3","url":"#","isTopLevelLink":true} /-->
-		<!-- /wp:navigation -->
-
+		<!-- wp:navigation {"textColor":"white","overlayMenu":"never","metadata":{"menu-name":"Menú legales"},"className":"footer__legal-nav","style":{"spacing":{"blockGap":"24px"}},"layout":{"type":"flex","orientation":"horizontal","justifyContent":"right","flexWrap":"wrap"}} /-->
 	</div>
 	<!-- /wp:group -->
-
 </footer>
 <!-- /wp:group -->
