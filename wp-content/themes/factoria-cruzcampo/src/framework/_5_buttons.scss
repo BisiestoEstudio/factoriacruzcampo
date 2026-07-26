@@ -138,6 +138,7 @@ input[type="submit"]{
   &:enabled:active{
     border-color: var(--red-dark);
     color: var(--red-dark);
+    background-color: transparent;
   }
 
   .has-red-background-color &{

@@ -16,9 +16,6 @@
 	&__title {
 		font-family: var(--display-font);
 		color: var(--red);
-		text-transform: uppercase;
-		line-height: 0.9;
-		margin: 0;
 	}
 
 	&__filters {
@@ -46,23 +43,22 @@
 		}
 	}
 
+	&__days{
+		width: 100%;
+		display: grid;
+		gap: 56px;
+	}
+
 	&__day {
 		&[hidden] {
 			display: none;
 		}
 
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-fluid-s);
+		display: grid;
+		gap: fluid(32px, 16px);
 	}
 
-	&__day-title {
-		font-family: var(--display-font);
-		color: var(--red);
-		text-transform: uppercase;
-		line-height: 1;
-		margin: 0;
-	}
+
 
 	&__grid {
 		display: grid;
@@ -75,16 +71,15 @@
 	}
 
 	&__card {
-		display: flex;
-		gap: 16px;
-		background-color: var(--beige-bg);
-		padding: 16px;
+		display: grid;
+		grid-template-columns: 142px 1fr;
+		gap: fluid(40px, 8px);
+		background-color: var(--white);
+		padding: fluid(24px, 16px);
 	}
 
 	&__card-image {
 		flex: 0 0 auto;
-		width: fluid(96px, 72px);
-		aspect-ratio: 1 / 1;
 		overflow: hidden;
 	}
 
