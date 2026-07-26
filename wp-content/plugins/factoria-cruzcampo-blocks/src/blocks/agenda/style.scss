@@ -146,4 +146,12 @@
 	&__empty {
 		opacity: 0.5;
 	}
+
+	&__load-more {
+		align-self: center;
+
+		&[hidden] {
+			display: none;
+		}
+	}
 }

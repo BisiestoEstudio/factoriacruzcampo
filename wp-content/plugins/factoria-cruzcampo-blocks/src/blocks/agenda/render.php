@@ -110,9 +110,12 @@ foreach ( $days as $date => $rows ) {
 	}
 }
 
-$title = $attributes['title'] ?? '';
+$title         = $attributes['title'] ?? '';
+$days_per_page = (int) ( $attributes['daysPerPage'] ?? 0 );
+
+$section_attrs = $days_per_page > 0 ? array( 'data-days-per-page' => $days_per_page ) : array();
 ?>
-<section <?php echo bis_get_block_prop( $block, true ); ?>>
+<section <?php echo bis_get_block_prop( $block, true, $section_attrs ); ?>>
 	<div class="b-agenda__header alignfull is-layout-constrained has-global-padding">
 <div class="b-agenda__header-inner alignmedium">
 	<?php if ( $title ) : ?>
@@ -175,6 +178,10 @@ $title = $attributes['title'] ?? '';
 
 	<?php if ( empty( $days_with_cards ) ) : ?>
 		<p class="b-agenda__empty"><?php esc_html_e( 'No hay experiencias agendadas próximamente.', 'factoria-cruzcampo-blocks' ); ?></p>
+	<?php elseif ( $days_per_page > 0 && count( $days_with_cards ) > $days_per_page ) : ?>
+		<button type="button" class="b-agenda__load-more btn btn-small">
+			<?php esc_html_e( 'Ver más', 'factoria-cruzcampo-blocks' ); ?>
+		</button>
 	<?php endif; ?>
 
 </section>

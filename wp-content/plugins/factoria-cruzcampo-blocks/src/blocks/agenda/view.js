@@ -1,33 +1,61 @@
 document.addEventListener( 'DOMContentLoaded', () => {
 	document.querySelectorAll( '.b-agenda' ).forEach( ( block ) => {
 		const filters = block.querySelectorAll( '.b-agenda__filter' );
-		const days = block.querySelectorAll( '.b-agenda__day' );
+		const days = Array.from( block.querySelectorAll( '.b-agenda__day' ) );
+		const loadMoreButton = block.querySelector( '.b-agenda__load-more' );
+		const daysPerPage = parseInt( block.dataset.daysPerPage, 10 ) || 0;
 
-		if ( ! filters.length ) {
+		if ( ! days.length ) {
 			return;
 		}
 
-		function applyFilter( month ) {
+		let activeMonth = null;
+		let revealCount = daysPerPage || Infinity;
+
+		function matchingDays() {
+			return activeMonth
+				? days.filter( ( day ) => day.dataset.month === activeMonth )
+				: days;
+		}
+
+		function render() {
+			const candidates = matchingDays();
+
 			days.forEach( ( day ) => {
-				day.hidden = !! month && day.dataset.month !== month;
+				day.hidden = true;
 			} );
+
+			candidates.slice( 0, revealCount ).forEach( ( day ) => {
+				day.hidden = false;
+			} );
+
+			if ( loadMoreButton ) {
+				loadMoreButton.hidden = candidates.length <= revealCount;
+			}
 
 			filters.forEach( ( button ) => {
 				button.setAttribute(
 					'aria-pressed',
-					button.dataset.month === month ? 'true' : 'false'
+					button.dataset.month === activeMonth ? 'true' : 'false'
 				);
 			} );
 		}
 
-		let activeMonth = null;
-		applyFilter( activeMonth );
-
 		filters.forEach( ( button ) => {
 			button.addEventListener( 'click', () => {
 				activeMonth = activeMonth === button.dataset.month ? null : button.dataset.month;
-				applyFilter( activeMonth );
+				revealCount = daysPerPage || Infinity;
+				render();
 			} );
 		} );
+
+		if ( loadMoreButton ) {
+			loadMoreButton.addEventListener( 'click', () => {
+				revealCount += daysPerPage;
+				render();
+			} );
+		}
+
+		render();
 	} );
 } );

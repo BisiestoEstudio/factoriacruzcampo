@@ -12,7 +12,8 @@
 	"description": "Listado por días de las experiencias agendadas en el calendario de CoverManager.",
 	"attributes": {
 		"anchor": { "type": "string", "default": "" },
-		"title": { "type": "string", "default": "" }
+		"title": { "type": "string", "default": "" },
+		"daysPerPage": { "type": "number", "default": 0 }
 	},
 	"supports": {
 		"html": false,
