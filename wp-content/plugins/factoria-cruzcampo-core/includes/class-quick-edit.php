@@ -17,13 +17,26 @@ class FCC_Quick_Edit {
 	}
 
 	public static function add_columns( $columns ) {
-		$columns['active_in_calendar']     = __( 'Activar en el calendario', 'factoria-cruzcampo-core' );
+		$columns['product_id']              = __( 'Product ID', 'factoria-cruzcampo-core' );
+		$columns['active_in_calendar']      = __( 'Activar en el calendario', 'factoria-cruzcampo-core' );
 		$columns['booking_engine_disabled'] = __( 'Desactivar en motor de reservas', 'factoria-cruzcampo-core' );
 
 		return $columns;
 	}
 
 	public static function render_column( $column, $post_id ) {
+		if ( 'product_id' === $column ) {
+			$value = get_post_meta( $post_id, 'product_id', true );
+
+			printf(
+				'<span class="fcc-quick-edit-value" data-field="product_id" data-value="%1$s">%2$s</span>',
+				esc_attr( $value ),
+				esc_html( $value )
+			);
+
+			return;
+		}
+
 		if ( 'active_in_calendar' !== $column && 'booking_engine_disabled' !== $column ) {
 			return;
 		}
@@ -43,8 +56,23 @@ class FCC_Quick_Edit {
 			return;
 		}
 
-		if ( 'active_in_calendar' === $column ) {
+		if ( 'product_id' === $column ) {
 			wp_nonce_field( 'fcc_quick_edit_save', 'fcc_quick_edit_nonce' );
+			?>
+			<fieldset class="inline-edit-col-right">
+				<div class="inline-edit-col">
+					<label class="alignleft">
+						<span class="title"><?php esc_html_e( 'Product ID', 'factoria-cruzcampo-core' ); ?></span>
+						<span class="input-text-wrap">
+							<input type="text" name="fcc_product_id" class="fcc-product-id" value="" />
+						</span>
+					</label>
+				</div>
+			</fieldset>
+			<?php
+		}
+
+		if ( 'active_in_calendar' === $column ) {
 			?>
 			<fieldset class="inline-edit-col-right">
 				<div class="inline-edit-col">
@@ -123,11 +151,13 @@ class FCC_Quick_Edit {
 			return;
 		}
 
+		$script_path = FCC_PLUGIN_DIR . 'assets/js/quick-edit.js';
+
 		wp_enqueue_script(
 			'fcc-quick-edit',
 			FCC_PLUGIN_URL . 'assets/js/quick-edit.js',
 			array( 'jquery', 'inline-edit-post' ),
-			FCC_VERSION,
+			file_exists( $script_path ) ? filemtime( $script_path ) : FCC_VERSION,
 			true
 		);
 	}
@@ -143,6 +173,10 @@ class FCC_Quick_Edit {
 
 			update_post_meta( $post_id, 'active_in_calendar', isset( $_REQUEST['fcc_active_in_calendar'] ) ? 1 : 0 );
 			update_post_meta( $post_id, 'booking_engine_disabled', isset( $_REQUEST['fcc_booking_engine_disabled'] ) ? 1 : 0 );
+
+			if ( isset( $_REQUEST['fcc_product_id'] ) ) {
+				update_post_meta( $post_id, 'product_id', sanitize_text_field( wp_unslash( $_REQUEST['fcc_product_id'] ) ) );
+			}
 
 			return;
 		}
