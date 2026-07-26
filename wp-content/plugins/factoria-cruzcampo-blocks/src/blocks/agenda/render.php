@@ -1,0 +1,152 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+
+/** @var array $attributes */
+/** @var WP_Block|null $block */
+
+$today    = gmdate( 'Y-m-d' );
+$end_date = gmdate( 'Y-m-d', strtotime( '+2 years', strtotime( $today ) ) );
+
+// Días con algún producto agendado, disponible o no: las fichas se muestran igualmente.
+$dates = FCC_Availability_Store::get_calendar_dates( $today, $end_date, false );
+
+bis_debug( $dates );
+
+$days        = array();
+$product_ids = array();
+
+foreach ( $dates as $date ) {
+	$rows = FCC_Availability_Store::get_day( $date );
+
+	if ( empty( $rows ) ) {
+		continue;
+	}
+
+	$days[ $date ] = $rows;
+
+	foreach ( $rows as $row ) {
+		$product_ids[] = (int) $row['product_id'];
+	}
+}
+
+$product_ids = array_unique( $product_ids );
+
+bis_debug( $product_ids );
+
+// Una única consulta para todas las experiencias activas en calendario, indexada por product_id,
+// para no repetir consultas por cada día en el que se repita la misma experiencia.
+$experiences_by_product = array();
+
+if ( ! empty( $product_ids ) ) {
+	$experience_posts = get_posts( array(
+		'post_type'      => 'experience',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'no_found_rows'  => true,
+		'meta_query'     => array(
+			array(
+				'key'   => 'active_in_calendar',
+				'value' => '1',
+			),
+		),
+	) );
+
+
+	foreach ( $experience_posts as $post ) {
+		$product_id = (int) get_post_meta( $post->ID, 'product_id', true );
+
+		if ( ! $product_id || ! in_array( $product_id, $product_ids, true ) ) {
+			continue;
+		}
+
+		$terms = get_the_terms( $post->ID, 'experience_category' );
+
+		$experiences_by_product[ $product_id ] = array(
+			'title'     => get_the_title( $post ),
+			'permalink' => get_permalink( $post ),
+			'image_id'  => get_post_thumbnail_id( $post ),
+			'tags'      => ( ! is_wp_error( $terms ) && $terms ) ? wp_list_pluck( $terms, 'name' ) : array(),
+		);
+	}
+}
+
+$day_names = array(
+	1 => 'lunes', 2 => 'martes', 3 => 'miércoles', 4 => 'jueves',
+	5 => 'viernes', 6 => 'sábado', 7 => 'domingo',
+);
+
+$month_names = array(
+	1  => 'enero',      2  => 'febrero',   3  => 'marzo',    4  => 'abril',
+	5  => 'mayo',       6  => 'junio',     7  => 'julio',     8  => 'agosto',
+	9  => 'septiembre', 10 => 'octubre',   11 => 'noviembre', 12 => 'diciembre',
+);
+
+$has_content = false;
+?>
+<section <?php echo bis_get_block_prop( $block, true ); ?>>
+
+	<?php foreach ( $days as $date => $rows ) :
+		$cards = array();
+
+		foreach ( $rows as $row ) {
+			$product_id = (int) $row['product_id'];
+
+			if ( ! isset( $experiences_by_product[ $product_id ] ) ) {
+				continue;
+			}
+
+			$cards[] = array_merge( $experiences_by_product[ $product_id ], array(
+				'hours' => $row['hours'],
+			) );
+		}
+
+		if ( empty( $cards ) ) {
+			continue;
+		}
+
+		$has_content = true;
+		$date_obj    = new DateTimeImmutable( $date );
+		$day_title   = $day_names[ (int) $date_obj->format( 'N' ) ] . ' ' . (int) $date_obj->format( 'j' ) . ' ' . $month_names[ (int) $date_obj->format( 'n' ) ];
+		?>
+		<div class="b-agenda__day">
+			<h2 class="b-agenda__day-title has-display-s-font-size"><?php echo esc_html( $day_title ); ?></h2>
+
+			<div class="b-agenda__grid">
+				<?php foreach ( $cards as $card ) : ?>
+					<div class="b-agenda__card">
+						<?php if ( $card['image_id'] ) : ?>
+							<div class="b-agenda__card-image">
+								<?php echo wp_get_attachment_image( $card['image_id'], 'medium', false, [ 'class' => 'b-agenda__card-img' ] ); ?>
+							</div>
+						<?php endif; ?>
+
+						<div class="b-agenda__card-body">
+							<?php if ( ! empty( $card['tags'] ) ) : ?>
+								<div class="b-agenda__tags">
+									<?php foreach ( $card['tags'] as $tag ) : ?>
+										<span class="b-agenda__tag"><?php echo esc_html( $tag ); ?></span>
+									<?php endforeach; ?>
+								</div>
+							<?php endif; ?>
+
+							<h3 class="b-agenda__card-title has-display-xs-font-size"><?php echo esc_html( $card['title'] ); ?></h3>
+
+							<?php if ( ! empty( $card['hours'] ) ) : ?>
+								<p class="b-agenda__card-hours"><?php echo esc_html( implode( ' · ', $card['hours'] ) ); ?></p>
+							<?php endif; ?>
+
+							<a class="b-agenda__card-link btn btn-small" href="<?php echo esc_url( $card['permalink'] ); ?>">
+								<?php esc_html_e( 'Ver info', 'factoria-cruzcampo-blocks' ); ?>
+							</a>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	<?php endforeach; ?>
+
+	<?php if ( ! $has_content ) : ?>
+		<p class="b-agenda__empty"><?php esc_html_e( 'No hay experiencias agendadas próximamente.', 'factoria-cruzcampo-blocks' ); ?></p>
+	<?php endif; ?>
+
+</section>

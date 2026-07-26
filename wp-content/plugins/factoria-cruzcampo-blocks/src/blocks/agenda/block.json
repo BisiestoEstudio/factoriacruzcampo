@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "bisiesto/agenda",
+	"version": "0.1.0",
+	"title": "Agenda de experiencias",
+	"category": "bisiesto",
+	"icon": {
+		"src": "calendar",
+		"foreground": "#7900D8"
+	},
+	"description": "Listado por días de las experiencias agendadas en el calendario de CoverManager.",
+	"attributes": {
+		"anchor": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": false,
+		"spacing": { "padding": false },
+		"color": { "background": false, "text": false }
+	},
+	"textdomain": "factoria-cruzcampo-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}
