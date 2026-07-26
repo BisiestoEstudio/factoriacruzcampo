@@ -92,7 +92,8 @@ class FCC_CoverManager {
 		}
 
 		if ( isset( $data['resp'] ) && 1 !== (int) $data['resp'] ) {
-			return new WP_Error( 'fcc_cm_api_error', $data['status'] ?? __( 'Error desconocido en CoverManager.', 'factoria-cruzcampo-core' ) );
+			$message = $data['status'] ?? $data['error'] ?? __( 'Error desconocido en CoverManager.', 'factoria-cruzcampo-core' );
+			return new WP_Error( 'fcc_cm_api_error', $message );
 		}
 
 		return $data;

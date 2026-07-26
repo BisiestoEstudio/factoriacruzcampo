@@ -4,7 +4,6 @@ defined( 'ABSPATH' ) || exit;
 class FCC_API {
 
 	const NAMESPACE = 'factoria-cruzcampo/v1';
-	const CACHE_TTL = HOUR_IN_SECONDS;
 
 	public static function register() {
 		add_action( 'rest_api_init', array( __CLASS__, 'register_routes' ) );
@@ -35,37 +34,16 @@ class FCC_API {
 		$year  = max( (int) gmdate( 'Y' ), min( $year, (int) gmdate( 'Y' ) + 2 ) );
 		$month = max( 1, min( $month, 12 ) );
 
-		$cache_key = "fcc_calendar_{$year}_{$month}";
-		$cached    = get_transient( $cache_key );
-
-		if ( false !== $cached ) {
-			return rest_ensure_response( $cached );
-		}
-
 		$date_start = sprintf( '%04d-%02d-01', $year, $month );
 		$date_end   = gmdate( 'Y-m-d', mktime( 0, 0, 0, $month + 1, 0, $year ) );
 
-		$response = FCC_CoverManager::get_availability_calendar( 1, $date_start, $date_end );
-
-		if ( is_wp_error( $response ) ) {
-			return new WP_Error(
-				'fcc_calendar_error',
-				$response->get_error_message(),
-				array( 'status' => 502 )
-			);
-		}
-
-		$dates = isset( $response['calendar'] ) && is_array( $response['calendar'] )
-			? $response['calendar']
-			: array();
+		$dates = FCC_Availability_Store::get_calendar_dates( $date_start, $date_end );
 
 		$data = array(
 			'year'  => $year,
 			'month' => $month,
-			'dates' => $dates,
+			'dates' => array_fill_keys( $dates, 1 ),
 		);
-
-		set_transient( $cache_key, $data, self::CACHE_TTL );
 
 		return rest_ensure_response( $data );
 	}
