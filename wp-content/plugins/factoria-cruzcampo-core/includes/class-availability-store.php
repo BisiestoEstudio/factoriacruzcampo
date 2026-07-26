@@ -325,6 +325,19 @@ class FCC_Availability_Store {
 	}
 
 	/**
+	 * Todos los product_id presentes en la caché (agendados en algún momento
+	 * dentro de la ventana cacheada), con independencia de si siguen disponibles.
+	 *
+	 * @return int[]
+	 */
+	public static function get_all_product_ids() {
+		global $wpdb;
+		$table_name = self::table_name();
+
+		return array_map( 'intval', $wpdb->get_col( "SELECT DISTINCT product_id FROM {$table_name}" ) );
+	}
+
+	/**
 	 * Horas a las que está agendado un producto (dentro de la ventana cacheada), sin duplicados.
 	 * Pensado para mostrarse en la ficha de la experiencia; no filtra por disponibilidad
 	 * porque representa el horario habitual del producto, no el estado de reserva del momento.

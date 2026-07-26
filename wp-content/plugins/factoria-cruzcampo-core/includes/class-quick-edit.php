@@ -7,6 +7,14 @@ defined( 'ABSPATH' ) || exit;
  */
 class FCC_Quick_Edit {
 
+	/**
+	 * Caché en memoria (una sola consulta por request) de los product_id
+	 * presentes en fcc_availability, para la columna "Agendada".
+	 *
+	 * @var array<string, true>|null
+	 */
+	private static $scheduled_product_ids = null;
+
 	public static function register() {
 		add_filter( 'manage_experience_posts_columns', array( __CLASS__, 'add_columns' ) );
 		add_action( 'manage_experience_posts_custom_column', array( __CLASS__, 'render_column' ), 10, 2 );
@@ -18,6 +26,7 @@ class FCC_Quick_Edit {
 
 	public static function add_columns( $columns ) {
 		$columns['product_id']              = __( 'Product ID', 'factoria-cruzcampo-core' );
+		$columns['scheduled']               = __( 'Actualmente agendada', 'factoria-cruzcampo-core' );
 		$columns['active_in_calendar']      = __( 'Activar en el calendario', 'factoria-cruzcampo-core' );
 		$columns['booking_engine_disabled'] = __( 'Desactivar en motor de reservas', 'factoria-cruzcampo-core' );
 
@@ -33,6 +42,18 @@ class FCC_Quick_Edit {
 				esc_attr( $value ),
 				esc_html( $value )
 			);
+
+			return;
+		}
+
+		if ( 'scheduled' === $column ) {
+			$product_id = get_post_meta( $post_id, 'product_id', true );
+
+			if ( '' !== $product_id && self::is_product_scheduled( $product_id ) ) {
+				echo '<span class="dashicons dashicons-yes-alt" style="color:#008a20"></span> ' . esc_html__( 'Sí', 'factoria-cruzcampo-core' );
+			} else {
+				echo '<span class="dashicons dashicons-marker" style="color:#a7aaad"></span> ' . esc_html__( 'No', 'factoria-cruzcampo-core' );
+			}
 
 			return;
 		}
@@ -194,5 +215,20 @@ class FCC_Quick_Edit {
 				update_post_meta( $post_id, 'booking_engine_disabled', '1' === $_REQUEST['fcc_bulk_booking_engine_disabled'] ? 1 : 0 );
 			}
 		}
+	}
+
+	/**
+	 * @param string $product_id
+	 * @return bool
+	 */
+	private static function is_product_scheduled( $product_id ) {
+		if ( null === self::$scheduled_product_ids ) {
+			self::$scheduled_product_ids = array_fill_keys(
+				array_map( 'strval', FCC_Availability_Store::get_all_product_ids() ),
+				true
+			);
+		}
+
+		return isset( self::$scheduled_product_ids[ (string) $product_id ] );
 	}
 }
