@@ -57,12 +57,22 @@ if (! empty($product_ids)) {
 		}
 
 		$terms = get_the_terms($post->ID, 'experience_category');
+		$tags  = array();
+
+		if (! is_wp_error($terms) && $terms) {
+			foreach ($terms as $term) {
+				$tags[] = array(
+					'name'  => $term->name,
+					'color' => get_term_meta($term->term_id, 'color', true),
+				);
+			}
+		}
 
 		$experiences_by_product[$product_id] = array(
 			'title'     => get_the_title($post),
 			'permalink' => get_permalink($post),
 			'image_id'  => get_post_thumbnail_id($post),
-			'tags'      => (! is_wp_error($terms) && $terms) ? wp_list_pluck($terms, 'name') : array(),
+			'tags'      => $tags,
 		);
 	}
 }
@@ -167,10 +177,14 @@ $section_attrs = $days_per_page > 0 ? array('data-days-per-page' => $days_per_pa
 						<?php endif; ?>
 
 						<div class="b-agenda__card-body">
+							<div class="b-agenda__card-info">
 							<?php if (! empty($card['tags'])) : ?>
 								<div class="b-agenda__tags">
 									<?php foreach ($card['tags'] as $tag) : ?>
-										<span class="b-agenda__tag"><?php echo esc_html($tag); ?></span>
+										<span
+											class="b-agenda__tag"
+											<?php if ($tag['color']) : ?>style="background-color: <?php echo esc_attr($tag['color']); ?>; "<?php endif; ?>
+										><?php echo esc_html($tag['name']); ?></span>
 									<?php endforeach; ?>
 								</div>
 							<?php endif; ?>
@@ -180,6 +194,7 @@ $section_attrs = $days_per_page > 0 ? array('data-days-per-page' => $days_per_pa
 							<?php if (! empty($card['hours'])) : ?>
 								<p class="b-agenda__card-hours"><?php echo esc_html(implode(' · ', $card['hours'])); ?></p>
 							<?php endif; ?>
+							</div>
 
 							<a class="b-agenda__card-link btn btn-small" href="<?php echo esc_url($card['permalink']); ?>">
 								<?php esc_html_e('Ver info', 'factoria-cruzcampo-blocks'); ?>

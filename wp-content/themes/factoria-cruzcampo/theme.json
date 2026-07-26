@@ -117,7 +117,7 @@
               "fontWeight": "500",
               "fontStyle": "normal",
               "fontDisplay": "swap",
-              "src": ["file:./assets/fonts/SuisseIntl-Bold.woff2", "file:./assets/fonts/SuisseIntl-Bold.woff"]
+              "src": ["file:./assets/fonts/SuisseIntl-Medium.woff"]
             }
           ]
         },
