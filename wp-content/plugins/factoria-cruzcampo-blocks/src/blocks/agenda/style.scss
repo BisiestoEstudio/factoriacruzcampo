@@ -3,7 +3,54 @@
 	flex-direction: column;
 	gap: var(--spacing-fluid-l);
 
+	&__header {
+		background-color: var(--white);
+		padding: var(--wp--preset--spacing--fluid-menu) 0 fluid(32px, 16px);
+	}
+
+	&__header-inner {
+		display: grid;
+		gap:fluid(24px, 16px);
+	}
+
+	&__title {
+		font-family: var(--display-font);
+		color: var(--red);
+		text-transform: uppercase;
+		line-height: 0.9;
+		margin: 0;
+	}
+
+	&__filters {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	&__filter {
+		text-transform: uppercase;
+		border: 2px solid var(--black);
+		padding: fluid(24px, 16px);
+		cursor: pointer;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+		&:hover {
+			background-color: var(--black);
+			color: var(--white);
+		}
+
+		&[aria-pressed="true"] {
+			background-color: var(--black);
+			border-color: var(--black);
+			color: var(--white);
+		}
+	}
+
 	&__day {
+		&[hidden] {
+			display: none;
+		}
+
 		display: flex;
 		flex-direction: column;
 		gap: var(--spacing-fluid-s);
@@ -72,8 +119,8 @@
 		font-size: 12px;
 		text-transform: uppercase;
 		letter-spacing: 0.03em;
-		color: var(--white);
-		background-color: var(--red);
+		color: var(--red);
+		background-color: var(--red-10);
 		padding: 2px 8px;
 	}
 

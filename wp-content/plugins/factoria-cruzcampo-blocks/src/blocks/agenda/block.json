@@ -11,7 +11,8 @@
 	},
 	"description": "Listado por días de las experiencias agendadas en el calendario de CoverManager.",
 	"attributes": {
-		"anchor": { "type": "string", "default": "" }
+		"anchor": { "type": "string", "default": "" },
+		"title": { "type": "string", "default": "" }
 	},
 	"supports": {
 		"html": false,
@@ -24,5 +25,6 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"render": "file:./render.php",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

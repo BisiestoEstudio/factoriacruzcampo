@@ -10,8 +10,6 @@ $end_date = gmdate( 'Y-m-d', strtotime( '+2 years', strtotime( $today ) ) );
 // Días con algún producto agendado, disponible o no: las fichas se muestran igualmente.
 $dates = FCC_Availability_Store::get_calendar_dates( $today, $end_date, false );
 
-bis_debug( $dates );
-
 $days        = array();
 $product_ids = array();
 
@@ -31,7 +29,6 @@ foreach ( $dates as $date ) {
 
 $product_ids = array_unique( $product_ids );
 
-bis_debug( $product_ids );
 
 // Una única consulta para todas las experiencias activas en calendario, indexada por product_id,
 // para no repetir consultas por cada día en el que se repita la misma experiencia.
@@ -81,34 +78,65 @@ $month_names = array(
 	9  => 'septiembre', 10 => 'octubre',   11 => 'noviembre', 12 => 'diciembre',
 );
 
-$has_content = false;
-?>
-<section <?php echo bis_get_block_prop( $block, true ); ?>>
+// Días que finalmente tienen alguna ficha que mostrar, y meses presentes entre esos días (para los chips de filtro).
+$days_with_cards = array();
+$months          = array();
 
-	<?php foreach ( $days as $date => $rows ) :
-		$cards = array();
+foreach ( $days as $date => $rows ) {
+	$cards = array();
 
-		foreach ( $rows as $row ) {
-			$product_id = (int) $row['product_id'];
+	foreach ( $rows as $row ) {
+		$product_id = (int) $row['product_id'];
 
-			if ( ! isset( $experiences_by_product[ $product_id ] ) ) {
-				continue;
-			}
-
-			$cards[] = array_merge( $experiences_by_product[ $product_id ], array(
-				'hours' => $row['hours'],
-			) );
-		}
-
-		if ( empty( $cards ) ) {
+		if ( ! isset( $experiences_by_product[ $product_id ] ) ) {
 			continue;
 		}
 
-		$has_content = true;
-		$date_obj    = new DateTimeImmutable( $date );
-		$day_title   = $day_names[ (int) $date_obj->format( 'N' ) ] . ' ' . (int) $date_obj->format( 'j' ) . ' ' . $month_names[ (int) $date_obj->format( 'n' ) ];
+		$cards[] = array_merge( $experiences_by_product[ $product_id ], array(
+			'hours' => $row['hours'],
+		) );
+	}
+
+	if ( empty( $cards ) ) {
+		continue;
+	}
+
+	$days_with_cards[ $date ] = $cards;
+
+	$year_month = substr( $date, 0, 7 );
+
+	if ( ! isset( $months[ $year_month ] ) ) {
+		$months[ $year_month ] = $month_names[ (int) substr( $date, 5, 2 ) ];
+	}
+}
+
+$title = $attributes['title'] ?? '';
+?>
+<section <?php echo bis_get_block_prop( $block, true ); ?>>
+	<div class="b-agenda__header alignfull is-layout-constrained has-global-padding">
+<div class="b-agenda__header-inner alignmedium">
+	<?php if ( $title ) : ?>
+		<h2 class="b-agenda__title has-display-l-font-size"><?php echo wp_kses_post( $title ); ?></h2>
+	<?php endif; ?>
+
+	<?php if ( ! empty( $months ) ) : ?>
+		<div class="b-agenda__filters">
+			<?php foreach ( $months as $year_month => $label ) : ?>
+				<button type="button" class="b-agenda__filter has-base-font-size" data-month="<?php echo esc_attr( $year_month ); ?>" aria-pressed="false">
+					<?php echo esc_html( $label ); ?>
+				</button>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+	</div>
+	</div>
+
+	<?php foreach ( $days_with_cards as $date => $cards ) :
+		$year_month = substr( $date, 0, 7 );
+		$date_obj   = new DateTimeImmutable( $date );
+		$day_title  = $day_names[ (int) $date_obj->format( 'N' ) ] . ' ' . (int) $date_obj->format( 'j' ) . ' ' . $month_names[ (int) $date_obj->format( 'n' ) ];
 		?>
-		<div class="b-agenda__day">
+		<div class="b-agenda__day" data-month="<?php echo esc_attr( $year_month ); ?>">
 			<h2 class="b-agenda__day-title has-display-s-font-size"><?php echo esc_html( $day_title ); ?></h2>
 
 			<div class="b-agenda__grid">
@@ -145,7 +173,7 @@ $has_content = false;
 		</div>
 	<?php endforeach; ?>
 
-	<?php if ( ! $has_content ) : ?>
+	<?php if ( empty( $days_with_cards ) ) : ?>
 		<p class="b-agenda__empty"><?php esc_html_e( 'No hay experiencias agendadas próximamente.', 'factoria-cruzcampo-blocks' ); ?></p>
 	<?php endif; ?>
 
