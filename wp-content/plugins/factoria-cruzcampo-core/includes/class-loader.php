@@ -14,6 +14,7 @@ class FCC_Loader {
 		require_once FCC_PLUGIN_DIR . 'includes/class-availability-store.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-debug.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-api.php';
+		require_once FCC_PLUGIN_DIR . 'includes/class-admin-covermanager.php';
 
 		add_action( 'init', array( 'FCC_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'FCC_Taxonomy_Manager', 'register' ) );
@@ -25,6 +26,7 @@ class FCC_Loader {
 		add_action( FCC_Availability_Store::SYNC_HOOK, array( 'FCC_Availability_Store', 'sync' ) );
 		FCC_Debug::init();
 		FCC_API::register();
+		FCC_Admin_CoverManager::register();
 	}
 
 	/**
