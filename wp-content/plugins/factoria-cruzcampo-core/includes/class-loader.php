@@ -9,6 +9,7 @@ class FCC_Loader {
 		require_once FCC_PLUGIN_DIR . 'includes/class-cpt-manager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-taxonomy-manager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-meta-boxes.php';
+		require_once FCC_PLUGIN_DIR . 'includes/class-quick-edit.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-covermanager.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-availability-store.php';
 		require_once FCC_PLUGIN_DIR . 'includes/class-debug.php';
@@ -17,6 +18,7 @@ class FCC_Loader {
 		add_action( 'init', array( 'FCC_CPT_Manager', 'register' ) );
 		add_action( 'init', array( 'FCC_Taxonomy_Manager', 'register' ) );
 		add_action( 'init', array( 'FCC_Meta_Boxes', 'register' ) );
+		add_action( 'init', array( 'FCC_Quick_Edit', 'register' ) );
 		add_action( 'init', array( 'FCC_Availability_Store', 'maybe_create_table' ) );
 		add_action( 'init', array( __CLASS__, 'maybe_schedule_sync' ) );
 		add_filter( 'cron_schedules', array( __CLASS__, 'add_cron_interval' ) );

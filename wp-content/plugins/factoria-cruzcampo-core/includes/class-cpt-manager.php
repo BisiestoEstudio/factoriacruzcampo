@@ -53,5 +53,19 @@ class FCC_CPT_Manager {
 			'single'       => true,
 			'show_in_rest' => true,
 		) );
+
+		register_post_meta( 'experience', 'active_in_calendar', array(
+			'type'         => 'boolean',
+			'single'       => true,
+			'show_in_rest' => true,
+			'default'      => false,
+		) );
+
+		register_post_meta( 'experience', 'booking_engine_disabled', array(
+			'type'         => 'boolean',
+			'single'       => true,
+			'show_in_rest' => true,
+			'default'      => false,
+		) );
 	}
 }
