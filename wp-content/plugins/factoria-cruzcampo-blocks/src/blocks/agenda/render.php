@@ -68,11 +68,15 @@ if (! empty($product_ids)) {
 			}
 		}
 
+		// Horas propias de la experiencia; si no las tiene, no se muestran (no las de la tabla de disponibilidad).
+		$horas = get_post_meta($post->ID, 'horas', true);
+
 		$experiences_by_product[$product_id] = array(
 			'title'     => get_the_title($post),
 			'permalink' => get_permalink($post),
 			'image_id'  => get_post_thumbnail_id($post),
 			'tags'      => $tags,
+			'hours'     => is_array($horas) ? $horas : array(),
 		);
 	}
 }
@@ -116,9 +120,7 @@ foreach ($days as $date => $rows) {
 			continue;
 		}
 
-		$cards[] = array_merge($experiences_by_product[$product_id], array(
-			'hours' => $row['hours'],
-		));
+		$cards[] = $experiences_by_product[$product_id];
 	}
 
 	if (empty($cards)) {

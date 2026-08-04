@@ -107,8 +107,8 @@ class FCC_API {
 
 	/**
 	 * Experiencias agendadas y con hueco un día concreto, con los datos que necesita
-	 * la card: título e imagen (de la experiencia), horas (de FCC_Availability_Store)
-	 * y precio (meta "precio" de la experiencia, no el amount_total de CoverManager).
+	 * la card: título e imagen (de la experiencia), horas (meta "horas" de la experiencia
+	 * si está rellena; si no, las de FCC_Availability_Store) y precio (meta "precio").
 	 */
 	public static function get_day( WP_REST_Request $request ) {
 		$date       = $request->get_param( 'date' );
@@ -137,9 +137,9 @@ class FCC_API {
 				continue;
 			}
 
-			$post  = $experiences[ $pid ];
+			$post     = $experiences[ $pid ];
 			$thumb_id = get_post_thumbnail_id( $post );
-			$euros = (float) get_post_meta( $post->ID, 'precio', true );
+			$euros    = (float) get_post_meta( $post->ID, 'precio', true );
 
 			// Sin coste: no se muestra precio, no un "0€".
 			$price = '';
@@ -150,11 +150,15 @@ class FCC_API {
 				$price .= '€';
 			}
 
+			// Horas propias de la experiencia; si no las tiene, no se muestran (no las de la tabla).
+			$experience_hours = get_post_meta( $post->ID, 'horas', true );
+			$hours            = ( ! empty( $experience_hours ) && is_array( $experience_hours ) ) ? implode( ' · ', $experience_hours ) : '';
+
 			$cards[] = array(
 				'title'     => get_the_title( $post ),
 				'permalink' => get_permalink( $post ),
 				'imageHtml' => $thumb_id ? wp_get_attachment_image( $thumb_id, 'medium', false ) : '',
-				'hours'     => implode( ' · ', $row['hours'] ),
+				'hours'     => $hours,
 				'price'     => $price,
 			);
 		}

@@ -79,11 +79,14 @@ function renderDayCards( cardsEl, cards ) {
 		titleEl.className = 'b-calendario-reserva__card-title has-display-xs-font-size';
 		titleEl.textContent = card.title;
 
-		const hoursEl = document.createElement( 'p' );
-		hoursEl.className = 'b-calendario-reserva__card-hours u_bold';
-		hoursEl.textContent = card.hours;
+		bodyEl.appendChild( titleEl );
 
-		bodyEl.append( titleEl, hoursEl );
+		if ( card.hours ) {
+			const hoursEl = document.createElement( 'p' );
+			hoursEl.className = 'b-calendario-reserva__card-hours u_bold';
+			hoursEl.textContent = card.hours;
+			bodyEl.appendChild( hoursEl );
+		}
 
 		if ( card.price ) {
 			const priceEl = document.createElement( 'p' );
