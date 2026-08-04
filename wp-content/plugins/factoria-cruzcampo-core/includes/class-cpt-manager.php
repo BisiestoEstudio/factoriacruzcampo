@@ -67,6 +67,20 @@ class FCC_CPT_Manager {
 			'show_in_rest' => true,
 			'default'      => false,
 		) );
+
+		// Horas a las que está programada la actividad (ej. ["11:00", "14:00", "20:00"]).
+		// Se guarda como array plano; WP lo serializa/deserializa automáticamente en wp_postmeta.
+		register_post_meta( 'experience', 'horas', array(
+			'type'         => 'array',
+			'single'       => true,
+			'show_in_rest' => array(
+				'schema' => array(
+					'type'  => 'array',
+					'items' => array( 'type' => 'string' ),
+				),
+			),
+			'default'      => array(),
+		) );
 	}
 
 	/**

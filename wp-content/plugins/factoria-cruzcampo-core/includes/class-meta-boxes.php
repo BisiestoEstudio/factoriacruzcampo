@@ -6,6 +6,29 @@ class FCC_Meta_Boxes {
 	public static function register() {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'add' ) );
 		add_action( 'save_post_experience', array( __CLASS__, 'save_experience' ), 10, 2 );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_script' ) );
+	}
+
+	public static function enqueue_script( $hook ) {
+		if ( 'post.php' !== $hook && 'post-new.php' !== $hook ) {
+			return;
+		}
+
+		$screen = get_current_screen();
+
+		if ( ! $screen || 'experience' !== $screen->post_type ) {
+			return;
+		}
+
+		$script_path = FCC_PLUGIN_DIR . 'assets/js/experience-horas.js';
+
+		wp_enqueue_script(
+			'fcc-experience-horas',
+			FCC_PLUGIN_URL . 'assets/js/experience-horas.js',
+			array(),
+			file_exists( $script_path ) ? filemtime( $script_path ) : FCC_VERSION,
+			true
+		);
 	}
 
 	public static function add() {
@@ -24,6 +47,8 @@ class FCC_Meta_Boxes {
 		$precio     = get_post_meta( $post->ID, 'precio', true );
 		$dias       = get_post_meta( $post->ID, 'dias', true );
 		$duracion   = get_post_meta( $post->ID, 'duracion', true );
+		$horas      = get_post_meta( $post->ID, 'horas', true );
+		$horas      = is_array( $horas ) ? $horas : array();
 		wp_nonce_field( 'experience_save', 'experience_nonce' );
 		?>
 		<p>
@@ -68,6 +93,20 @@ class FCC_Meta_Boxes {
 				style="width:100%;margin-top:4px;"
 			/>
 		</p>
+		<p>
+			<strong><?php esc_html_e( 'Horas programadas', 'factoria-cruzcampo-core' ); ?></strong>
+			<div class="fcc-horas-rows" data-fcc-horas-rows style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+				<?php foreach ( $horas as $hora ) : ?>
+					<div class="fcc-horas-row" style="display:flex;gap:6px;align-items:center;">
+						<input type="time" name="fcc_horas[]" value="<?php echo esc_attr( $hora ); ?>" style="flex:1;" />
+						<button type="button" class="button fcc-horas-remove" aria-label="<?php esc_attr_e( 'Eliminar hora', 'factoria-cruzcampo-core' ); ?>">&times;</button>
+					</div>
+				<?php endforeach; ?>
+			</div>
+			<button type="button" class="button fcc-horas-add" data-fcc-horas-add style="margin-top:6px;">
+				<?php esc_html_e( '+ Añadir hora', 'factoria-cruzcampo-core' ); ?>
+			</button>
+		</p>
 		<?php
 	}
 
@@ -96,5 +135,22 @@ class FCC_Meta_Boxes {
 
 		$duracion = isset( $_POST['fcc_duracion'] ) ? sanitize_text_field( wp_unslash( $_POST['fcc_duracion'] ) ) : '';
 		update_post_meta( $post_id, 'duracion', $duracion );
+
+		$horas = array();
+
+		if ( isset( $_POST['fcc_horas'] ) && is_array( $_POST['fcc_horas'] ) ) {
+			foreach ( wp_unslash( $_POST['fcc_horas'] ) as $hora ) {
+				$hora = sanitize_text_field( $hora );
+
+				if ( preg_match( '/^([01]\d|2[0-3]):[0-5]\d$/', $hora ) ) {
+					$horas[] = $hora;
+				}
+			}
+
+			$horas = array_values( array_unique( $horas ) );
+			sort( $horas );
+		}
+
+		update_post_meta( $post_id, 'horas', $horas );
 	}
 }
