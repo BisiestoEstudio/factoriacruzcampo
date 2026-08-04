@@ -68,4 +68,54 @@ class FCC_CPT_Manager {
 			'default'      => false,
 		) );
 	}
+
+	/**
+	 * Experiencias publicadas cuyo product_id está en la lista dada, indexadas por product_id.
+	 * Si $only_active_in_calendar es true, solo cuentan las marcadas para aparecer en el
+	 * calendario/agenda general (no aplica cuando ya se pide una experiencia concreta).
+	 *
+	 * @param int[] $product_ids
+	 * @param bool  $only_active_in_calendar
+	 * @return WP_Post[] Indexado por product_id.
+	 */
+	public static function get_experiences_by_product_ids( array $product_ids, $only_active_in_calendar = true ) {
+		if ( empty( $product_ids ) ) {
+			return array();
+		}
+
+		$meta_query = array(
+			array(
+				'key'     => 'product_id',
+				'value'   => $product_ids,
+				'compare' => 'IN',
+			),
+		);
+
+		if ( $only_active_in_calendar ) {
+			$meta_query[] = array(
+				'key'   => 'active_in_calendar',
+				'value' => '1',
+			);
+		}
+
+		$posts = get_posts( array(
+			'post_type'      => 'experience',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'no_found_rows'  => true,
+			'meta_query'     => $meta_query,
+		) );
+
+		$by_product = array();
+
+		foreach ( $posts as $post ) {
+			$product_id = (int) get_post_meta( $post->ID, 'product_id', true );
+
+			if ( $product_id ) {
+				$by_product[ $product_id ] = $post;
+			}
+		}
+
+		return $by_product;
+	}
 }

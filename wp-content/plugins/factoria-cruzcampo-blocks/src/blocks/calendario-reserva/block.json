@@ -11,6 +11,7 @@
   "attributes": {
     "anchor": { "type": "string", "default": "" }
   },
+  "usesContext": [ "postId", "postType" ],
   "supports": {
     "html": false,
     "anchor": true,

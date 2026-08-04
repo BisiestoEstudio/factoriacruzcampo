@@ -279,6 +279,80 @@ class FCC_Availability_Store {
 	}
 
 	/**
+	 * Primera y última fecha con disponibilidad real (availability = 1), para
+	 * saber entre qué meses tiene sentido dejar navegar el calendario. Sin
+	 * $product_id, considera cualquier producto (calendario general); con
+	 * $product_id, solo ese producto (calendario de una experiencia).
+	 *
+	 * @param int|null $product_id Restringe a un producto si se indica.
+	 * @return array{min: string|null, max: string|null} 'YYYY-MM-DD' o null si no hay ninguna fecha disponible.
+	 */
+	public static function get_availability_bounds( $product_id = null ) {
+		global $wpdb;
+		$table_name = self::table_name();
+
+		if ( $product_id ) {
+			$row = $wpdb->get_row( $wpdb->prepare(
+				"SELECT MIN(date) AS min_date, MAX(date) AS max_date FROM {$table_name}
+				WHERE product_id = %d AND availability = 1",
+				$product_id
+			), ARRAY_A );
+		} else {
+			$row = $wpdb->get_row(
+				"SELECT MIN(date) AS min_date, MAX(date) AS max_date FROM {$table_name} WHERE availability = 1",
+				ARRAY_A
+			);
+		}
+
+		return array(
+			'min' => $row['min_date'] ?? null,
+			'max' => $row['max_date'] ?? null,
+		);
+	}
+
+	/**
+	 * Mapa fecha => 1|0 para pintar un calendario: 1 disponible, 0 agotado.
+	 * Sin $product_id, cuenta cualquier producto agendado ese día (calendario
+	 * general); con $product_id, restringe a ese producto (calendario de una
+	 * experiencia concreta). Las fechas sin ninguna fila no aparecen en el mapa.
+	 *
+	 * @param string   $start      'YYYY-MM-DD'.
+	 * @param string   $end        'YYYY-MM-DD'.
+	 * @param int|null $product_id Restringe a un producto si se indica.
+	 * @return array<string,int> Fecha => 1 (disponible) | 0 (agotado).
+	 */
+	public static function get_calendar_state( $start, $end, $product_id = null ) {
+		global $wpdb;
+		$table_name = self::table_name();
+
+		if ( $product_id ) {
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT date, MAX(availability) AS available FROM {$table_name}
+				WHERE product_id = %d AND date BETWEEN %s AND %s
+				GROUP BY date ORDER BY date",
+				$product_id,
+				$start,
+				$end
+			), ARRAY_A );
+		} else {
+			$rows = $wpdb->get_results( $wpdb->prepare(
+				"SELECT date, MAX(availability) AS available FROM {$table_name}
+				WHERE date BETWEEN %s AND %s
+				GROUP BY date ORDER BY date",
+				$start,
+				$end
+			), ARRAY_A );
+		}
+
+		$map = array();
+		foreach ( $rows as $row ) {
+			$map[ $row['date'] ] = (int) $row['available'];
+		}
+
+		return $map;
+	}
+
+	/**
 	 * Productos agendados en un día concreto, con sus horas y disponibilidad.
 	 *
 	 * @param string $date 'YYYY-MM-DD'.
