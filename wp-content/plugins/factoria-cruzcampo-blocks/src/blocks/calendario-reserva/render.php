@@ -147,6 +147,106 @@ $render_grid = function( $year, $month, $dates, $today ) {
 		</div>
 	</div>
 
+	<div class="b-calendario-reserva__form-step alignwide" hidden>
+		<div class="b-calendario-reserva__form-summary">
+			<button type="button" class="b-calendario-reserva__form-back">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				<?php esc_html_e( 'Volver', 'factoria-cruzcampo-blocks' ); ?>
+			</button>
+
+			<h2 class="b-calendario-reserva__form-title has-display-s-font-size"></h2>
+
+			<ul class="b-calendario-reserva__form-meta">
+				<li class="b-calendario-reserva__form-meta-item">
+					<img src="<?php echo esc_url( FCB_PLUGIN_URL . 'assets/images/booking-dolar.svg' ); ?>" width="20" height="20" alt="" />
+					<span data-field="price"></span>
+				</li>
+				<li class="b-calendario-reserva__form-meta-item">
+					<img src="<?php echo esc_url( FCB_PLUGIN_URL . 'assets/images/booking-clock.svg' ); ?>" width="20" height="20" alt="" />
+					<span data-field="hour"></span>
+				</li>
+				<li class="b-calendario-reserva__form-meta-item">
+					<img src="<?php echo esc_url( FCB_PLUGIN_URL . 'assets/images/booking-smile.svg' ); ?>" width="20" height="20" alt="" />
+					<span data-field="people"></span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="b-calendario-reserva__form-fields">
+			<h2 class="b-calendario-reserva__form-heading has-display-s-font-size">
+				<?php esc_html_e( 'Datos de reserva', 'factoria-cruzcampo-blocks' ); ?>
+			</h2>
+
+			<form class="b-calendario-reserva__form" novalidate>
+				<div class="b-calendario-reserva__form-row">
+					<div class="b-calendario-reserva__form-field">
+						<label for="fcb-nombre"><?php esc_html_e( 'Nombre', 'factoria-cruzcampo-blocks' ); ?></label>
+						<input type="text" id="fcb-nombre" name="nombre" autocomplete="given-name" required />
+					</div>
+					<div class="b-calendario-reserva__form-field">
+						<label for="fcb-apellidos"><?php esc_html_e( 'Apellidos', 'factoria-cruzcampo-blocks' ); ?></label>
+						<input type="text" id="fcb-apellidos" name="apellidos" autocomplete="family-name" required />
+					</div>
+				</div>
+
+				<div class="b-calendario-reserva__form-field">
+					<label for="fcb-email"><?php esc_html_e( 'Email', 'factoria-cruzcampo-blocks' ); ?></label>
+					<input type="email" id="fcb-email" name="email" autocomplete="email" required />
+				</div>
+
+				<div class="b-calendario-reserva__form-field">
+					<label for="fcb-telefono"><?php esc_html_e( 'Teléfono', 'factoria-cruzcampo-blocks' ); ?></label>
+					<div class="b-calendario-reserva__form-phone">
+						<input type="tel" class="b-calendario-reserva__form-prefix" name="prefijo" value="+34" aria-label="<?php esc_attr_e( 'Prefijo', 'factoria-cruzcampo-blocks' ); ?>" />
+						<input type="tel" id="fcb-telefono" name="telefono" autocomplete="tel-national" required />
+					</div>
+				</div>
+
+				<div class="b-calendario-reserva__form-field">
+					<label for="fcb-nacimiento"><?php esc_html_e( 'Fecha de nacimiento', 'factoria-cruzcampo-blocks' ); ?></label>
+					<input type="date" id="fcb-nacimiento" name="fecha_nacimiento" required />
+				</div>
+
+				<fieldset class="b-calendario-reserva__form-field">
+					<legend><?php esc_html_e( '¿Tiene algún comensal alguna intolerancia o alergia?', 'factoria-cruzcampo-blocks' ); ?></legend>
+					<label class="b-calendario-reserva__form-radio">
+						<input type="radio" name="alergia" value="si" />
+						<?php esc_html_e( 'Sí', 'factoria-cruzcampo-blocks' ); ?>
+					</label>
+					<label class="b-calendario-reserva__form-radio">
+						<input type="radio" name="alergia" value="no" />
+						<?php esc_html_e( 'No', 'factoria-cruzcampo-blocks' ); ?>
+					</label>
+				</fieldset>
+
+				<div class="b-calendario-reserva__form-field b-calendario-reserva__form-allergy-detail" hidden>
+					<label for="fcb-alergia-detalle"><?php esc_html_e( 'Especifica la intolerancia o alergia', 'factoria-cruzcampo-blocks' ); ?></label>
+					<textarea id="fcb-alergia-detalle" name="alergia_detalle" rows="3"></textarea>
+				</div>
+
+				<label class="b-calendario-reserva__form-check">
+					<input type="checkbox" name="mayor_edad" required />
+					<span><?php esc_html_e( 'Confirmo que soy mayor de edad', 'factoria-cruzcampo-blocks' ); ?></span>
+				</label>
+
+				<label class="b-calendario-reserva__form-check">
+					<input type="checkbox" name="consentimiento_comercial" />
+					<span><?php esc_html_e( 'Consiento la recepción de comunicaciones comerciales por e-mail y/o SMS', 'factoria-cruzcampo-blocks' ); ?></span>
+				</label>
+
+				<button type="submit" class="btn b-calendario-reserva__form-submit">
+					<?php esc_html_e( 'Reserva ahora', 'factoria-cruzcampo-blocks' ); ?>
+				</button>
+			</form>
+
+			<p class="b-calendario-reserva__form-disclaimer">
+				<?php esc_html_e( '*Las experiencias de Factoría Cruzcampo están reservadas a mayores de 18 años. Cruzcampo recomienda el consumo responsable.', 'factoria-cruzcampo-blocks' ); ?>
+			</p>
+		</div>
+	</div>
+
 </section>
 
 <?php if ( defined( 'FCC_DEBUG' ) && FCC_DEBUG ) : ?>

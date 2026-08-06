@@ -10,6 +10,10 @@
     @media (min-width: 768px) {
       grid-template-columns: 1fr 1fr;
     }
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   &__col-calendar,
@@ -43,6 +47,10 @@
 
     &[aria-busy="true"] {
       opacity: 0.5;
+    }
+
+    &[hidden] {
+      display: none;
     }
   }
 
@@ -325,5 +333,178 @@
       margin: 0;
       line-height: 1.5;
     }
+  }
+
+  &__form-step {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: fluid(56px, 32px);
+    align-items: start;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__form-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__form-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--display-font);
+    font-size: var(--wp--preset--font-size--h3, 24px);
+    text-transform: uppercase;
+    color: var(--black);
+  }
+
+  &__form-title {
+    font-family: var(--display-font);
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0;
+  }
+
+  &__form-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__form-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--display-font);
+    font-size: fluid(24px, 20px);
+    text-transform: uppercase;
+    color: var(--red);
+
+    img {
+      flex: 0 0 auto;
+    }
+  }
+
+  &__form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__form-heading {
+    color: var(--black);
+    margin: 0 0 12px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    @media (min-width: 480px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    label,
+    legend {
+      font-family: var(--base-font);
+      font-weight: var(--font-weight-bold);
+      color: var(--black);
+      padding: 0;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--black);
+      background-color: var(--white);
+      font-family: var(--base-font);
+      font-size: var(--wp--preset--font-size--base, 18px);
+      color: var(--black);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__form-phone {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 8px;
+  }
+
+  &__form-radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-inline-end: 16px;
+    font-family: var(--base-font);
+    color: var(--black);
+  }
+
+  &__form-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--caption, 14px);
+    color: var(--black);
+
+    input {
+      margin-top: 3px;
+    }
+  }
+
+  &__form-submit {
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  &__form-disclaimer {
+    margin-block-start: var(--innerblocks-gap, 24px);
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--caption, 14px);
+    color: var(--black);
+    line-height: 1.5;
   }
 }

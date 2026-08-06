@@ -122,7 +122,7 @@ function renderDayCards( cardsEl, cards, onSelect ) {
 	} );
 }
 
-function renderBookingPanel( panelEl, card, matrix, onBack ) {
+function renderBookingPanel( panelEl, card, matrix, onBack, onSubmit ) {
 	panelEl.innerHTML = '';
 
 	const allPeople = Object.keys( matrix ).map( Number ).sort( ( a, b ) => a - b );
@@ -261,14 +261,18 @@ function renderBookingPanel( panelEl, card, matrix, onBack ) {
 	} );
 
 	submitBtn.addEventListener( 'click', () => {
+		const detail = {
+			productId: card.productId,
+			people: selectedPeople,
+			hour: selectedHour,
+		};
+
 		document.dispatchEvent( new CustomEvent( 'fcb:booking-selected', {
 			bubbles: true,
-			detail: {
-				productId: card.productId,
-				people: selectedPeople,
-				hour: selectedHour,
-			},
+			detail,
 		} ) );
+
+		onSubmit( detail );
 	} );
 
 	renderPeopleOptions();
@@ -295,6 +299,14 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		const daySubtitleEl = block.querySelector( '.b-calendario-reserva__day-subtitle' );
 		const dayCardsEl    = block.querySelector( '.b-calendario-reserva__day-cards' );
 		const bookingEl     = block.querySelector( '.b-calendario-reserva__booking' );
+		const columnsEl     = block.querySelector( '.b-calendario-reserva__columns' );
+		const formStepEl    = block.querySelector( '.b-calendario-reserva__form-step' );
+		const formBackBtn   = block.querySelector( '.b-calendario-reserva__form-back' );
+		const formTitleEl   = block.querySelector( '.b-calendario-reserva__form-title' );
+		const formPriceEl   = formStepEl.querySelector( '[data-field="price"]' );
+		const formHourEl    = formStepEl.querySelector( '[data-field="hour"]' );
+		const formPeopleEl  = formStepEl.querySelector( '[data-field="people"]' );
+		const formEl        = block.querySelector( '.b-calendario-reserva__form' );
 		const today         = state.today;
 		const restUrl       = state.restUrl;
 		const dayUrl        = state.dayUrl;
@@ -364,7 +376,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				const params = new URLSearchParams( { date, product_id: card.productId } );
 				const res    = await fetch( `${ availabilityUrl }?${ params.toString() }` );
 				const data   = await res.json();
-				renderBookingPanel( bookingEl, card, data.matrix || {}, showCardsStep );
+				renderBookingPanel(
+					bookingEl,
+					card,
+					data.matrix || {},
+					showCardsStep,
+					( booking ) => showFormStep( card, booking )
+				);
 			} catch {
 				bookingEl.innerHTML = '<p class="b-calendario-reserva__day-empty">No se ha podido consultar la disponibilidad.</p>';
 			} finally {
@@ -372,7 +390,73 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			}
 		}
 
+		function showBookingStep() {
+			formStepEl.hidden = true;
+			columnsEl.hidden = false;
+		}
+
+		function showFormStep( card, booking ) {
+			columnsEl.hidden = true;
+			formStepEl.hidden = false;
+
+			formTitleEl.textContent = card.title;
+			formPriceEl.textContent = formatPrice( card.price ) || 'Gratis';
+			formHourEl.textContent = booking.hour;
+			formPeopleEl.textContent = `${ booking.people } ${ booking.people === 1 ? 'persona' : 'personas' }`;
+
+			formEl.dataset.productId = booking.productId;
+			formEl.dataset.people = booking.people;
+			formEl.dataset.hour = booking.hour;
+			formEl.dataset.date = state.selectedDate || '';
+		}
+
+		formBackBtn.addEventListener( 'click', showBookingStep );
+
+		const allergyDetailEl = formEl.querySelector( '.b-calendario-reserva__form-allergy-detail' );
+		const allergyTextarea = allergyDetailEl.querySelector( 'textarea' );
+
+		function updateAllergyDetail() {
+			const showDetail = formEl.querySelector( 'input[name="alergia"]:checked' )?.value === 'si';
+			allergyDetailEl.hidden = ! showDetail;
+			allergyTextarea.required = showDetail;
+			if ( ! showDetail ) allergyTextarea.value = '';
+		}
+
+		formEl.querySelectorAll( 'input[name="alergia"]' ).forEach( ( radio ) => {
+			radio.addEventListener( 'change', updateAllergyDetail );
+		} );
+
+		formEl.addEventListener( 'submit', ( e ) => {
+			e.preventDefault();
+
+			if ( ! formEl.checkValidity() ) {
+				formEl.reportValidity();
+				return;
+			}
+
+			const formData = new FormData( formEl );
+
+			document.dispatchEvent( new CustomEvent( 'fcb:reservation-submitted', {
+				bubbles: true,
+				detail: {
+					productId: formEl.dataset.productId,
+					people: formEl.dataset.people,
+					hour: formEl.dataset.hour,
+					date: formEl.dataset.date,
+					nombre: formData.get( 'nombre' ),
+					apellidos: formData.get( 'apellidos' ),
+					email: formData.get( 'email' ),
+					telefono: `${ formData.get( 'prefijo' ) }${ formData.get( 'telefono' ) }`,
+					fechaNacimiento: formData.get( 'fecha_nacimiento' ),
+					alergia: formData.get( 'alergia' ),
+					alergiaDetalle: formData.get( 'alergia_detalle' ),
+					consentimientoComercial: formData.get( 'consentimiento_comercial' ) === 'on',
+				},
+			} ) );
+		} );
+
 		async function selectDay( date ) {
+			state.selectedDate = date;
 			dayTitleEl.textContent = formatDayLabel( date );
 			showCardsStep();
 			dayCardsEl.setAttribute( 'aria-busy', 'true' );
