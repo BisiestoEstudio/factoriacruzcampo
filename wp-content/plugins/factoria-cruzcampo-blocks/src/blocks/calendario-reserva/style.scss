@@ -498,6 +498,27 @@
   &__form-submit {
     align-self: flex-start;
     margin-top: 8px;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  &__form-debug {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    font: 12px/1.5 monospace;
+    white-space: pre-wrap;
+    word-break: break-all;
+    border: none;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   &__form-disclaimer {

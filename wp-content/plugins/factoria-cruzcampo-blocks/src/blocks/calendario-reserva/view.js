@@ -307,10 +307,13 @@ document.addEventListener( 'DOMContentLoaded', () => {
 		const formHourEl    = formStepEl.querySelector( '[data-field="hour"]' );
 		const formPeopleEl  = formStepEl.querySelector( '[data-field="people"]' );
 		const formEl        = block.querySelector( '.b-calendario-reserva__form' );
+		const formDebugEl   = block.querySelector( '.b-calendario-reserva__form-debug' );
+		const formSubmitBtn = block.querySelector( '.b-calendario-reserva__form-submit' );
 		const today         = state.today;
 		const restUrl       = state.restUrl;
 		const dayUrl        = state.dayUrl;
 		const availabilityUrl = state.availabilityUrl;
+		const bookingUrl      = state.bookingUrl;
 
 		function render() {
 			gridEl.innerHTML = buildGrid( state.year, state.month, state.dates, today );
@@ -408,6 +411,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			formEl.dataset.people = booking.people;
 			formEl.dataset.hour = booking.hour;
 			formEl.dataset.date = state.selectedDate || '';
+			formEl.dataset.experienceTitle = card.title;
 		}
 
 		formBackBtn.addEventListener( 'click', showBookingStep );
@@ -426,7 +430,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			radio.addEventListener( 'change', updateAllergyDetail );
 		} );
 
-		formEl.addEventListener( 'submit', ( e ) => {
+		formEl.addEventListener( 'submit', async ( e ) => {
 			e.preventDefault();
 
 			if ( ! formEl.checkValidity() ) {
@@ -435,24 +439,65 @@ document.addEventListener( 'DOMContentLoaded', () => {
 			}
 
 			const formData = new FormData( formEl );
+			const prefijo  = formData.get( 'prefijo' );
+			const telefono = formData.get( 'telefono' );
+
+			const booking = {
+				date: formEl.dataset.date,
+				hour: formEl.dataset.hour,
+				people: formEl.dataset.people,
+				experienceTitle: formEl.dataset.experienceTitle,
+				nombre: formData.get( 'nombre' ),
+				apellidos: formData.get( 'apellidos' ),
+				email: formData.get( 'email' ),
+				prefijo,
+				telefono,
+				alergia: formData.get( 'alergia' ),
+				alergiaDetalle: formData.get( 'alergia_detalle' ),
+			};
 
 			document.dispatchEvent( new CustomEvent( 'fcb:reservation-submitted', {
 				bubbles: true,
 				detail: {
+					...booking,
 					productId: formEl.dataset.productId,
-					people: formEl.dataset.people,
-					hour: formEl.dataset.hour,
-					date: formEl.dataset.date,
-					nombre: formData.get( 'nombre' ),
-					apellidos: formData.get( 'apellidos' ),
-					email: formData.get( 'email' ),
-					telefono: `${ formData.get( 'prefijo' ) }${ formData.get( 'telefono' ) }`,
+					telefono: `${ prefijo }${ telefono }`,
 					fechaNacimiento: formData.get( 'fecha_nacimiento' ),
-					alergia: formData.get( 'alergia' ),
-					alergiaDetalle: formData.get( 'alergia_detalle' ),
 					consentimientoComercial: formData.get( 'consentimiento_comercial' ) === 'on',
 				},
 			} ) );
+
+			formSubmitBtn.disabled = true;
+
+			if ( formDebugEl ) {
+				formDebugEl.hidden = true;
+				formDebugEl.textContent = '';
+			}
+
+			try {
+				const res  = await fetch( bookingUrl, {
+					method: 'POST',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-WP-Nonce': state.nonce,
+					},
+					body: JSON.stringify( booking ),
+				} );
+				const data = await res.json();
+
+				if ( state.debug && formDebugEl ) {
+					formDebugEl.hidden = false;
+					formDebugEl.textContent = JSON.stringify( data, null, 2 );
+				}
+			} catch ( err ) {
+				if ( state.debug && formDebugEl ) {
+					formDebugEl.hidden = false;
+					formDebugEl.textContent = `Error de red: ${ err.message }`;
+				}
+			} finally {
+				formSubmitBtn.disabled = false;
+			}
 		} );
 
 		async function selectDay( date ) {

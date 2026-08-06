@@ -65,6 +65,49 @@ class FCC_CoverManager {
 	}
 
 	/**
+	 * Crea una reserva.
+	 *
+	 * @param array $args {
+	 *     @type string $date            'YYYY-MM-DD'. Requerido.
+	 *     @type string $hour            'HH:MM'. Requerido.
+	 *     @type int    $people          Número de personas. Requerido.
+	 *     @type string $first_name      Requerido.
+	 *     @type string $last_name       Requerido.
+	 *     @type string $email
+	 *     @type string $int_call_code   Prefijo telefónico sin '+', ej. "34".
+	 *     @type string $phone
+	 *     @type string $tags_client
+	 *     @type string $source
+	 *     @type string $commentary
+	 *     @type string $language        Por defecto 'spanish'.
+	 *     @type string $pending         '1' o '0'. Por defecto '1'.
+	 *     @type string $discount        '0' si no hay descuento. Por defecto '0'.
+	 *     @type string $not_notify      '1' o '0'. Por defecto '1'.
+	 * }
+	 * @return array|WP_Error
+	 */
+	public static function create_reservation( array $args ) {
+		$defaults = array(
+			'email'         => '',
+			'int_call_code' => '',
+			'phone'         => '',
+			'tags_client'   => '',
+			'source'        => '',
+			'commentary'    => '',
+			'language'      => 'spanish',
+			'pending'       => '1',
+			'discount'      => '0',
+			'not_notify'    => '1',
+		);
+
+		$params = array_merge( $defaults, $args, array(
+			'restaurant' => FCC_COVERMANAGER_RESTAURANT,
+		) );
+
+		return self::post( '/api/reserv/reserv', $params );
+	}
+
+	/**
 	 * Realiza una petición POST a la API de CoverManager.
 	 *
 	 * @param string $endpoint  Ruta del endpoint (con / inicial).

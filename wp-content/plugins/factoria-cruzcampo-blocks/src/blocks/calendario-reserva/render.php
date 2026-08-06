@@ -54,6 +54,9 @@ $calendar_data = wp_json_encode( array(
 	'restUrl'         => rest_url( 'factoria-cruzcampo/v1/calendar' ),
 	'dayUrl'          => rest_url( 'factoria-cruzcampo/v1/day' ),
 	'availabilityUrl' => rest_url( 'factoria-cruzcampo/v1/availability' ),
+	'bookingUrl'      => rest_url( 'factoria-cruzcampo/v1/booking' ),
+	'nonce'           => wp_create_nonce( 'wp_rest' ),
+	'debug'           => defined( 'FCC_DEBUG' ) && FCC_DEBUG,
 ) );
 
 $month_names = array(
@@ -240,6 +243,10 @@ $render_grid = function( $year, $month, $dates, $today ) {
 					<?php esc_html_e( 'Reserva ahora', 'factoria-cruzcampo-blocks' ); ?>
 				</button>
 			</form>
+
+			<?php if ( defined( 'FCC_DEBUG' ) && FCC_DEBUG ) : ?>
+				<pre class="b-calendario-reserva__form-debug" hidden></pre>
+			<?php endif; ?>
 
 			<p class="b-calendario-reserva__form-disclaimer">
 				<?php esc_html_e( '*Las experiencias de Factoría Cruzcampo están reservadas a mayores de 18 años. Cruzcampo recomienda el consumo responsable.', 'factoria-cruzcampo-blocks' ); ?>

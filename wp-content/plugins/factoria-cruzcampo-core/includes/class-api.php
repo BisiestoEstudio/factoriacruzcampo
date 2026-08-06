@@ -71,6 +71,64 @@ class FCC_API {
 				),
 			),
 		) );
+
+		register_rest_route( self::NAMESPACE, '/booking', array(
+			'methods'             => WP_REST_Server::CREATABLE,
+			'callback'            => array( __CLASS__, 'create_booking' ),
+			'permission_callback' => '__return_true',
+			'args'                => array(
+				'date' => array(
+					'required'          => true,
+					'sanitize_callback' => 'sanitize_text_field',
+					'validate_callback' => function( $value ) {
+						return (bool) preg_match( '/^\d{4}-\d{2}-\d{2}$/', $value );
+					},
+				),
+				'hour' => array(
+					'required'          => true,
+					'sanitize_callback' => 'sanitize_text_field',
+					'validate_callback' => function( $value ) {
+						return (bool) preg_match( '/^\d{2}:\d{2}$/', $value );
+					},
+				),
+				'people' => array(
+					'required'          => true,
+					'sanitize_callback' => 'absint',
+				),
+				'nombre' => array(
+					'required'          => true,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'apellidos' => array(
+					'required'          => true,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'email' => array(
+					'required'          => true,
+					'sanitize_callback' => 'sanitize_email',
+				),
+				'prefijo' => array(
+					'required'          => false,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'telefono' => array(
+					'required'          => false,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'experienceTitle' => array(
+					'required'          => false,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'alergia' => array(
+					'required'          => false,
+					'sanitize_callback' => 'sanitize_text_field',
+				),
+				'alergiaDetalle' => array(
+					'required'          => false,
+					'sanitize_callback' => 'sanitize_textarea_field',
+				),
+			),
+		) );
 	}
 
 	public static function get_calendar( WP_REST_Request $request ) {
@@ -229,5 +287,55 @@ class FCC_API {
 		unset( $hours_list );
 
 		return $matrix;
+	}
+
+	/**
+	 * Crea la reserva en CoverManager (FCC_CoverManager::create_reservation()).
+	 * De momento solo se usa para testear el endpoint: devuelve tanto el JSON que
+	 * se envía a CoverManager como la respuesta cruda obtenida, sin pantalla de
+	 * confirmación todavía (eso se resuelve en un paso posterior).
+	 */
+	public static function create_booking( WP_REST_Request $request ) {
+		$params = array(
+			'date'          => $request->get_param( 'date' ),
+			'hour'          => $request->get_param( 'hour' ),
+			'people'        => absint( $request->get_param( 'people' ) ),
+			'first_name'    => $request->get_param( 'nombre' ),
+			'last_name'     => $request->get_param( 'apellidos' ),
+			'email'         => $request->get_param( 'email' ),
+			'int_call_code' => ltrim( (string) $request->get_param( 'prefijo' ), '+' ),
+			'phone'         => preg_replace( '/\D/', '', (string) $request->get_param( 'telefono' ) ),
+			'source'        => 'web',
+			'commentary'    => self::build_booking_commentary( $request ),
+		);
+
+		$response = FCC_CoverManager::create_reservation( $params );
+
+		return rest_ensure_response( array(
+			'request'  => array_merge( array( 'restaurant' => FCC_COVERMANAGER_RESTAURANT ), $params ),
+			'response' => is_wp_error( $response )
+				? array( 'wp_error' => $response->get_error_message() )
+				: $response,
+		) );
+	}
+
+	/**
+	 * Construye el "commentary" de la reserva: qué experiencia es (el endpoint de
+	 * reserva no lleva id_product) y, si procede, el detalle de alergias.
+	 */
+	private static function build_booking_commentary( WP_REST_Request $request ) {
+		$parts = array();
+
+		$experience_title = $request->get_param( 'experienceTitle' );
+		if ( $experience_title ) {
+			$parts[] = "Experiencia: {$experience_title}";
+		}
+
+		if ( 'si' === $request->get_param( 'alergia' ) ) {
+			$detalle = $request->get_param( 'alergiaDetalle' );
+			$parts[] = $detalle ? "Alergias/intolerancias: {$detalle}" : 'Alergias/intolerancias: sí (sin detalle)';
+		}
+
+		return implode( '. ', $parts );
 	}
 }
