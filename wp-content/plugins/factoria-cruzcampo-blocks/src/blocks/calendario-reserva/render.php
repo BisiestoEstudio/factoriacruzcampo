@@ -13,9 +13,7 @@ $post_type     = $post_id ? get_post_type( $post_id ) : null;
 $is_experience = ( 'experience' === $post_type );
 $product_id    = $is_experience ? (int) get_post_meta( $post_id, 'product_id', true ) : 0;
 
-$bounds = ( $is_experience && ! $product_id )
-	? array( 'min' => null, 'max' => null )
-	: FCC_Availability_Store::get_availability_bounds( $is_experience ? $product_id : null );
+$bounds = FCC_Availability_Store::get_availability_bounds_for( $is_experience, $product_id );
 
 // El calendario arranca en el primer mes con disponibilidad (y no antes de hoy, aunque
 // eso ya lo garantiza el purgado de fechas pasadas en FCC_Availability_Store::sync()).
@@ -31,11 +29,7 @@ if ( $bounds['min'] ) {
 $date_start = sprintf( '%04d-%02d-01', $year, $month );
 $date_end   = ( new DateTimeImmutable( "last day of {$date_start}" ) )->format( 'Y-m-d' );
 
-if ( $is_experience ) {
-	$dates = $product_id ? FCC_Availability_Store::get_calendar_state( $date_start, $date_end, $product_id ) : array();
-} else {
-	$dates = FCC_Availability_Store::get_calendar_state( $date_start, $date_end );
-}
+$dates = FCC_Availability_Store::get_calendar_state_for( $is_experience, $product_id, $date_start, $date_end );
 
 // Al cargar siempre estamos ya en el primer mes disponible, así que "anterior" arranca deshabilitado;
 // "siguiente" se deshabilita si ese primer mes coincide con el último mes con disponibilidad (o si no hay ninguna).
@@ -57,8 +51,9 @@ $calendar_data = wp_json_encode( array(
 	'productId'  => $product_id,
 	'boundsMin'  => $bounds['min'],
 	'boundsMax'  => $bounds['max'],
-	'restUrl'    => rest_url( 'factoria-cruzcampo/v1/calendar' ),
-	'dayUrl'     => rest_url( 'factoria-cruzcampo/v1/day' ),
+	'restUrl'         => rest_url( 'factoria-cruzcampo/v1/calendar' ),
+	'dayUrl'          => rest_url( 'factoria-cruzcampo/v1/day' ),
+	'availabilityUrl' => rest_url( 'factoria-cruzcampo/v1/availability' ),
 ) );
 
 $month_names = array(
@@ -148,6 +143,7 @@ $render_grid = function( $year, $month, $dates, $today ) {
 				<p class="b-calendario-reserva__day-subtitle">Elige una fecha disponible en el calendario</p>
 			</div>
 			<div class="b-calendario-reserva__day-cards" aria-live="polite"></div>
+			<div class="b-calendario-reserva__booking" aria-live="polite" hidden></div>
 		</div>
 	</div>
 
@@ -166,8 +162,6 @@ $render_grid = function( $year, $month, $dates, $today ) {
 		'bounds (get_availability_bounds)' => $bounds,
 		'next_disabled'           => $next_disabled,
 		'dates (get_calendar_state)' => $dates,
-		'all_cached_dates (tabla completa, sin filtro de rango/producto)' => FCC_Availability_Store::get_all_cached_dates(),
-		'all_product_ids (tabla completa)' => FCC_Availability_Store::get_all_product_ids(),
 	);
 	?>
 	<style>

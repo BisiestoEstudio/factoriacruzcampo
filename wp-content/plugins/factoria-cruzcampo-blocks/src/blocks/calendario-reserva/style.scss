@@ -23,7 +23,6 @@
     margin-block-end: var(--innerblocks-gap, 24px);
   }
 
-
   &__day-subtitle {
     font-family: var(--base-font);
     font-size: var(--wp--preset--font-size--base, 18px);
@@ -59,6 +58,20 @@
     gap: fluid(24px, 12px);
     background-color: var(--white);
     padding: fluid(16px, 12px);
+
+    &--available {
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+        background-color: color-mix(in srgb, var(--white) 80%, var(--black) 10%);
+      }
+    }
+
+    &--unavailable {
+      opacity: 0.4;
+    }
   }
 
   &__card-image {
@@ -79,11 +92,110 @@
     gap: 8px;
   }
 
-
   &__card-price {
     font-family: var(--display-font);
     font-size: fluid(24px, 20px);
     color: var(--red);
+  }
+
+  &__booking {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &[hidden] {
+      display: none;
+    }
+
+    &[aria-busy="true"] {
+      opacity: 0.5;
+    }
+  }
+
+  &__booking-back {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--caption, 14px);
+    color: var(--black);
+    text-decoration: underline;
+  }
+
+  &__booking-title {
+    font-family: var(--display-font);
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0;
+  }
+
+  &__booking-price {
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--base, 18px);
+    color: var(--black);
+    margin: 0;
+  }
+
+  &__booking-label {
+    font-family: var(--display-font);
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 12px 0 0;
+  }
+
+  &__booking-people {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--black);
+    background-color: var(--white);
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--base, 18px);
+    color: var(--black);
+    text-transform: uppercase;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  &__booking-hours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__booking-hour {
+    padding: 12px 20px;
+    border: 2px solid var(--black);
+    background: none;
+    cursor: pointer;
+    font-family: var(--base-font);
+    font-size: var(--wp--preset--font-size--base, 18px);
+    color: var(--black);
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &--selected {
+      background-color: var(--black);
+      color: var(--white);
+    }
+  }
+
+  &__booking-submit {
+    align-self: flex-start;
+    margin-top: 12px;
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+      pointer-events: none;
+    }
   }
 
   &__nav {
@@ -93,8 +205,6 @@
     width: 100%;
     margin-block-end: var(--innerblocks-gap, 24px);
   }
-
-
 
   &__nav-prev,
   &__nav-next {
@@ -133,12 +243,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-right: 2px solid var(--black);
-    border-bottom: 2px solid var(--black);
+    border: 1px solid var(--black);
     background: none;
     padding: 0;
     cursor: default;
-    
+    outline: 1px solid var(--black);
 
     &--empty {
       pointer-events: none;
@@ -166,9 +275,17 @@
     }
 
     &--selected {
-      outline: 3px solid var(--black);
-      outline-offset: -3px;
+      background-color: var(--black);
       z-index: 1;
+
+      span {
+        color: var(--white);
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--black);
+      }
     }
   }
 

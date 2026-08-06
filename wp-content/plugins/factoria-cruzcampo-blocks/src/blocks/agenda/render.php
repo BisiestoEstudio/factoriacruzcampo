@@ -30,55 +30,33 @@ foreach ($dates as $date) {
 $product_ids = array_unique($product_ids);
 
 
-// Una única consulta para todas las experiencias activas en calendario, indexada por product_id,
-// para no repetir consultas por cada día en el que se repita la misma experiencia.
+// Una única consulta (vía FCC_CPT_Manager) para todas las experiencias activas en calendario,
+// indexada por product_id, para no repetir consultas por cada día en el que se repita la misma experiencia.
 $experiences_by_product = array();
 
-if (! empty($product_ids)) {
-	$experience_posts = get_posts(array(
-		'post_type'      => 'experience',
-		'post_status'    => 'publish',
-		'posts_per_page' => -1,
-		'no_found_rows'  => true,
-		'meta_query'     => array(
-			array(
-				'key'   => 'active_in_calendar',
-				'value' => '1',
-			),
-		),
-	));
+foreach (FCC_CPT_Manager::get_experiences_by_product_ids($product_ids, true) as $product_id => $post) {
+	$terms = get_the_terms($post->ID, 'experience_category');
+	$tags  = array();
 
-
-	foreach ($experience_posts as $post) {
-		$product_id = (int) get_post_meta($post->ID, 'product_id', true);
-
-		if (! $product_id || ! in_array($product_id, $product_ids, true)) {
-			continue;
+	if (! is_wp_error($terms) && $terms) {
+		foreach ($terms as $term) {
+			$tags[] = array(
+				'name'  => $term->name,
+				'color' => get_term_meta($term->term_id, 'color', true),
+			);
 		}
-
-		$terms = get_the_terms($post->ID, 'experience_category');
-		$tags  = array();
-
-		if (! is_wp_error($terms) && $terms) {
-			foreach ($terms as $term) {
-				$tags[] = array(
-					'name'  => $term->name,
-					'color' => get_term_meta($term->term_id, 'color', true),
-				);
-			}
-		}
-
-		// Horas propias de la experiencia; si no las tiene, no se muestran (no las de la tabla de disponibilidad).
-		$horas = get_post_meta($post->ID, 'horas', true);
-
-		$experiences_by_product[$product_id] = array(
-			'title'     => get_the_title($post),
-			'permalink' => get_permalink($post),
-			'image_id'  => get_post_thumbnail_id($post),
-			'tags'      => $tags,
-			'hours'     => is_array($horas) ? $horas : array(),
-		);
 	}
+
+	// Horas propias de la experiencia; si no las tiene, no se muestran (no las de la tabla de disponibilidad).
+	$horas = get_post_meta($post->ID, 'horas', true);
+
+	$experiences_by_product[$product_id] = array(
+		'title'     => get_the_title($post),
+		'permalink' => get_permalink($post),
+		'image_id'  => get_post_thumbnail_id($post),
+		'tags'      => $tags,
+		'hours'     => is_array($horas) ? $horas : array(),
+	);
 }
 
 $day_names = array(

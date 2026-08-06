@@ -353,6 +353,40 @@ class FCC_Availability_Store {
 	}
 
 	/**
+	 * Envoltorio de get_availability_bounds() para el caso común "calendario general
+	 * vs. calendario de una experiencia": si es de experiencia pero no tiene producto
+	 * asignado, no hay nada que mostrar (no cae al calendario general).
+	 *
+	 * @param bool     $is_experience
+	 * @param int|null $product_id
+	 * @return array{min: string|null, max: string|null}
+	 */
+	public static function get_availability_bounds_for( $is_experience, $product_id ) {
+		if ( $is_experience && ! $product_id ) {
+			return array( 'min' => null, 'max' => null );
+		}
+
+		return self::get_availability_bounds( $is_experience ? $product_id : null );
+	}
+
+	/**
+	 * Envoltorio de get_calendar_state() con la misma regla que get_availability_bounds_for().
+	 *
+	 * @param bool     $is_experience
+	 * @param int|null $product_id
+	 * @param string   $start 'YYYY-MM-DD'.
+	 * @param string   $end   'YYYY-MM-DD'.
+	 * @return array<string,int>
+	 */
+	public static function get_calendar_state_for( $is_experience, $product_id, $start, $end ) {
+		if ( $is_experience && ! $product_id ) {
+			return array();
+		}
+
+		return self::get_calendar_state( $start, $end, $is_experience ? $product_id : null );
+	}
+
+	/**
 	 * Productos agendados en un día concreto, con sus horas y disponibilidad.
 	 *
 	 * @param string $date 'YYYY-MM-DD'.
