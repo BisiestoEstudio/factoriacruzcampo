@@ -195,8 +195,9 @@ class FCC_API {
 			return rest_ensure_response( array( 'date' => $date, 'cards' => array() ) );
 		}
 
-		// Sin producto concreto (calendario general): solo las experiencias marcadas para el calendario.
-		$experiences = FCC_CPT_Manager::get_experiences_by_product_ids( wp_list_pluck( $rows, 'product_id' ), ! $product_id );
+		// El calendario de reserva muestra cualquier experiencia agendada (a diferencia de la
+		// agenda general), salvo que tenga el motor de reservas desactivado.
+		$experiences = FCC_CPT_Manager::get_bookable_experiences_by_product_ids( wp_list_pluck( $rows, 'product_id' ) );
 
 		$cards = array();
 

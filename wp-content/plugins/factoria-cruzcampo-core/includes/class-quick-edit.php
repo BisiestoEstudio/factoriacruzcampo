@@ -27,7 +27,7 @@ class FCC_Quick_Edit {
 	public static function add_columns( $columns ) {
 		$columns['product_id']              = __( 'Product ID', 'factoria-cruzcampo-core' );
 		$columns['scheduled']               = __( 'Actualmente agendada', 'factoria-cruzcampo-core' );
-		$columns['active_in_calendar']      = __( 'Activar en el calendario', 'factoria-cruzcampo-core' );
+		$columns['active_in_calendar']      = __( 'Activar en la agenda', 'factoria-cruzcampo-core' );
 		$columns['booking_engine_disabled'] = __( 'Desactivar en motor de reservas', 'factoria-cruzcampo-core' );
 
 		return $columns;
