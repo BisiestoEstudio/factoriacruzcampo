@@ -447,6 +447,7 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				hour: formEl.dataset.hour,
 				people: formEl.dataset.people,
 				experienceTitle: formEl.dataset.experienceTitle,
+				productId: formEl.dataset.productId,
 				nombre: formData.get( 'nombre' ),
 				apellidos: formData.get( 'apellidos' ),
 				email: formData.get( 'email' ),
@@ -460,7 +461,6 @@ document.addEventListener( 'DOMContentLoaded', () => {
 				bubbles: true,
 				detail: {
 					...booking,
-					productId: formEl.dataset.productId,
 					telefono: `${ prefijo }${ telefono }`,
 					fechaNacimiento: formData.get( 'fecha_nacimiento' ),
 					consentimientoComercial: formData.get( 'consentimiento_comercial' ) === 'on',

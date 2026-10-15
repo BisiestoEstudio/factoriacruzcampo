@@ -119,6 +119,10 @@ class FCC_API {
 					'required'          => false,
 					'sanitize_callback' => 'sanitize_text_field',
 				),
+				'productId' => array(
+					'required'          => false,
+					'sanitize_callback' => 'absint',
+				),
 				'alergia' => array(
 					'required'          => false,
 					'sanitize_callback' => 'sanitize_text_field',
@@ -308,6 +312,11 @@ class FCC_API {
 			'phone'         => preg_replace( '/\D/', '', (string) $request->get_param( 'telefono' ) ),
 			'source'        => 'web',
 			'commentary'    => self::build_booking_commentary( $request ),
+			'id_product'    => absint( $request->get_param( 'productId' ) ),
+			// De momento fijos: español. pending/not_notify a '0' para probar (confirmada + notificación de CoverManager).
+			'language'      => 'spanish',
+			'pending'       => '1',
+			'not_notify'    => '1',
 		);
 
 		$response = FCC_CoverManager::create_reservation( $params );
