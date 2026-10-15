@@ -26,6 +26,10 @@ class FCC_Availability_Store {
 	const DB_VERSION_OPTION = 'fcc_availability_db_version';
 	const SYNC_HOOK = 'fcc_availability_sync';
 
+	// Horizonte de días a sincronizar y máximo que admite availability_calendar por llamada.
+	const SYNC_DAYS         = 120;
+	const CALENDAR_MAX_DAYS = 90;
+
 	public static function table_name() {
 		global $wpdb;
 		return $wpdb->prefix . 'fcc_availability';
@@ -78,15 +82,11 @@ class FCC_Availability_Store {
 
 		self::purge_past_dates( $today );
 
-		$calendar = FCC_CoverManager::get_availability_calendar( 1 );
+		$calendar_dates = self::fetch_calendar_dates( $today );
 
-		if ( is_wp_error( $calendar ) ) {
-			return $calendar;
+		if ( is_wp_error( $calendar_dates ) ) {
+			return $calendar_dates;
 		}
-
-		$calendar_dates = isset( $calendar['calendar'] ) && is_array( $calendar['calendar'] )
-			? array_keys( $calendar['calendar'] )
-			: array();
 
 		$dates = array_unique( array_merge( $calendar_dates, self::get_all_cached_dates() ) );
 
@@ -100,6 +100,36 @@ class FCC_Availability_Store {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Fechas candidatas de availability_calendar para los próximos SYNC_DAYS días.
+	 * El endpoint admite como máximo CALENDAR_MAX_DAYS por llamada, así que el
+	 * rango se parte en tramos consecutivos.
+	 *
+	 * @param string $today 'YYYY-MM-DD'.
+	 * @return string[]|WP_Error
+	 */
+	private static function fetch_calendar_dates( $today ) {
+		$dates = array();
+
+		for ( $offset = 0; $offset < self::SYNC_DAYS; $offset += self::CALENDAR_MAX_DAYS ) {
+			$span  = min( self::CALENDAR_MAX_DAYS, self::SYNC_DAYS - $offset );
+			$start = gmdate( 'Y-m-d', strtotime( "{$today} +{$offset} days" ) );
+			$end   = gmdate( 'Y-m-d', strtotime( "{$start} +" . ( $span - 1 ) . ' days' ) );
+
+			$calendar = FCC_CoverManager::get_availability_calendar( 1, $start, $end );
+
+			if ( is_wp_error( $calendar ) ) {
+				return $calendar;
+			}
+
+			if ( isset( $calendar['calendar'] ) && is_array( $calendar['calendar'] ) ) {
+				$dates = array_merge( $dates, array_keys( $calendar['calendar'] ) );
+			}
+		}
+
+		return $dates;
 	}
 
 	/**
